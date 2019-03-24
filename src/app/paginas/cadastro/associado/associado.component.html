@@ -1,0 +1,34 @@
+<mat-card>
+  <mat-card-title>
+    Cadastro Associado
+  </mat-card-title>
+  <mat-card-content>
+    <div class="example-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Nome Completo</mat-label>
+        <input matInput [formControl]="nome" required>
+        <mat-error *ngIf="nome.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Matricula</mat-label>
+        <input matInput [formControl]="matricula">
+        <!-- <mat-error *ngIf="matricula.invalid">{{getErrorMessage()}}</mat-error> -->
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>teste</mat-label>
+        <input matInput [formControl]="teste">
+        <!-- <mat-error *ngIf="teste.invalid">{{getErrorMessage()}}</mat-error> -->
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>teste2</mat-label>
+        <input matInput [formControl]="teste2">
+        <!-- <mat-error *ngIf="teste2.invalid">{{getErrorMessage()}}</mat-error> -->
+      </mat-form-field>
+
+
+    </div>
+  </mat-card-content>
+</mat-card>

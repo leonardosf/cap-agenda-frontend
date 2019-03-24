@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatAutocompleteModule,
@@ -36,7 +38,7 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTreeModule
+  MatTreeModule,
 } from '@angular/material';
 
 @NgModule({
@@ -77,7 +79,9 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule
+    MatTreeModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [BrowserAnimationsModule,
     MatAutocompleteModule,
@@ -114,6 +118,8 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule]
+    MatTreeModule,
+    FormsModule,
+    ReactiveFormsModule]
 })
-export class CompartilhadoModule { }
+export class ModuleCompartilhado { }
