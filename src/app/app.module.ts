@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router';
 import { AssociadoComponent } from './paginas/cadastro/associado/associado.component';
 import { MenuComponent } from './menu/menu.component';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 const router = [{
   path: 'cadastro',
   component: AssociadoComponent
@@ -20,7 +22,7 @@ const router = [{
     MenuComponent,
     AssociadoComponent,
   ],
-  imports: [BrowserModule, ModuleCompartilhado, LayoutModule,
+  imports: [BrowserModule, ModuleCompartilhado, LayoutModule, FlexLayoutModule,
     RouterModule.forRoot(router)],
   providers: [],
   bootstrap: [AppComponent]
