@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-associado',
@@ -8,19 +8,22 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class AssociadoComponent implements OnInit {
 
-  nome = new FormControl('', [Validators.required]);
-  matricula = new FormControl();
-  teste = new FormControl();
-  teste2 = new FormControl();
-  teste3 =new FormControl();
+  formAssociado:FormGroup;
 
-  constructor() { }
+  constructor(public fb:FormBuilder) {
+    this.formAssociado = new FormGroup({
+      nome: new FormControl('', Validators.required),
+      matricula: new FormControl('', Validators.required),
+      cpf: new FormControl('', Validators.required),
+      rg: new FormControl('', Validators.required)
+    })
+  }
 
   ngOnInit() {
   }
 
   getErrorMessage() {
-    return this.nome.hasError('required') ? 'Campo obrigatório' : '';
+    return 'Campo obrigatório';
   }
 
 }
