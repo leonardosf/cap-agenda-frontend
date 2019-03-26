@@ -21,9 +21,8 @@ export class AssociadoComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  getErrorMessage() {
-    return 'Campo obrigatório';
+  
+  salvar() {
+    debugger;
   }
-
 }

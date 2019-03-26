@@ -10,6 +10,8 @@ import { AssociadoComponent } from './paginas/cadastro/associado/associado.compo
 import { MenuComponent } from './menu/menu.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormularioComponent } from './componentes/formulario.component';
+import { LinhaComponent } from './componentes/linha/linha.component';
 
 const router = [{
   path: 'cadastro',
@@ -21,6 +23,8 @@ const router = [{
     AppComponent,
     MenuComponent,
     AssociadoComponent,
+    FormularioComponent,
+    LinhaComponent
   ],
   imports: [BrowserModule, ModuleCompartilhado, LayoutModule, FlexLayoutModule,
     RouterModule.forRoot(router)],

@@ -1,0 +1,26 @@
+<div [formGroup]="formAssociado">
+    <div linha fxLayoutGap="2%">
+        <mat-form-field fxFlex="50%" fxFill appearance="outline">
+            <mat-label>Nome Completo</mat-label>
+            <input matInput id="nome" name="nome" [formControlName]="'nome'" required>
+            <mat-error *ngIf="!formAssociado.controls.nome.valid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex="50%" fxFill appearance="outline">
+            <mat-label>Matricula</mat-label>
+            <input matInput formControlName="matricula">
+            <mat-error *ngIf="!formAssociado.controls.matricula.valid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+    </div>
+    <div linha fxLayoutGap="2%">
+        <mat-form-field fxFlex="50%" fxFill appearance="outline">
+            <mat-label>CPF</mat-label>
+            <input matInput formControlName="cpf">
+            <mat-error *ngIf="!formAssociado.controls.cpf.valid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex="50%" fxFill appearance="outline">
+            <mat-label>Nº RG</mat-label>
+            <input matInput formControlName="rg">
+            <mat-error *ngIf="!formAssociado.controls.rg.valid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+    </div>
+</div>

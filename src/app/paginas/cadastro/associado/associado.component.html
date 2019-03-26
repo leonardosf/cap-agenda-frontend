@@ -3,38 +3,10 @@
     Cadastro Associado
   </mat-card-title>
   <mat-card-content>
-    <form [formGroup]="formAssociado" (ngSubmit)="onSubmit()">
-      <div fxLayout="row" fxLayout.xs="column">
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.xs="center center" fxLayoutAlign="start center" fxLayoutGap="2%" fxFlex="auto">
-          <mat-form-field fxFlex="50%" fxFill appearance="outline">
-            <mat-label>Nome Completo</mat-label>
-            <input matInput formControlName="nome" required>
-            <mat-error *ngIf="!formAssociado.controls.nome.valid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-          <mat-form-field fxFlex="50%" fxFill appearance="outline">
-            <mat-label>Matricula</mat-label>
-            <input matInput formControlName="matricula">
-            <mat-error *ngIf="!formAssociado.controls.matricula.valid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </div>
-      </div>
-      <div fxLayout="row" fxLayout.xs="column">
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.xs="center center" fxLayoutAlign="start center" fxLayoutGap="2%" fxFlex="auto">
-          <mat-form-field fxFlex="50%" fxFill appearance="outline">
-            <mat-label>CPF</mat-label>
-            <input matInput formControlName="cpf">
-            <mat-error *ngIf="!formAssociado.controls.cpf.valid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-          <mat-form-field fxFlex="50%" fxFill appearance="outline">
-            <mat-label>Nº RG</mat-label>
-            <input matInput formControlName="rg">
-            <mat-error *ngIf="!formAssociado.controls.rg.valid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-        </div>
-      </div>
-      <p>
-        <button (click)="salvar()" [disabled]="!formAssociado.controls.nome.valid">Salvar</button>
-      </p>
+    <form [formGroup]="formAssociado" (ngSubmit)="salvar()">
+      <formulario [formAssociado]="formAssociado"></formulario>
+      <button color="primary" mat-raised-button type="submit"
+        [disabled]="!formAssociado.controls.nome.valid">Salvar</button>
     </form>
   </mat-card-content>
 </mat-card>
