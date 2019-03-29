@@ -2,11 +2,11 @@ import { Component, Input } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 @Component({
-    selector: 'formulario',
-    templateUrl: './formulario.component.html',
-    styleUrls: ['./formulario.component.scss']
+    selector: 'form-associado',
+    templateUrl: './form-associado.component.html',
+    styleUrls: ['./form-associado.component.scss']
 })
-export class FormularioComponent {
+export class FormAssociadoComponent {
 
     @Input()
     public formAssociado:FormGroup;
@@ -17,5 +17,5 @@ export class FormularioComponent {
 
     getErrorMessage() {
         return 'Campo obrigatório';
-      }
+    }
 }
