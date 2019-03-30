@@ -12,6 +12,10 @@ import { MenuComponent } from './menu/menu.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LinhaComponent } from './componentes/linha/linha.component';
 import { FormAssociadoComponent } from './componentes/formularios/associado/form-associado.component';
+import { FormDependenteComponent } from './componentes/formularios/dependente/form-dependente.component';
+import { FormEnderecoComponent } from './componentes/formularios/endereco/form-endereco.component';
+import { FormTelefoneComponent } from './componentes/formularios/telefone/form-telefone.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const router = [{
   path: 'cadastro',
@@ -24,9 +28,12 @@ const router = [{
     MenuComponent,
     AssociadoComponent,
     FormAssociadoComponent,
-    LinhaComponent
+    LinhaComponent,
+    FormDependenteComponent,
+    FormEnderecoComponent,
+    FormTelefoneComponent
   ],
-  imports: [BrowserModule, ModuleCompartilhado, LayoutModule, FlexLayoutModule,
+  imports: [BrowserModule, ModuleCompartilhado, LayoutModule, FlexLayoutModule, HttpClientModule,
     RouterModule.forRoot(router)],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,11 +7,11 @@ export class EstadoCivilEnum {
     public static VIU: EstadoCivilEnum = new EstadoCivilEnum(5, "VIUVO");
     public static UNI: EstadoCivilEnum = new EstadoCivilEnum(6, "UNIAO ESTAVEL");
 
-    public codigo: number;
+    public id: number;
     public descricao: string;
 
-    constructor(codigo: number, descricao: string) {
-        this.codigo = codigo;
+    constructor(id: number, descricao: string) {
+        this.id = id;
         this.descricao = descricao;
     }
 

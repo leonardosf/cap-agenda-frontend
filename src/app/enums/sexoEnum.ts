@@ -1,14 +1,16 @@
 export class SexoEnum {
 
-    public static F: SexoEnum = new SexoEnum(1, "Feminino");
-    public static M: SexoEnum = new SexoEnum(2, "Masculino");
+    public static F: SexoEnum = new SexoEnum(1, "Feminino","F");
+    public static M: SexoEnum = new SexoEnum(2, "Masculino", "M");
 
     public codigo: number;
     public descricao: string;
+    public sigla: string;
 
-    constructor(codigo: number, descricao: string) {
+    constructor(codigo: number, descricao: string, sigla:string) {
         this.codigo = codigo;
         this.descricao = descricao;
+        this.sigla = sigla;
     }
 
     public static values(): Array<SexoEnum> {

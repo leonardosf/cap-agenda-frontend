@@ -3,135 +3,109 @@
         <mat-tab label="Principal">
             <div linha fxLayoutGap="2%">
                 <mat-form-field fxFlex="25%" fxFill appearance="outline">
-                    <mat-label>Matricula</mat-label>
-                    <input type="number" matInput formControlName="matricula">
+                    <mat-label>Matricula*</mat-label>
+                    <input type="text" matInput formControlName="matricula">
                     <mat-error *ngIf="!formAssociado.controls.matricula.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="25%" fxFill appearance="outline">
-                    <mat-label>CPF</mat-label>
+                    <mat-label>CPF*</mat-label>
                     <input type="number" matInput formControlName="cpf">
                     <mat-error *ngIf="!formAssociado.controls.cpf.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="50%" fxFill appearance="outline">
-                    <mat-label>Nome Completo</mat-label>
-                    <input type="text" matInput id="nome" name="nome" [formControlName]="'nome'" required>
+                    <mat-label>Nome Completo*</mat-label>
+                    <input type="text" matInput formControlName="nome">
                     <mat-error *ngIf="!formAssociado.controls.nome.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
             <div linha fxLayoutGap="2%">
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
-                    <mat-label>Nº RG</mat-label>
-                    <input type="number" matInput formControlName="numeroRg">
-                    <mat-error *ngIf="!formAssociado.controls.numeroRg.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-label>Nº RG*</mat-label>
+                    <input type="text" matInput formControlName="numeroRG">
+                    <mat-error *ngIf="!formAssociado.controls.numeroRG.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
-                    <mat-label>Data Emissão RG</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="dataEmissaoRg">
+                    <mat-label>Data Emissão RG*</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dataEmissaoRG">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngIf="!formAssociado.controls.dataEmissaoRg.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="!formAssociado.controls.dataEmissaoRG.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
-                    <mat-label>Orgão Emissor RG</mat-label>
+                    <mat-label>Orgão Emissor RG*</mat-label>
                     <input type="text" matInput formControlName="orgaoEmissor">
                     <mat-error *ngIf="!formAssociado.controls.orgaoEmissor.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
             <div linha fxLayoutGap="2%">
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
-                    <mat-label>Data Nascimento</mat-label>
+                    <mat-label>Data Nascimento*</mat-label>
                     <input matInput [matDatepicker]="pickerDTNasc" formControlName="dataNascimento">
                     <mat-datepicker-toggle matSuffix [for]="pickerDTNasc"></mat-datepicker-toggle>
                     <mat-datepicker #pickerDTNasc></mat-datepicker>
                     <mat-error *ngIf="!formAssociado.controls.dataNascimento.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
-                    <mat-label>Email</mat-label>
+                    <mat-label>Email*</mat-label>
                     <input type="email" matInput formControlName="email">
                     <mat-error *ngIf="!formAssociado.controls.email.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
-                <mat-form-field fxFlex="33%" fxFill appearance="outline">
-                    <mat-label>Estado Civil</mat-label>
-                    <input type="text" matInput formControlName="estadoCivil">
-                    <mat-error *ngIf="!formAssociado.controls.estadoCivil.valid">{{getErrorMessage()}}</mat-error>
+                <mat-form-field formGroupName="estadoCivil" fxFlex="33%" fxFill appearance="outline">
+                    <mat-label>Estado Civil*</mat-label>
+                    <mat-select formControlName="descricao">
+                        <mat-option>NENHUM</mat-option>
+                        <mat-option *ngFor="let estado of estadoCivilEnum" [value]="estado.descricao">
+                            {{estado.descricao}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="!formAssociado.controls.estadoCivil.controls.descricao.valid">
+                        {{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
             <div linha fxLayoutGap="2%">
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
-                    <mat-label>Naturalidade</mat-label>
+                    <mat-label>Naturalidade*</mat-label>
                     <input type="text" matInput formControlName="naturalidade">
                     <mat-error *ngIf="!formAssociado.controls.naturalidade.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
-                    <mat-label>Nascionalidade</mat-label>
+                    <mat-label>Nascionalidade*</mat-label>
                     <input type="text" matInput formControlName="nascionalidade">
                     <mat-error *ngIf="!formAssociado.controls.nascionalidade.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
-                    <mat-label>Sexo</mat-label>
-                    <input matInput formControlName="sexo">
+                    <mat-label>Sexo*</mat-label>
+                    <mat-select formControlName="sexo">
+                        <mat-option>NENHUM</mat-option>
+                        <mat-option *ngFor="let sexo of sexoEnum" [value]="sexo.sigla">
+                            {{sexo.descricao}}
+                        </mat-option>
+                    </mat-select>
                     <mat-error *ngIf="!formAssociado.controls.sexo.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
             <div linha fxLayoutGap="2%">
                 <mat-form-field fxFlex="50%" fxFill appearance="outline">
-                    <mat-label>Nome Mãe</mat-label>
+                    <mat-label>Nome Mãe*</mat-label>
                     <input type="text" matInput formControlName="nomeMae">
+                    <mat-error *ngIf="!formAssociado.controls.nomeMae.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="50%" fxFill appearance="outline">
-                    <mat-label>Nome Pai</mat-label>
+                    <mat-label>Nome Pai*</mat-label>
                     <input type="text" matInput formControlName="nomePai">
+                    <mat-error *ngIf="!formAssociado.controls.nomePai.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
-            <div formGroupName="formEndereco">
-                <div linha fxLayoutGap="2%">
-                    <mat-form-field fxFlex="30%" fxFill appearance="outline">
-                        <mat-label>Cep</mat-label>
-                        <input type="number" matInput formControlName="cep">
-                    </mat-form-field>
-                    <mat-form-field fxFlex="40%" fxFill appearance="outline">
-                        <mat-label>Logradouro</mat-label>
-                        <input type="text" matInput formControlName="logradouro">
-                    </mat-form-field>
-                    <mat-form-field fxFlex="20%" fxFill appearance="outline">
-                        <mat-label>Número</mat-label>
-                        <input type="number" matInput formControlName="numero">
-                    </mat-form-field>
-                    <mat-form-field fxFlex="10%" fxFill appearance="outline">
-                        <mat-label>UF</mat-label>
-                        <input matInput formControlName="uf">
-                    </mat-form-field>
-                </div>
-                <div linha fxLayoutGap="2%">
-                    <mat-form-field fxFlex="25%" fxFill appearance="outline">
-                        <mat-label>Bairro</mat-label>
-                        <input type="text" matInput formControlName="bairro">
-                    </mat-form-field>
-                    <mat-form-field fxFlex="25%" fxFill appearance="outline">
-                        <mat-label>Cidade</mat-label>
-                        <input type="text" matInput formControlName="cidade">
-                    </mat-form-field>
-                    <mat-form-field fxFlex="50%" fxFill appearance="outline">
-                        <mat-label>Complemento</mat-label>
-                        <input type="text" matInput formControlName="complemento">
-                    </mat-form-field>
-                </div>
-            </div>
-            <div formGroupName="formTelefones">
-                <div linha fxLayoutGap="2%">
-                    <mat-form-field fxFlex="25%" fxFill appearance="outline">
-                        <mat-label>Número Telefone</mat-label>
-                        <input type="number" matInput formControlName="numero">
-                    </mat-form-field>
-                    <mat-form-field formGroupName="formTipoTelefone" fxFlex="25%" fxFill appearance="outline">
-                        <mat-label>Tipo Telefone</mat-label>
-                        <input matInput formControlName="descricao">
-                    </mat-form-field>
-                </div>
-            </div>
+
+            <!-- FORM ENDERECO -->
+            <form-endereco [formGenerico]="formAssociado"></form-endereco>
+            <!-- FORM TELEFONE -->
+            <form-telefone [formGenerico]="formAssociado"></form-telefone>
+
         </mat-tab>
         <mat-tab label="Dependente">
-            TESTE
+            <!-- FORM DEPENDENTE -->
+            <form-dependente [formAssociado]="formAssociado"></form-dependente>
         </mat-tab>
     </mat-tab-group>
 </div>

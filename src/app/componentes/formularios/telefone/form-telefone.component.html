@@ -1,0 +1,24 @@
+<div [formGroup]="formGenerico">
+    <div formArrayName="telefones">
+        <div *ngFor="let item of formGenerico.get('telefones').controls; let i = index;">
+            <div linha fxLayoutGap="2%" [formGroupName]="i">
+                <mat-form-field fxFlex="25%" fxFill appearance="outline">
+                    <mat-label>Número Telefone*</mat-label>
+                    <input type="number" matInput formControlName="numero">
+                    <mat-error *ngIf="!formGenerico.controls.telefones.controls[i].controls.numero.valid">
+                        {{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field formGroupName="tipoTelefone" fxFlex="25%" fxFill appearance="outline">
+                    <mat-label>Tipo Telefone*</mat-label>
+                    <mat-select formControlName="descricao">
+                        <mat-option>NENHUM</mat-option>
+                        <mat-option *ngFor="let tipo of tiposTelefone" [value]="tipo.id">
+                            {{tipo.descricao}}
+                        </mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="!formGenerico.controls.telefones.controls[i].controls.tipoTelefone.descricao.valid">{{getErrorMessage()}}</mat-error> -->
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</div>

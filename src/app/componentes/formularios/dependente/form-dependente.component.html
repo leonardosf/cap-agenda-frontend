@@ -1,0 +1,54 @@
+<div [formGroup]="formAssociado">
+    <div formArrayName="dependentes">
+        <div *ngFor="let item of formAssociado.get('dependentes').controls; let i = index;">
+            <div [formGroupName]="i">
+                <div linha fxLayoutGap="2%">
+                    <mat-form-field fxFlex="25%" fxFill appearance="outline">
+                        <mat-label>Matricula Titular</mat-label>
+                        <input type="number" matInput formControlName="matricula">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="50%" fxFill appearance="outline">
+                        <mat-label>Nome Completo</mat-label>
+                        <input type="text" matInput formControlName="nome">
+                    </mat-form-field>
+                    <mat-form-field formGroupName="tipoParentesco" fxFlex="25%" fxFill appearance="outline">
+                        <mat-label>Parentesco</mat-label>
+                        <input type="number" matInput formControlName="descricao">
+                    </mat-form-field>
+                </div>
+                <div linha fxLayoutGap="2%">
+                    <mat-form-field fxFlex="33%" fxFill appearance="outline">
+                        <mat-label>CPF</mat-label>
+                        <input type="number" matInput formControlName="cpf">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="33%" fxFill appearance="outline">
+                        <mat-label>Data Nascimento</mat-label>
+                        <input matInput [matDatepicker]="pickerDTNasc" formControlName="dataNascimento">
+                        <mat-datepicker-toggle matSuffix [for]="pickerDTNasc"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerDTNasc></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="33%" fxFill appearance="outline">
+                        <mat-label>Sexo</mat-label>
+                        <input type="number" matInput formControlName="sexo">
+                    </mat-form-field>
+                </div>
+                <div linha fxLayoutGap="2%">
+                    <mat-form-field fxFlex="33%" fxFill appearance="outline">
+                        <mat-label>Nº RG</mat-label>
+                        <input type="number" matInput formControlName="numeroRg">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="33%" fxFill appearance="outline">
+                        <mat-label>Data Emissão RG</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dataEmissaoRg">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="33%" fxFill appearance="outline">
+                        <mat-label>Orgão Emissor RG</mat-label>
+                        <input type="text" matInput formControlName="orgaoEmissor">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
