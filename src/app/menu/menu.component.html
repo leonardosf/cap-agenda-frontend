@@ -36,6 +36,24 @@
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
+                                Pesquisar
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list>
+                            <mat-list-item>
+                                <!-- <mat-icon>person_add</mat-icon> -->
+                                <a routerLink="pesquisa/associado">Associado</a>
+                            </mat-list-item>
+                        </mat-nav-list>
+                        <mat-nav-list>
+                            <mat-list-item>
+                                <a href="#">Usuário</a>
+                            </mat-list-item>
+                        </mat-nav-list>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
                                 Cadastro
                             </mat-panel-title>
                         </mat-expansion-panel-header>
@@ -60,3 +78,4 @@
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>
+<loading [loading]="loading"></loading>

@@ -14,7 +14,9 @@ export class AssociadoComponent implements OnInit {
   formAssociado: FormGroup;
   associadoModelo:AssociadoModelo;
 
-  constructor(public fb: FormBuilder, public associadoService: AssociadoService) {
+  constructor(public fb: FormBuilder, public associadoService: AssociadoService) {}
+
+  ngOnInit() {
 
     this.formAssociado = this.fb.group({
       nome: new FormControl('', Validators.required),
@@ -65,14 +67,11 @@ export class AssociadoComponent implements OnInit {
           sexo: new FormControl(''),
           tipoParentesco: new FormGroup({
             id: new FormControl(''),
-            descricao: new FormControl('', Validators.required)
+            descricao: new FormControl('')
           })
         })
       ])
     })
-  }
-
-  ngOnInit() {
   }
 
   salvar() {

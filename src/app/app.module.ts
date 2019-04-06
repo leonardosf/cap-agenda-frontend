@@ -16,10 +16,17 @@ import { FormDependenteComponent } from './componentes/formularios/dependente/fo
 import { FormEnderecoComponent } from './componentes/formularios/endereco/form-endereco.component';
 import { FormTelefoneComponent } from './componentes/formularios/telefone/form-telefone.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoadingComponent } from './componentes/loading/loading.component';
+import { PesquisarAssociadoComponent } from './paginas/pesquisar/associado/pesquisar-associado.component';
+import { TabelaAssociadoComponent } from './componentes/tabela/associado/tabela-associado.component';
 
 const router = [{
   path: 'cadastro',
   component: AssociadoComponent
+  },
+  {
+    path: 'pesquisa/associado',
+    component: PesquisarAssociadoComponent
   }];
 
 @NgModule({
@@ -31,7 +38,10 @@ const router = [{
     LinhaComponent,
     FormDependenteComponent,
     FormEnderecoComponent,
-    FormTelefoneComponent
+    FormTelefoneComponent,
+    LoadingComponent,
+    PesquisarAssociadoComponent,
+    TabelaAssociadoComponent
   ],
   imports: [BrowserModule, ModuleCompartilhado, LayoutModule, FlexLayoutModule, HttpClientModule,
     RouterModule.forRoot(router)],

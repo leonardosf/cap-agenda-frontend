@@ -29,9 +29,28 @@ export class HttpService {
     obterTipoTelefone(callback) {
         this.http.get(this.resource + 'tipos-telefones').pipe().subscribe(
             (retorno) => {
-               return callback(retorno)
+                return callback(retorno)
             }, (erro) => {
-                console.log("EERRRROOO = "+erro);
+                console.log("EERRRROOO = " + erro);
             });
+    }
+
+    obterTipoParentescos(callback) {
+        this.http.get(this.resource + 'tipos-parentescos').pipe().subscribe(
+            (retorno) => {
+                return callback(retorno)
+            }, (erro) => {
+                console.log("EERRRROOO = " + erro);
+            });
+    }
+
+    pesquisarAssociado(callback) {
+        this.http.get(this.resource + this.path).pipe().subscribe(
+            (retorno) => {
+                return callback(retorno)
+            }, (erro) => {
+                console.log("EERRRROOO = " + erro);
+            });
+
     }
 }
