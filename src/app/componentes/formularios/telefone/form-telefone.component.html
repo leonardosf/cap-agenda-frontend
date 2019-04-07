@@ -12,7 +12,7 @@
                     <mat-label>Tipo Telefone*</mat-label>
                     <mat-select formControlName="descricao">
                         <mat-option>NENHUM</mat-option>
-                        <mat-option *ngFor="let tipo of tiposTelefone" [value]="tipo.id">
+                        <mat-option *ngFor="let tipo of tiposTelefone" [value]="tipo.descricao">
                             {{tipo.descricao}}
                         </mat-option>
                     </mat-select>

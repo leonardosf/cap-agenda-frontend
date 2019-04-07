@@ -18,15 +18,25 @@ import { FormTelefoneComponent } from './componentes/formularios/telefone/form-t
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingComponent } from './componentes/loading/loading.component';
 import { PesquisarAssociadoComponent } from './paginas/pesquisar/associado/pesquisar-associado.component';
-import { TabelaAssociadoComponent } from './componentes/tabela/associado/tabela-associado.component';
+import { TabelaAssociadoComponent } from './componentes/tabelas/associado/tabela-associado.component';
+import { VisualizarAssociadoComponent } from './paginas/visualizar/associado/visualizar-associado.component';
+import { EditarAssociadoComponent } from './paginas/editar/associado/editar-associado.component';
 
 const router = [{
   path: 'cadastro',
   component: AssociadoComponent
   },
   {
-    path: 'pesquisa/associado',
+    path: 'pesquisar/associado',
     component: PesquisarAssociadoComponent
+  },
+  {
+    path: 'visualizar/associado',
+    component: VisualizarAssociadoComponent
+  },
+  {
+    path: 'editar/associado',
+    component: EditarAssociadoComponent
   }];
 
 @NgModule({
@@ -41,7 +51,9 @@ const router = [{
     FormTelefoneComponent,
     LoadingComponent,
     PesquisarAssociadoComponent,
-    TabelaAssociadoComponent
+    TabelaAssociadoComponent,
+    VisualizarAssociadoComponent,
+    EditarAssociadoComponent
   ],
   imports: [BrowserModule, ModuleCompartilhado, LayoutModule, FlexLayoutModule, HttpClientModule,
     RouterModule.forRoot(router)],

@@ -1,5 +1,6 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Utils } from "../utils/utils";
 
 @Injectable({
     providedIn: 'root'
@@ -23,6 +24,24 @@ export class HttpService {
                 callback(retorno);
             }, (erro) => {
                 console.log("ERRROOOOR = " + erro);
+            });
+    }
+
+    recuperar(id, callback) {
+        this.http.get(this.resource + this.path +"/"+id).pipe().subscribe(
+            (retorno) => {
+                return callback(retorno)
+            }, (erro) => {
+                console.log("EERRRROOO = " + erro);
+            });
+    }
+
+    atualizar(modelo, callback) {
+        this.http.put(this.resource + this.path, modelo).pipe().subscribe(
+            (retorno) => {
+                return callback(retorno)
+            }, (erro) => {
+                console.log("EERRRROOO = " + erro);
             });
     }
 

@@ -16,6 +16,8 @@ export class FormAssociadoComponent {
     public estadoCivilEnum = EstadoCivilEnum.values();
     public sexoEnum = SexoEnum.values();
 
+    constructor(){}
+
     getErrorMessage() {
         return 'Campo obrigatório';
     }
