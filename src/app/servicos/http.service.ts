@@ -30,7 +30,7 @@ export class HttpService {
     recuperar(id, callback) {
         this.http.get(this.resource + this.path +"/"+id).pipe().subscribe(
             (retorno) => {
-                return callback(retorno)
+                return callback(retorno);
             }, (erro) => {
                 console.log("EERRRROOO = " + erro);
             });
@@ -39,7 +39,16 @@ export class HttpService {
     atualizar(modelo, callback) {
         this.http.put(this.resource + this.path, modelo).pipe().subscribe(
             (retorno) => {
-                return callback(retorno)
+                return callback(retorno);
+            }, (erro) => {
+                console.log("EERRRROOO = " + erro);
+            });
+    }
+
+    remover(id, callback) {
+        this.http.delete(this.resource + this.path +"/"+id).pipe().subscribe(
+            (retorno) => {
+                return callback(retorno);
             }, (erro) => {
                 console.log("EERRRROOO = " + erro);
             });
@@ -48,7 +57,7 @@ export class HttpService {
     obterTipoTelefone(callback) {
         this.http.get(this.resource + 'tipos-telefones').pipe().subscribe(
             (retorno) => {
-                return callback(retorno)
+                return callback(retorno);
             }, (erro) => {
                 console.log("EERRRROOO = " + erro);
             });
@@ -57,7 +66,7 @@ export class HttpService {
     obterTipoParentescos(callback) {
         this.http.get(this.resource + 'tipos-parentescos').pipe().subscribe(
             (retorno) => {
-                return callback(retorno)
+                return callback(retorno);
             }, (erro) => {
                 console.log("EERRRROOO = " + erro);
             });
@@ -65,8 +74,8 @@ export class HttpService {
 
     pesquisarAssociado(callback) {
         this.http.get(this.resource + this.path).pipe().subscribe(
-            (retorno) => {
-                return callback(retorno)
+            (retorno:any) => {
+                return callback(retorno.conteudo);
             }, (erro) => {
                 console.log("EERRRROOO = " + erro);
             });

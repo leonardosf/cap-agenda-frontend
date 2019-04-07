@@ -3,11 +3,7 @@
         <div *ngFor="let item of formAssociado.get('dependentes').controls; let i = index;">
             <div [formGroupName]="i">
                 <div linha fxLayoutGap="2%">
-                    <mat-form-field fxFlex="25%" fxFill appearance="outline">
-                        <mat-label>Matricula Titular</mat-label>
-                        <input type="number" matInput formControlName="matricula">
-                    </mat-form-field>
-                    <mat-form-field fxFlex="50%" fxFill appearance="outline">
+                    <mat-form-field fxFlex="75%" fxFill appearance="outline">
                         <mat-label>Nome Completo</mat-label>
                         <input type="text" matInput formControlName="nome">
                     </mat-form-field>
@@ -15,7 +11,7 @@
                         <mat-label>Parentesco</mat-label>
                         <mat-select formControlName="descricao">
                             <mat-option>NENHUM</mat-option>
-                            <mat-option *ngFor="let tipo of tipoParentesco" [value]="tipo.id">
+                            <mat-option *ngFor="let tipo of tipoParentesco" [value]="tipo.descricao">
                                 {{tipo.descricao}}
                             </mat-option>
                         </mat-select>
@@ -34,8 +30,13 @@
                         <mat-datepicker #pickerDTNasc></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field fxFlex="33%" fxFill appearance="outline">
-                        <mat-label>Sexo</mat-label>
-                        <input type="number" matInput formControlName="sexo">
+                        <mat-label>Sexo*</mat-label>
+                        <mat-select formControlName="sexo">
+                            <mat-option>NENHUM</mat-option>
+                            <mat-option *ngFor="let sexo of sexoEnum" [value]="sexo.sigla">
+                                {{sexo.descricao}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
                 <div linha fxLayoutGap="2%">

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { HttpService } from "src/app/servicos/http.service";
+import { SexoEnum } from "src/app/enums/sexoEnum";
 
 @Component({
     selector: 'form-dependente',
@@ -11,6 +12,8 @@ export class FormDependenteComponent implements OnInit{
 
     @Input()
     public formAssociado:FormGroup;
+
+    public sexoEnum = SexoEnum.values();
 
     tipoParentesco;
 

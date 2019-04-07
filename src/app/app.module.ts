@@ -21,6 +21,7 @@ import { PesquisarAssociadoComponent } from './paginas/pesquisar/associado/pesqu
 import { TabelaAssociadoComponent } from './componentes/tabelas/associado/tabela-associado.component';
 import { VisualizarAssociadoComponent } from './paginas/visualizar/associado/visualizar-associado.component';
 import { EditarAssociadoComponent } from './paginas/editar/associado/editar-associado.component';
+// import { MascaraDirective } from './diretivas/mascaras/mascara';
 
 const router = [{
   path: 'cadastro',
@@ -53,7 +54,8 @@ const router = [{
     PesquisarAssociadoComponent,
     TabelaAssociadoComponent,
     VisualizarAssociadoComponent,
-    EditarAssociadoComponent
+    EditarAssociadoComponent,
+    // MascaraDirective
   ],
   imports: [BrowserModule, ModuleCompartilhado, LayoutModule, FlexLayoutModule, HttpClientModule,
     RouterModule.forRoot(router)],

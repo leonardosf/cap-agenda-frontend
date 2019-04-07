@@ -4,12 +4,12 @@
             <div linha fxLayoutGap="2%">
                 <mat-form-field fxFlex="25%" fxFill appearance="outline">
                     <mat-label>Matricula*</mat-label>
-                    <input type="text" matInput formControlName="matricula">
+                    <input type="text" matInput formControlName="matricula" maxlength="15">
                     <mat-error *ngIf="!formAssociado.controls.matricula.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="25%" fxFill appearance="outline">
                     <mat-label>CPF*</mat-label>
-                    <input type="number" matInput formControlName="cpf">
+                    <input OnlyNumber="true" type="text" matInput formControlName="cpf">
                     <mat-error *ngIf="!formAssociado.controls.cpf.valid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="50%" fxFill appearance="outline">

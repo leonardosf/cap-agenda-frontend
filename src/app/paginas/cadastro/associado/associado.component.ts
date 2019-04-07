@@ -5,6 +5,7 @@ import { AssociadoModelo } from 'src/app/modelos/associado/associadoModelo';
 import { EstadoCivilEnum } from 'src/app/enums/estadoCivilEnum';
 import { Utils } from 'src/app/utils/utils';
 import { TipoTelefoneEnum } from 'src/app/enums/tipoTelefoneEnum';
+import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
 
 @Component({
   selector: 'app-associado',
@@ -30,6 +31,8 @@ export class AssociadoComponent implements OnInit {
     for(let dep of associadoModelo.dependentes) {
       if(dep.nome) {
         dep.endereco = associadoModelo.endereco;
+        dep.matricula = associadoModelo.matricula;
+        dep.tipoParentesco.id = TipoParentescoEnum.getByDescCompleta(dep.tipoParentesco.descricao.toUpperCase()).codigo;
       } else {
         delete associadoModelo.dependentes;
       }

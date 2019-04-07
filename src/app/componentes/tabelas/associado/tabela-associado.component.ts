@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export class TabelaAssociadoComponent implements OnInit{
 
     @Input()
-    lstAssociado;
+    lstAssociado:Array<AssociadoModelo>;
     dataSource;
 
     displayedColumns: string[] = ['id', 'matricula', 'nome', 'dataNascimento', 'acao'];
@@ -46,8 +46,14 @@ export class TabelaAssociadoComponent implements OnInit{
             })
     }
 
-    deletar(id) {
-
+    remover(id) {
+        this.http.remover(id,
+            (callback) => {
+                alert("Associado removido com sucesso!")
+                let novaLista = this.lstAssociado.splice(this.lstAssociado.indexOf(id), 1);
+                this.dataSource = new MatTableDataSource<AssociadoModelo>(novaLista);
+                this.dataSource.paginator = this.paginator;
+            })
     }
 
 }

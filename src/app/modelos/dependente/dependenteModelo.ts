@@ -4,4 +4,5 @@ import { TipoParentescoModelo } from "./tipoParentescoModelo";
 export class DependenteModelo extends PessoaModelo {
 
     tipoParentesco:TipoParentescoModelo;
+    matricula;
 }

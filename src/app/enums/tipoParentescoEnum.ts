@@ -1,7 +1,8 @@
 export class TipoParentescoEnum {
 
-    public static FILHO:TipoParentescoEnum = new TipoParentescoEnum(1, "FILHO(A)");
-    public static ESPOSO:TipoParentescoEnum = new TipoParentescoEnum(2 ,"ESPOSO(A)");
+    public static FILHO:TipoParentescoEnum = new TipoParentescoEnum(1, "FILHO(S)");
+    public static ESPOSO:TipoParentescoEnum = new TipoParentescoEnum(2 ,"ESPOSA");
+    public static MARIDO:TipoParentescoEnum = new TipoParentescoEnum(3 ,"MARIDO");
 
     public codigo: number;
     public descricao: string;

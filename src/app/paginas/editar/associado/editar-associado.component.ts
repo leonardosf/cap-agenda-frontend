@@ -5,6 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Utils } from 'src/app/utils/utils';
 import { AssociadoService } from 'src/app/servicos/associado/associado.service';
+import { EstadoCivilEnum } from 'src/app/enums/estadoCivilEnum';
+import { TipoTelefoneEnum } from 'src/app/enums/tipoTelefoneEnum';
+import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
 
 @Component({
   selector: 'editar-associado',
@@ -35,10 +38,15 @@ export class EditarAssociadoComponent implements OnInit {
 
   atualizar() {
     const associadoModelo:AssociadoModelo = {...this.formAssociado.value};
-    // associadoModelo.estadoCivil.id = EstadoCivilEnum.getByDescCompleta(associadoModelo.estadoCivil.descricao).id;
+    associadoModelo.estadoCivil.id = EstadoCivilEnum.getByDescCompleta(associadoModelo.estadoCivil.descricao).id;
+    associadoModelo.telefones[0].tipoTelefone.id = TipoTelefoneEnum.getByDescCompleta(associadoModelo.telefones[0].tipoTelefone.descricao.toUpperCase()).codigo;
     for(let dep of associadoModelo.dependentes) {
       if(dep.nome) {
         dep.endereco = associadoModelo.endereco;
+        dep.matricula = associadoModelo.matricula;
+        dep.estadoCivil = associadoModelo.estadoCivil;
+        dep.telefones = associadoModelo.telefones;
+        dep.tipoParentesco.id = TipoParentescoEnum.getByDescCompleta(dep.tipoParentesco.descricao.toUpperCase()).codigo;
       } else {
         delete associadoModelo.dependentes;
       }
@@ -47,7 +55,6 @@ export class EditarAssociadoComponent implements OnInit {
       (callback) => {
         alert("Associado atualizado com sucesso!");
       });
-
   }
 
 
