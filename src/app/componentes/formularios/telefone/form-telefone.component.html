@@ -4,15 +4,15 @@
             <div linha fxLayoutGap="2%" [formGroupName]="i">
                 <mat-form-field fxFlex="25%" fxFill appearance="outline">
                     <mat-label>Número Telefone*</mat-label>
-                    <input type="number" matInput formControlName="numero">
+                    <input type="text" matInput formControlName="numero" maxlength="15" mascara="TELEFONE">
                     <mat-error *ngIf="!formGenerico.controls.telefones.controls[i].controls.numero.valid">
                         {{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field formGroupName="tipoTelefone" fxFlex="25%" fxFill appearance="outline">
                     <mat-label>Tipo Telefone*</mat-label>
-                    <mat-select formControlName="descricao">
+                    <mat-select formControlName="id">
                         <mat-option>NENHUM</mat-option>
-                        <mat-option *ngFor="let tipo of tiposTelefone" [value]="tipo.descricao">
+                        <mat-option *ngFor="let tipo of tiposTelefone" [value]="tipo.id">
                             {{tipo.descricao}}
                         </mat-option>
                     </mat-select>

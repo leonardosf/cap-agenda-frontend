@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AssociadoService } from 'src/app/servicos/associado/associado.service';
 import { AssociadoModelo } from 'src/app/modelos/associado/associadoModelo';
-import { EstadoCivilEnum } from 'src/app/enums/estadoCivilEnum';
 import { Utils } from 'src/app/utils/utils';
-import { TipoTelefoneEnum } from 'src/app/enums/tipoTelefoneEnum';
 import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
 
 @Component({
@@ -25,21 +23,33 @@ export class AssociadoComponent implements OnInit {
   }
 
   salvar() {
-    const associadoModelo:AssociadoModelo = {...this.formAssociado.value};
-    associadoModelo.estadoCivil.id = EstadoCivilEnum.getByDescCompleta(associadoModelo.estadoCivil.descricao).id;
-    associadoModelo.telefones[0].tipoTelefone.id = TipoTelefoneEnum.getByDescCompleta(associadoModelo.telefones[0].tipoTelefone.descricao.toUpperCase()).codigo;
-    for(let dep of associadoModelo.dependentes) {
+    this.associadoModelo = {...this.formAssociado.value};
+    this.removerCarateresEspeciais(this.associadoModelo)
+    for(let dep of this.associadoModelo.dependentes) {
       if(dep.nome) {
-        dep.endereco = associadoModelo.endereco;
-        dep.matricula = associadoModelo.matricula;
+        dep.endereco = this.associadoModelo.endereco;
+        dep.matricula = this.associadoModelo.matricula;
         dep.tipoParentesco.id = TipoParentescoEnum.getByDescCompleta(dep.tipoParentesco.descricao.toUpperCase()).codigo;
       } else {
-        delete associadoModelo.dependentes;
+        delete this.associadoModelo.dependentes;
       }
     }
-    this.associadoService.salvar(associadoModelo, (callback) => {
+    this.associadoService.salvar(this.associadoModelo, (callback) => {
       console.log("cadastrado com sucesso!");
       alert("cadastrado com sucesso!");
     });
   }
+
+  removerCarateresEspeciais(associadoModelo: AssociadoModelo): any {
+    associadoModelo.cpf = Utils.somenteNumeros(associadoModelo.cpf);
+    associadoModelo.numeroRG = Utils.somenteNumeros(associadoModelo.numeroRG);
+    associadoModelo.endereco.cep = Utils.somenteNumeros(associadoModelo.endereco.cep);
+
+    if(associadoModelo.telefones.length > 0) {
+      for(let tel of associadoModelo.telefones) {
+        tel.numero = Utils.somenteNumeros(tel.numero);
+      }
+    }
+  }
+
 }

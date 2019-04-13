@@ -7,10 +7,10 @@ export class PessoaModelo {
 
     id:Number;
     nome:String;
-    cpf:Number;
+    cpf:String;
     // LocalDate JAVA
     dataEmissaoRg:Date;
-    numeroRg:String;
+    numeroRG:String;
     orgaoEmissor:String;
     // LocalDate
     dataNascimento:Date

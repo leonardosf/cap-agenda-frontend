@@ -6,6 +6,6 @@ export class EnderecoModelo {
     complemento:String;
     bairro:String;
     cidade:String;
-    cep:Number;
+    cep:String;
     uf:String;
 }

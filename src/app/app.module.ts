@@ -21,6 +21,8 @@ import { PesquisarAssociadoComponent } from './paginas/pesquisar/associado/pesqu
 import { TabelaAssociadoComponent } from './componentes/tabelas/associado/tabela-associado.component';
 import { VisualizarAssociadoComponent } from './paginas/visualizar/associado/visualizar-associado.component';
 import { EditarAssociadoComponent } from './paginas/editar/associado/editar-associado.component';
+import { NumeroDiretiva } from './diretivas/validadores/numero.diretiva';
+import { MascaraDirective } from './diretivas/mascaras/mascara';
 // import { MascaraDirective } from './diretivas/mascaras/mascara';
 
 const router = [{
@@ -55,11 +57,13 @@ const router = [{
     TabelaAssociadoComponent,
     VisualizarAssociadoComponent,
     EditarAssociadoComponent,
-    // MascaraDirective
+    NumeroDiretiva,
+    MascaraDirective
   ],
   imports: [BrowserModule, ModuleCompartilhado, LayoutModule, FlexLayoutModule, HttpClientModule,
     RouterModule.forRoot(router)],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [NumeroDiretiva, MascaraDirective]
 })
 export class AppModule { }
