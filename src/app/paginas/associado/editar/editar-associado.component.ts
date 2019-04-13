@@ -35,8 +35,13 @@ export class EditarAssociadoComponent implements OnInit {
   }
 
   atualizar() {
-    const associadoModelo:AssociadoModelo = {...this.formAssociado.value};
+    this.associadoModelo = {...this.formAssociado.value};
     this.removerCarateresEspeciais(this.associadoModelo)
+    this.comporDependentes(this.associadoModelo);
+    this.associadoService.atualizar(this.associadoModelo);
+  }
+
+  comporDependentes(associadoModelo: AssociadoModelo): any {
     for(let dep of associadoModelo.dependentes) {
       if(dep.nome) {
         dep.endereco = associadoModelo.endereco;
@@ -48,20 +53,16 @@ export class EditarAssociadoComponent implements OnInit {
         delete associadoModelo.dependentes;
       }
     }
-    this.associadoService.atualizar(associadoModelo, 
-      (callback) => {
-        alert("Associado atualizado com sucesso!");
-      });
   }
 
   removerCarateresEspeciais(associadoModelo: AssociadoModelo): any {
-    associadoModelo.cpf = Utils.somenteNumeros(associadoModelo.cpf);
-    associadoModelo.numeroRG = Utils.somenteNumeros(associadoModelo.numeroRG);
-    associadoModelo.endereco.cep = Utils.somenteNumeros(associadoModelo.endereco.cep);
+    associadoModelo.cpf = Utils.somenteNumeros(associadoModelo.cpf.toString());
+    associadoModelo.numeroRG = Utils.somenteNumeros(associadoModelo.numeroRG.toString());
+    associadoModelo.endereco.cep = Utils.somenteNumeros(associadoModelo.endereco.cep.toString());
 
     if(associadoModelo.telefones.length > 0) {
       for(let tel of associadoModelo.telefones) {
-        tel.numero = Utils.somenteNumeros(tel.numero);
+        tel.numero = Utils.somenteNumeros(tel.numero.toString());
       }
     }
   }

@@ -7,10 +7,10 @@ import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
 
 @Component({
   selector: 'app-associado',
-  templateUrl: './associado.component.html',
-  styleUrls: ['./associado.component.scss']
+  templateUrl: './cadastrar-associado.component.html',
+  styleUrls: ['./cadastrar-associado.component.scss']
 })
-export class AssociadoComponent implements OnInit {
+export class CadastrarAssociadoComponent implements OnInit {
 
   formAssociado: FormGroup;
   associadoModelo:AssociadoModelo;
@@ -24,20 +24,23 @@ export class AssociadoComponent implements OnInit {
 
   salvar() {
     this.associadoModelo = {...this.formAssociado.value};
-    this.removerCarateresEspeciais(this.associadoModelo)
-    for(let dep of this.associadoModelo.dependentes) {
+    this.removerCarateresEspeciais(this.associadoModelo);
+    this.comporDependentes(this.associadoModelo);
+    this.associadoService.salvar(this.associadoModelo);
+  }
+
+  comporDependentes(associadoModelo: AssociadoModelo): any {
+    for(let dep of associadoModelo.dependentes) {
       if(dep.nome) {
-        dep.endereco = this.associadoModelo.endereco;
-        dep.matricula = this.associadoModelo.matricula;
+        dep.endereco = associadoModelo.endereco;
+        dep.matricula = associadoModelo.matricula;
+        dep.estadoCivil = associadoModelo.estadoCivil;
+        dep.telefones = associadoModelo.telefones;
         dep.tipoParentesco.id = TipoParentescoEnum.getByDescCompleta(dep.tipoParentesco.descricao.toUpperCase()).codigo;
       } else {
-        delete this.associadoModelo.dependentes;
+        delete associadoModelo.dependentes;
       }
     }
-    this.associadoService.salvar(this.associadoModelo, (callback) => {
-      console.log("cadastrado com sucesso!");
-      alert("cadastrado com sucesso!");
-    });
   }
 
   removerCarateresEspeciais(associadoModelo: AssociadoModelo): any {

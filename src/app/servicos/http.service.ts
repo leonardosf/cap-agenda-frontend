@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Utils } from "../utils/utils";
+import { MensagemToast } from "../componentes/mensagens/mensagem-toast";
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,7 @@ export class HttpService {
     resource = "http://localhost:8080/cap-agenda/api/";
     path;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private mensagem:MensagemToast) {
 
     }
 
@@ -18,10 +19,10 @@ export class HttpService {
         this.path = path;
     }
 
-    salvar(modelo, callback, loading?) {
+    salvar(modelo) {
         this.http.post(this.resource + this.path, modelo).subscribe(
-            (retorno) => {
-                callback(retorno);
+            () => {
+                this.mensagem.sucesso("Cadastrado com sucesso!", "OK");
             }, (erro) => {
                 console.log("ERRROOOOR = " + erro);
             });
@@ -36,10 +37,10 @@ export class HttpService {
             });
     }
 
-    atualizar(modelo, callback) {
+    atualizar(modelo) {
         this.http.put(this.resource + this.path, modelo).pipe().subscribe(
-            (retorno) => {
-                return callback(retorno);
+            () => {
+                this.mensagem.sucesso("Atualizado com sucesso!", "OK");
             }, (erro) => {
                 console.log("EERRRROOO = " + erro);
             });
