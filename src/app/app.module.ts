@@ -15,7 +15,7 @@ import { FormAssociadoComponent } from './componentes/formularios/associado/form
 import { FormDependenteComponent } from './componentes/formularios/dependente/form-dependente.component';
 import { FormEnderecoComponent } from './componentes/formularios/endereco/form-endereco.component';
 import { FormTelefoneComponent } from './componentes/formularios/telefone/form-telefone.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingComponent } from './componentes/loading/loading.component';
 import { PesquisarAssociadoComponent } from './paginas/pesquisar/associado/pesquisar-associado.component';
 import { TabelaAssociadoComponent } from './componentes/tabelas/associado/tabela-associado.component';
@@ -23,6 +23,7 @@ import { VisualizarAssociadoComponent } from './paginas/visualizar/associado/vis
 import { EditarAssociadoComponent } from './paginas/editar/associado/editar-associado.component';
 import { NumeroDiretiva } from './diretivas/validadores/numero.diretiva';
 import { MascaraDirective } from './diretivas/mascaras/mascara';
+import { HttpInterceptador } from './interceptador/http-interceptor';
 // import { MascaraDirective } from './diretivas/mascaras/mascara';
 
 const router = [{
@@ -62,8 +63,8 @@ const router = [{
   ],
   imports: [BrowserModule, ModuleCompartilhado, LayoutModule, FlexLayoutModule, HttpClientModule,
     RouterModule.forRoot(router)],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpInterceptador, multi: true}],
   bootstrap: [AppComponent],
-  exports: [NumeroDiretiva, MascaraDirective]
+  exports: [NumeroDiretiva, MascaraDirective, LoadingComponent]
 })
 export class AppModule { }
