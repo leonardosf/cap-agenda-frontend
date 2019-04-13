@@ -50,8 +50,10 @@ export class TabelaAssociadoComponent implements OnInit{
         this.http.remover(id,
             (callback) => {
                 alert("Associado removido com sucesso!")
-                let novaLista = this.lstAssociado.splice(this.lstAssociado.indexOf(id), 1);
-                this.dataSource = new MatTableDataSource<AssociadoModelo>(novaLista);
+                let associado = this.lstAssociado.filter(l => l.id == id);
+                let indexAssociado = this.lstAssociado.indexOf(associado[0]);
+                this.lstAssociado.splice(indexAssociado, 1);
+                this.dataSource = new MatTableDataSource<AssociadoModelo>(this.lstAssociado);
                 this.dataSource.paginator = this.paginator;
             })
     }
