@@ -1,0 +1,11 @@
+<mat-card>
+    <mat-card-title>
+      Cadastro Agenda
+    </mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="formAgenda" (ngSubmit)="salvar()">
+        <form-agenda [formAgenda]="formAgenda"></form-agenda>
+        <button color="primary" mat-raised-button type="submit" [disabled]="!formAgenda.valid">Salvar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>

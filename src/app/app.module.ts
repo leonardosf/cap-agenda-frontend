@@ -5,22 +5,28 @@ import { AppComponent } from './app.component';
 import { ModuleCompartilhado } from './modulos-compartilhados/compartilhado.module';
 import { LayoutModule } from '@angular/cdk/layout';
 
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+
 import { RouterModule } from '@angular/router';
 import { AssociadoComponent } from './paginas/cadastro/associado/associado.component';
 import { MenuComponent } from './menu/menu.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LinhaComponent } from './componentes/linha/linha.component';
+import { InputTextoComponent } from './componentes/input/input-texto.component';
 import { FormAssociadoComponent } from './componentes/formularios/associado/form-associado.component';
 import { FormDependenteComponent } from './componentes/formularios/dependente/form-dependente.component';
 import { FormEnderecoComponent } from './componentes/formularios/endereco/form-endereco.component';
 import { FormTelefoneComponent } from './componentes/formularios/telefone/form-telefone.component';
+import { FormAgendaComponent } from './componentes/formularios/agenda/form-agenda.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingComponent } from './componentes/loading/loading.component';
 import { PesquisarAssociadoComponent } from './paginas/pesquisar/associado/pesquisar-associado.component';
 import { TabelaAssociadoComponent } from './componentes/tabelas/associado/tabela-associado.component';
 import { VisualizarAssociadoComponent } from './paginas/visualizar/associado/visualizar-associado.component';
 import { EditarAssociadoComponent } from './paginas/editar/associado/editar-associado.component';
+import { AgendaComponent } from './paginas/agenda/agenda.component';
 // import { MascaraDirective } from './diretivas/mascaras/mascara';
 
 const router = [{
@@ -38,6 +44,10 @@ const router = [{
   {
     path: 'editar/associado',
     component: EditarAssociadoComponent
+  },
+  {
+    path: 'agenda',
+    component: AgendaComponent
   }];
 
 @NgModule({
@@ -47,18 +57,21 @@ const router = [{
     AssociadoComponent,
     FormAssociadoComponent,
     LinhaComponent,
+    InputTextoComponent,
     FormDependenteComponent,
     FormEnderecoComponent,
     FormTelefoneComponent,
+    FormAgendaComponent,
     LoadingComponent,
     PesquisarAssociadoComponent,
     TabelaAssociadoComponent,
     VisualizarAssociadoComponent,
     EditarAssociadoComponent,
+    AgendaComponent,
     // MascaraDirective
   ],
   imports: [BrowserModule, ModuleCompartilhado, LayoutModule, FlexLayoutModule, HttpClientModule,
-    RouterModule.forRoot(router)],
+    RouterModule.forRoot(router), NgxMaterialTimepickerModule],
   providers: [],
   bootstrap: [AppComponent]
 })

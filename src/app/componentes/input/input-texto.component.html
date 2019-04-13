@@ -1,0 +1,5 @@
+<mat-form-field fxFlex="{{tamanho}}" fxFill appearance="outline" [formGroup]="formulario" >
+    <mat-label>{{label}}</mat-label>
+    <input type="text" matInput formControlName="{{name}}" maxlength="{{tamanhoMaximo}}">
+    <mat-error *ngIf="isValid()">{{mensagemErro}}</mat-error>    
+</mat-form-field>
