@@ -52,7 +52,7 @@ export class TabelaAssociadoComponent implements OnInit{
     remover(id) {
         this.http.remover(id,
             () => {
-                this.mensagem.sucesso("Removido com sucesso!","OK")
+                this.mensagem.mostrar("Removido com sucesso!","OK")
                 let associado = this.lstAssociado.filter(l => l.id == id);
                 let indexAssociado = this.lstAssociado.indexOf(associado[0]);
                 this.lstAssociado.splice(indexAssociado, 1);

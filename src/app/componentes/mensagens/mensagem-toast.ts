@@ -8,7 +8,7 @@ export class MensagemToast {
 
     constructor(private snackBar: MatSnackBar) {}
 
-    sucesso(mensagem:string, acao:string) {
+    mostrar(mensagem:string, acao?:string) {
         this.snackBar.open(mensagem, acao, {
             duration: 2000
         });
