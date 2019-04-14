@@ -3,6 +3,7 @@ import {MatPaginator, MatTableDataSource, MatPaginatorIntl} from '@angular/mater
 import { AssociadoModelo } from "src/app/modelos/associado/associadoModelo";
 import { AssociadoService } from "src/app/servicos/associado/associado.service";
 import { Router } from "@angular/router";
+import { MensagemToast } from "../../mensagens/mensagem-toast";
 
 @Component({
     selector: 'tabela-associado',
@@ -19,7 +20,9 @@ export class TabelaAssociadoComponent implements OnInit{
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    constructor(mat:MatPaginatorIntl, public http:AssociadoService, public navegar:Router) {
+    constructor(mat:MatPaginatorIntl, public http:AssociadoService, public navegar:Router,
+            private mensagem:MensagemToast) {
+
         mat.itemsPerPageLabel = 'Itens por pagina';
     }
 
@@ -48,10 +51,12 @@ export class TabelaAssociadoComponent implements OnInit{
 
     remover(id) {
         this.http.remover(id,
-            (callback) => {
-                alert("Associado removido com sucesso!")
-                let novaLista = this.lstAssociado.splice(this.lstAssociado.indexOf(id), 1);
-                this.dataSource = new MatTableDataSource<AssociadoModelo>(novaLista);
+            () => {
+                this.mensagem.mostrar("Removido com sucesso!","OK")
+                let associado = this.lstAssociado.filter(l => l.id == id);
+                let indexAssociado = this.lstAssociado.indexOf(associado[0]);
+                this.lstAssociado.splice(indexAssociado, 1);
+                this.dataSource = new MatTableDataSource<AssociadoModelo>(this.lstAssociado);
                 this.dataSource.paginator = this.paginator;
             })
     }

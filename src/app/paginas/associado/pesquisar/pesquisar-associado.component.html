@@ -7,15 +7,15 @@
             <div linha fxLayoutGap="2%">
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
                     <mat-label>Matricula</mat-label>
-                    <input type="text" matInput formControlName="matricula">
+                    <input type="text" matInput formControlName="matricula" maxlength="15">
                 </mat-form-field>
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
                     <mat-label>CPF</mat-label>
-                    <input type="number" matInput formControlName="cpf">
+                    <input type="text" matInput formControlName="cpf" maxlength="14" mascara="CPF">
                 </mat-form-field>
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
                     <mat-label>Nome</mat-label>
-                    <input type="number" matInput formControlName="nome">
+                    <input type="text" matInput formControlName="nome" maxlength="50">
                 </mat-form-field>
             </div>
             <button color="primary" mat-raised-button type="submit">Pesquisar</button>

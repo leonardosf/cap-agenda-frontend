@@ -41,9 +41,12 @@ export class Utils {
         return valor.replace(/[.,-]/g, "");
     }
 
+    static somenteNumeros(valor): String {
+        return valor.replace(/[^\d]+/g, '');
+    }
+
     static montarForGroupAssociado(fb) {
         return fb.group({
-            // id: new FormControl(''),
             nome: new FormControl('', Validators.required),
             matricula: new FormControl('', Validators.required),
             cpf: new FormControl('', Validators.required),
@@ -53,8 +56,8 @@ export class Utils {
             dataNascimento: new FormControl('', Validators.required),
             email: new FormControl('', [Validators.required, Validators.email]),
             estadoCivil: new FormGroup({
-                id: new FormControl(''),
-                descricao: new FormControl('', Validators.required)
+                id: new FormControl('', Validators.required),
+                descricao: new FormControl('')
             }),
             naturalidade: new FormControl('', Validators.required),
             nascionalidade: new FormControl('', Validators.required),
@@ -62,7 +65,6 @@ export class Utils {
             nomePai: new FormControl('', Validators.required),
             sexo: new FormControl('', Validators.required),
             endereco: new FormGroup({
-                // id: new FormControl(''),
                 logradouro: new FormControl('', Validators.required),
                 numero: new FormControl('', Validators.required),
                 complemento: new FormControl('', Validators.required),
@@ -74,17 +76,15 @@ export class Utils {
             }),
             telefones: fb.array([
                 new FormGroup({
-                    // id: new FormControl(''),
                     numero: new FormControl('', Validators.required),
                     tipoTelefone: new FormGroup({
-                        id: new FormControl(''),
-                        descricao: new FormControl('', Validators.required)
+                        id: new FormControl('', Validators.required),
+                        descricao: new FormControl('')
                     })
                 }),
             ]),
             dependentes: fb.array([
                 new FormGroup({
-                    // id: new FormControl(''),
                     nome: new FormControl(''),
                     matricula: new FormControl(''),
                     cpf: new FormControl(''),

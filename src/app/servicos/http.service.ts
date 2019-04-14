@@ -1,6 +1,8 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Utils } from "../utils/utils";
+import { MensagemToast } from "../componentes/mensagens/mensagem-toast";
+import { AssociadoModelo } from "../modelos/associado/associadoModelo";
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +12,7 @@ export class HttpService {
     resource = "http://localhost:8080/cap-agenda/api/";
     path;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private mensagem:MensagemToast) {
 
     }
 
@@ -18,10 +20,10 @@ export class HttpService {
         this.path = path;
     }
 
-    salvar(modelo, callback, loading?) {
+    salvar(modelo) {
         this.http.post(this.resource + this.path, modelo).subscribe(
-            (retorno) => {
-                callback(retorno);
+            () => {
+                this.mensagem.mostrar("Cadastrado com sucesso!", "OK");
             }, (erro) => {
                 console.log("ERRROOOOR = " + erro);
             });
@@ -36,10 +38,10 @@ export class HttpService {
             });
     }
 
-    atualizar(modelo, callback) {
+    atualizar(modelo) {
         this.http.put(this.resource + this.path, modelo).pipe().subscribe(
-            (retorno) => {
-                return callback(retorno);
+            () => {
+                this.mensagem.mostrar("Atualizado com sucesso!", "OK");
             }, (erro) => {
                 console.log("EERRRROOO = " + erro);
             });
@@ -72,10 +74,14 @@ export class HttpService {
             });
     }
 
-    pesquisarAssociado(callback) {
-        this.http.get(this.resource + this.path).pipe().subscribe(
+    pesquisarAssociado(modelo, callback) {
+        this.http.get(this.resource + this.path, {params:Utils.montarParametros(modelo)}).pipe().subscribe(
             (retorno:any) => {
-                return callback(retorno.conteudo);
+                if(retorno.conteudo && retorno.conteudo.length > 0) {
+                    return callback(retorno.conteudo);
+                }
+                this.mensagem.mostrar("Nenhum registro encontrado!");
+                return callback(new Array<AssociadoModelo>())
             }, (erro) => {
                 console.log("EERRRROOO = " + erro);
             });

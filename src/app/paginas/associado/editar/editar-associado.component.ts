@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AssociadoModelo } from 'src/app/modelos/associado/associadoModelo';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Utils } from 'src/app/utils/utils';
 import { AssociadoService } from 'src/app/servicos/associado/associado.service';
-import { EstadoCivilEnum } from 'src/app/enums/estadoCivilEnum';
-import { TipoTelefoneEnum } from 'src/app/enums/tipoTelefoneEnum';
 import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
 
 @Component({
@@ -37,9 +35,13 @@ export class EditarAssociadoComponent implements OnInit {
   }
 
   atualizar() {
-    const associadoModelo:AssociadoModelo = {...this.formAssociado.value};
-    associadoModelo.estadoCivil.id = EstadoCivilEnum.getByDescCompleta(associadoModelo.estadoCivil.descricao).id;
-    associadoModelo.telefones[0].tipoTelefone.id = TipoTelefoneEnum.getByDescCompleta(associadoModelo.telefones[0].tipoTelefone.descricao.toUpperCase()).codigo;
+    this.associadoModelo = {...this.formAssociado.value};
+    this.removerCarateresEspeciais(this.associadoModelo)
+    this.comporDependentes(this.associadoModelo);
+    this.associadoService.atualizar(this.associadoModelo);
+  }
+
+  comporDependentes(associadoModelo: AssociadoModelo): any {
     for(let dep of associadoModelo.dependentes) {
       if(dep.nome) {
         dep.endereco = associadoModelo.endereco;
@@ -51,10 +53,18 @@ export class EditarAssociadoComponent implements OnInit {
         delete associadoModelo.dependentes;
       }
     }
-    this.associadoService.atualizar(associadoModelo, 
-      (callback) => {
-        alert("Associado atualizado com sucesso!");
-      });
+  }
+
+  removerCarateresEspeciais(associadoModelo: AssociadoModelo): any {
+    associadoModelo.cpf = Utils.somenteNumeros(associadoModelo.cpf.toString());
+    associadoModelo.numeroRG = Utils.somenteNumeros(associadoModelo.numeroRG.toString());
+    associadoModelo.endereco.cep = Utils.somenteNumeros(associadoModelo.endereco.cep.toString());
+
+    if(associadoModelo.telefones.length > 0) {
+      for(let tel of associadoModelo.telefones) {
+        tel.numero = Utils.somenteNumeros(tel.numero.toString());
+      }
+    }
   }
 
 

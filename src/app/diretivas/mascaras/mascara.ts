@@ -1,85 +1,96 @@
-import { Directive, Attribute } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { Directive, Attribute, ElementRef, HostListener } from "@angular/core";
 import { CpfFormatador } from "../formatadores/cpf-formatador";
 import { CnpjFormatador } from "../formatadores/cnpj-formatador";
 
 @Directive({
-    selector: '[mascara]',
-    host: { '(keyup)': 'onInputChange($event)' },
-    providers: [FormControl]
+    selector: '[mascara]'
 })
 export class MascaraDirective {
 
     private tipo: string;
+    private specialKeys: Array<string> = [ 'Backspace', 'Tab', 'End', 'Home', '-', 'ArrowLeft', 'ArrowRight', 'Delete' ];
 
-    constructor(public model: FormControl, @Attribute('mascara') tipo: string) {
+    constructor(private el: ElementRef, @Attribute('mascara') tipo: string) {
         this.tipo = tipo;
     }
+    
+    @HostListener('keyup', [ '$event' ])
+    onInputChange(event: KeyboardEvent) {
 
-    onInputChange(event) {
-        let valorLimpo = event.target.value.replace(/[^\d]+/g, '');
+        if (this.specialKeys.indexOf(event.key) !== -1) {
+            return;
+        }
+
+        let current: string = this.el.nativeElement.value;
+        let valorLimpo = current.replace(/[^\d]+/g, '');
+
         switch (this.tipo) {
             case "CPF":
-                this.cpf(valorLimpo);
-                return;
+                this.el.nativeElement.value = this.cpf(valorLimpo);
+                return event.preventDefault();
             case "CNPJ":
-                this.cnpj(valorLimpo);
-                return;
+                this.el.nativeElement.value = this.cnpj(valorLimpo);
+                return event.preventDefault();
             case "CPF-CNPJ":
-                this.cpfCnpj(valorLimpo);
-                return;
+                this.el.nativeElement.value = this.cpfCnpj(valorLimpo);
+                return event.preventDefault();
             case "MONETARIO":
-                this.monetario(valorLimpo);
-                return;
+                this.el.nativeElement.value = this.monetario(valorLimpo);
+                return event.preventDefault();
             case "MONETARIO-NULL":
-                this.monetarioNull(valorLimpo);
-                return;
+                this.el.nativeElement.value = this.monetarioNull(valorLimpo);
+                return event.preventDefault();
             case "TELEFONE":
-                this.telefone(valorLimpo);
-                return;
+                this.el.nativeElement.value = this.telefone(valorLimpo);
+                return event.preventDefault();
             case "CEP":
-                this.cep(valorLimpo);
-                return;
+                this.el.nativeElement.value = this.cep(valorLimpo);
+                return event.preventDefault();
+            case "RG":
+                this.el.nativeElement.value = this.rg(valorLimpo);
+                return event.preventDefault();
             default:
                 return;
         }
     }
 
     private cpf(valorLimpo: any) {
-        this.model.patchValue(CpfFormatador.formatarIncompleto(valorLimpo));
+        return CpfFormatador.formatarIncompleto(valorLimpo);
     }
 
     private cnpj(valorLimpo: any) {
-        this.model.patchValue(CnpjFormatador.formatarIncompleto(valorLimpo));
+        return CnpjFormatador.formatarIncompleto(valorLimpo);
     }
 
     private cpfCnpj(valorLimpo: any) {
         if (valorLimpo.length <= 11) {
-            this.model.patchValue(CpfFormatador.formatarIncompleto(valorLimpo));
+            return CpfFormatador.formatarIncompleto(valorLimpo);
         } else {
-            this.model.patchValue(CnpjFormatador.formatarIncompleto(valorLimpo));
+            return CnpjFormatador.formatarIncompleto(valorLimpo);
         }
     }
 
     private telefone(valorLimpo: any) {
+        if(valorLimpo.length === 9) {
+            return valorLimpo.replace(/(\d{5})(\d{4})$/, "$1-$2");
+        }
         let telefone = valorLimpo.replace(/(\d{2})(\d{4,5})(\d{4})$/, "($1) $2-$3");
-        this.model.patchValue(telefone);
+        return telefone;
     }
 
     private monetario(valorLimpo: any) {
         if (!valorLimpo) {
-            this.model.patchValue(valorLimpo);
-            return;
+            return valorLimpo;
         }
         let v = valorLimpo + 'e-2';
         let numero = Number(v);
         v = numero.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-        this.model.patchValue(v);
+        return v;
     }
 
     private monetarioNull(valorLimpo: any) {
         if (!valorLimpo) {
-            this.model.patchValue(valorLimpo);
+            return valorLimpo;
             return;
         }
         let v = valorLimpo + 'e-2';
@@ -89,13 +100,16 @@ export class MascaraDirective {
         } else {
             v = '';
         }
-        this.model.patchValue(v);
-        return;
+        return v;
     }
 
     private cep(valorLimpo: any) {
         let telefone = valorLimpo.replace(/(\d{5})(\d{3})$/, '$1-$2');
-        this.model.patchValue(telefone);
+        return telefone;
+    }
+
+    private rg(valorLimpo: any) {
+        return valorLimpo.replace(/(\d{1})(\d{3})(\d{3})$/, '$1.$2.$3');
     }
 
 }

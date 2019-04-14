@@ -5,7 +5,7 @@
                 <div linha fxLayoutGap="2%">
                     <mat-form-field fxFlex="75%" fxFill appearance="outline">
                         <mat-label>Nome Completo</mat-label>
-                        <input type="text" matInput formControlName="nome">
+                        <input type="text" matInput formControlName="nome" maxlength="50">
                     </mat-form-field>
                     <mat-form-field formGroupName="tipoParentesco" fxFlex="25%" fxFill appearance="outline">
                         <mat-label>Parentesco</mat-label>
@@ -21,7 +21,7 @@
                 <div linha fxLayoutGap="2%">
                     <mat-form-field fxFlex="33%" fxFill appearance="outline">
                         <mat-label>CPF</mat-label>
-                        <input type="number" matInput formControlName="cpf">
+                        <input type="text" matInput formControlName="cpf" maxlength="14" mascara="CPF">
                     </mat-form-field>
                     <mat-form-field fxFlex="33%" fxFill appearance="outline">
                         <mat-label>Data Nascimento</mat-label>
@@ -30,7 +30,7 @@
                         <mat-datepicker #pickerDTNasc></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field fxFlex="33%" fxFill appearance="outline">
-                        <mat-label>Sexo*</mat-label>
+                        <mat-label>Sexo</mat-label>
                         <mat-select formControlName="sexo">
                             <mat-option>NENHUM</mat-option>
                             <mat-option *ngFor="let sexo of sexoEnum" [value]="sexo.sigla">
@@ -42,7 +42,7 @@
                 <div linha fxLayoutGap="2%">
                     <mat-form-field fxFlex="33%" fxFill appearance="outline">
                         <mat-label>Nº RG</mat-label>
-                        <input type="number" matInput formControlName="numeroRg">
+                        <input type="number" matInput formControlName="numeroRg" maxlength="9" mascara="RG">
                     </mat-form-field>
                     <mat-form-field fxFlex="33%" fxFill appearance="outline">
                         <mat-label>Data Emissão RG</mat-label>
@@ -52,7 +52,7 @@
                     </mat-form-field>
                     <mat-form-field fxFlex="33%" fxFill appearance="outline">
                         <mat-label>Orgão Emissor RG</mat-label>
-                        <input type="text" matInput formControlName="orgaoEmissor">
+                        <input type="text" matInput formControlName="orgaoEmissor" maxlength="5">
                     </mat-form-field>
                 </div>
             </div>
