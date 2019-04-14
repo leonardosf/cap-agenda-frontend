@@ -54,6 +54,44 @@
         </mat-form-field>         
     </div>
     <div linha fxLayoutGap="2%">
-        
+        <mat-form-field fxFlex="20%" fxFill appearance="outline">
+            <mat-label>Hora Ínicio Intervado*</mat-label>
+            <input type="text" matInput formControlName="horaInicioIntervalo" maxlength="100">
+            <mat-error *ngIf="formAgenda.controls.horaInicioIntervalo.invalid">{{ getErrorMessage() }}</mat-error>
+        </mat-form-field> 
+        <mat-form-field fxFlex="20%" fxFill appearance="outline">
+            <mat-label>Hora Fim Intervalo*</mat-label>
+            <input type="text" matInput formControlName="horaFimIntervalo" maxlength="100">
+            <mat-error *ngIf="formAgenda.controls.horaFimIntervalo.invalid">{{ getErrorMessage() }}</mat-error>
+        </mat-form-field> 
+    </div>
+    <div linha fxLayoutGap="2%" >
+        <mat-form-field class="example-chip-list">
+                <mat-chip-list #chipList>
+                  <mat-chip
+                    color="primary"
+                    *ngFor="let dia of dias"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(dia)">
+                    {{ dia }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="Dias da Semana" matInput
+                    #fruitInput
+                    formControlName="diasSemana"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)"/>
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let diaSemana of filteredFruits | async" [value]="fruit">
+                    {{ diaSemana }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>    
     </div>
 </div>
