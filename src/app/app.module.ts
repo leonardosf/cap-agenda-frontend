@@ -5,8 +5,6 @@ import { AppComponent } from './app.component';
 import { ModuleCompartilhado } from './modulos-compartilhados/compartilhado.module';
 import { LayoutModule } from '@angular/cdk/layout';
 
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-
 import { RouterModule } from '@angular/router';
 import { CadastrarAssociadoComponent } from './paginas/associado/cadastrar/cadastrar-associado.component';
 import { MenuComponent } from './menu/menu.component';
