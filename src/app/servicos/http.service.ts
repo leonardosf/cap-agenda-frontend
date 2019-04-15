@@ -29,6 +29,15 @@ export class HttpService {
             });
     }
 
+    recuperarTodos(callBackSucesso, callbackErro) {
+        this.http.get(`${this.resource}${this.path}`).subscribe(response => {
+            callBackSucesso(response);
+        }, error => {
+            console.log('ERRO HTTP', error);
+            callbackErro();
+        });
+    }
+
     recuperar(id, callback) {
         this.http.get(this.resource + this.path +"/"+id).pipe().subscribe(
             (retorno) => {
@@ -36,6 +45,15 @@ export class HttpService {
             }, (erro) => {
                 console.log("EERRRROOO = " + erro);
             });
+    }
+
+    recuperarPaginada(parametros, callBackSucesso, callBackErro) {
+        this.http.get(`${this.resource}${this.path}`, { params:Utils.montarParametros(parametros) }).pipe().subscribe( response => {
+            callBackSucesso(response);
+        }, error => {
+            console.log('ERRO HTTP', error);
+            callBackErro();
+        });
     }
 
     atualizar(modelo) {

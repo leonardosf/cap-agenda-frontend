@@ -10,7 +10,7 @@
             <mat-select formControlName="medico">
                 <mat-option>Selecione</mat-option>
                 <mat-option *ngFor="let medico of medicos" [value]="medico.id">
-                    {{medico.nome}}
+                    {{ medico.nome }}
                 </mat-option>
             </mat-select>
             <mat-error *ngIf="formAgenda.controls.medico.invalid">{{ getErrorMessage() }}</mat-error>
@@ -20,7 +20,7 @@
             <mat-select formControlName="medico">
                 <mat-option>Selecione</mat-option>
                 <mat-option *ngFor="let consultorio of consultorios" [value]="consultorio.id">
-                    {{medico.nome}}
+                    {{ consultorio.nome }}
                 </mat-option>
             </mat-select>
             <mat-error *ngIf="formAgenda.controls.consultorio.invalid">{{ getErrorMessage() }}</mat-error>

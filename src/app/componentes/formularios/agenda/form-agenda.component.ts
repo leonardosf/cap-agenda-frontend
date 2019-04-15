@@ -1,3 +1,5 @@
+import { ConsultorioService } from './../../../servicos/consultorios/consultorio.service';
+import { MedicoService } from './../../../servicos/medicos/medico.service';
 import { FormBase } from './../form.base';
 import { Component, Input, ElementRef, ViewChild, OnInit } from "@angular/core";
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -5,6 +7,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from '@angular/material';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { DiasAtendimentoService } from 'src/app/servicos/dias-atendimento/dias-atendimento.service';
 
 @Component({
     selector: 'form-agenda',
@@ -16,8 +19,10 @@ export class FormAgendaComponent extends FormBase implements OnInit {
     @Input()
     public formAgenda: FormGroup;
     public tempoAtendimentos = [20, 30, 40, 50, 60];
-    public diasSemanas = [ { id: 1, descricao: 'Domingo' }, { id: 2, descricao: 'Segunda' }, { id: 3, descricao: 'Terça' }, { id: 4, descricao: 'Quarta' }];
+    public diasSemanas = [];
     public dias = [];
+    public medicos = [];
+    public consultorios = [];
 
     public visible = true;
     public selectable = true;
@@ -30,12 +35,39 @@ export class FormAgendaComponent extends FormBase implements OnInit {
     @ViewChild('diaSemanaInput') diaSemanaInput: ElementRef<HTMLInputElement>;
     @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-    constructor() {
+    constructor(private medicoService: MedicoService,
+                private diasAtendimentosService: DiasAtendimentoService,
+                private consultorioService: ConsultorioService) {
         super();        
     }
 
-    ngOnInit() {
-        this.iniciarFiltroAutoComplete();
+    ngOnInit() {        
+        this.carregarDiasAtendimentos();
+        this.carregarMedicos();
+        this.carregarConsultorios();
+    }
+
+    private carregarDiasAtendimentos() {
+        this.diasAtendimentosService.recuperarTodos(response => {
+            this.diasSemanas = response;
+            this.iniciarFiltroAutoComplete();
+        }, () => {
+            this.iniciarFiltroAutoComplete();
+        });
+    }
+
+    private carregarConsultorios() {
+        this.consultorioService.recuperarPaginada({ limite: 1000 }, response => {
+            this.consultorios = response.conteudo;
+        }, () => {
+        });
+    }
+
+    private carregarMedicos() {
+        this.medicoService.recuperarPaginada({ limite: 1000 }, response => {
+            this.medicos = response.conteudo;
+        }, () => {
+        });
     }
 
     private iniciarFiltroAutoComplete() {
