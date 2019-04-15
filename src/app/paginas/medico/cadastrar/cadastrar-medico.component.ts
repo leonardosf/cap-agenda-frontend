@@ -6,11 +6,11 @@ import { Utils } from 'src/app/utils/utils';
 import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
 
 @Component({
-  selector: 'cadastrar-associado',
-  templateUrl: './cadastrar-associado.component.html',
-  styleUrls: ['./cadastrar-associado.component.scss']
+  selector: 'cadastrar-medico',
+  templateUrl: './cadastrar-medico.component.html',
+  styleUrls: ['./cadastrar-medico.component.scss']
 })
-export class CadastrarAssociadoComponent implements OnInit {
+export class CadastrarMedicoComponent implements OnInit {
 
   formAssociado: FormGroup;
   associadoModelo:AssociadoModelo;
