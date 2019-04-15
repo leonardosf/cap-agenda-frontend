@@ -49,6 +49,12 @@ export class MascaraDirective {
             case "RG":
                 this.el.nativeElement.value = this.rg(valorLimpo);
                 return event.preventDefault();
+            case "HORA":
+                this.el.nativeElement.value = this.hora(valorLimpo);
+                return event.preventDefault();
+            case "COMPETENCIA":
+                this.el.nativeElement.value = this.competencia(valorLimpo);
+                return event.preventDefault();
             default:
                 return;
         }
@@ -110,6 +116,14 @@ export class MascaraDirective {
 
     private rg(valorLimpo: any) {
         return valorLimpo.replace(/(\d{1})(\d{3})(\d{3})$/, '$1.$2.$3');
+    }
+
+    private hora(valorLimpo: any) {
+        return valorLimpo.replace(/(\d{2})(\d{2})$/, "$1:$2");
+    }
+
+    private competencia(valorLimpo: any) {
+        return valorLimpo.replace(/(\d{2})(\d{4})$/, "$1/$2");
     }
 
 }

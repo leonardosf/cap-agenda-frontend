@@ -29,57 +29,64 @@
     <div linha fxLayoutGap="2%">
         <mat-form-field fxFlex="20%" fxFill appearance="outline">
             <mat-label>Hora Ínicio Atendimento*</mat-label>
-            <input type="text" matInput formControlName="horaInicio" maxlength="100">
+            <input type="text" matInput formControlName="horaInicio" mascara="HORA" maxlength="5">
             <mat-error *ngIf="formAgenda.controls.horaInicio.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="20%" fxFill appearance="outline">
             <mat-label>Hora Ínicio Atendimento*</mat-label>
-            <input type="text" matInput formControlName="horaInicio" maxlength="100">
+            <input type="text" matInput formControlName="horaInicio" mascara="HORA" maxlength="5">
             <mat-error *ngIf="formAgenda.controls.horaInicio.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field> 
         <mat-form-field fxFlex="20%" fxFill appearance="outline">
             <mat-label>Hora Fim Atendimento*</mat-label>
-            <input type="text" matInput formControlName="horaFim" maxlength="100">
+            <input type="text" matInput formControlName="horaFim" mascara="HORA" maxlength="5">
             <mat-error *ngIf="formAgenda.controls.horaFim.invalid">{{ getErrorMessage() }}</mat-error>
-        </mat-form-field>   
-        <mat-form-field fxFlex="20%" fxFill appearance="outline">
+        </mat-form-field>
+        <mat-form-field fxFlex="25%" fxFill appearance="outline">
             <mat-label>Tempo Atendimento*</mat-label>
-            <input type="text" matInput formControlName="tempoAtendimento" maxlength="100">
+            <mat-select formControlName="tempoAtendimento">
+                <mat-option>Selecione</mat-option>
+                <mat-option *ngFor="let tempo of tempoAtendimentos" [value]="tempo">
+                    {{ tempo }}
+                </mat-option>
+            </mat-select>
             <mat-error *ngIf="formAgenda.controls.tempoAtendimento.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field>   
         <mat-form-field fxFlex="15%" fxFill appearance="outline">
             <mat-label>Competência*</mat-label>
-            <input type="text" matInput formControlName="competencia" maxlength="100">
+            <input type="text" matInput formControlName="competencia" mascara="COMPETENCIA" maxlength="7">
             <mat-error *ngIf="formAgenda.controls.competencia.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field>         
     </div>
     <div linha fxLayoutGap="2%">
         <mat-form-field fxFlex="20%" fxFill appearance="outline">
             <mat-label>Hora Ínicio Intervado*</mat-label>
-            <input type="text" matInput formControlName="horaInicioIntervalo" maxlength="100">
+            <input type="text" matInput formControlName="horaInicioIntervalo" mascara="HORA" maxlength="5">
             <mat-error *ngIf="formAgenda.controls.horaInicioIntervalo.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field> 
         <mat-form-field fxFlex="20%" fxFill appearance="outline">
             <mat-label>Hora Fim Intervalo*</mat-label>
-            <input type="text" matInput formControlName="horaFimIntervalo" maxlength="100">
+            <input type="text" matInput formControlName="horaFimIntervalo" mascara="HORA" maxlength="5">
             <mat-error *ngIf="formAgenda.controls.horaFimIntervalo.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field> 
     </div>
     <div linha fxLayoutGap="2%" >
-        <mat-form-field class="example-chip-list">
+        <mat-form-field class="chip-list-agenda">
                 <mat-chip-list #chipList>
                   <mat-chip
-                    color="primary"
+                    class="chip-agenda"
+                    [color]="primary"
+                    [selected]="true"
                     *ngFor="let dia of dias"
                     [selectable]="selectable"
                     [removable]="removable"
-                    (removed)="remove(dia)">
-                    {{ dia }}
-                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    (removed)="remove(dia)" >
+                    {{ dia.descricao }}
+                    <mat-icon class="chip-icone" matChipRemove *ngIf="removable">cancel</mat-icon>
                   </mat-chip>
                   <input
                     placeholder="Dias da Semana" matInput
-                    #fruitInput
+                    #diaSemanaInput
                     formControlName="diasSemana"
                     [matAutocomplete]="auto"
                     [matChipInputFor]="chipList"
@@ -88,8 +95,8 @@
                     (matChipInputTokenEnd)="add($event)"/>
                 </mat-chip-list>
                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                  <mat-option *ngFor="let diaSemana of filteredFruits | async" [value]="fruit">
-                    {{ diaSemana }}
+                  <mat-option *ngFor="let diaSemana of filteredDiasSemanas | async" [value]="diaSemana">
+                    {{ diaSemana.descricao }}
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>    

@@ -15,19 +15,19 @@ export class FormAgendaComponent extends FormBase implements OnInit {
 
     @Input()
     public formAgenda: FormGroup;
-    public diasSemanas: string[] = ['Domingo', 'Segunda'];
+    public tempoAtendimentos = [20, 30, 40, 50, 60];
+    public diasSemanas = [ { id: 1, descricao: 'Domingo' }, { id: 2, descricao: 'Segunda' }, { id: 3, descricao: 'Terça' }, { id: 4, descricao: 'Quarta' }];
     public dias = [];
-
 
     public visible = true;
     public selectable = true;
     public removable = true;
     public addOnBlur = true;
     public separatorKeysCodes: number[] = [ENTER, COMMA];
-    public filteredFruits: Observable<string[]>;
-    public fruitCtrl ;
+    public filteredDiasSemanas: Observable<Array<any>>;
+    private diasSemanasCtrl;
 
-    @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+    @ViewChild('diaSemanaInput') diaSemanaInput: ElementRef<HTMLInputElement>;
     @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
     constructor() {
@@ -35,10 +35,14 @@ export class FormAgendaComponent extends FormBase implements OnInit {
     }
 
     ngOnInit() {
-        this.fruitCtrl = this.formAgenda.get('diasSemana');        
-        this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+        this.iniciarFiltroAutoComplete();
+    }
+
+    private iniciarFiltroAutoComplete() {
+        this.diasSemanasCtrl = this.formAgenda.get('diasSemana');        
+        this.filteredDiasSemanas = this.diasSemanasCtrl.valueChanges.pipe(
             startWith(null),
-            map((fruit: string | null) => fruit ? this._filter(fruit) : this.diasSemanas.slice())
+            map((item) => item ? this.filtrar(item) : this.diasSemanas.slice())
         );
     }
 
@@ -46,37 +50,53 @@ export class FormAgendaComponent extends FormBase implements OnInit {
         if (!this.matAutocomplete.isOpen) {
             const input = event.input;
             const value = event.value;
-
-            // Add our fruit
-            if ((value || '').trim()) {
+            if ((value || '').trim() && this.isContem(value, this.diasSemanas)) {
                 this.dias.push(value.trim());
             }
 
-            // Reset the input value
             if (input) {
                 input.value = '';
             }
 
-            this.fruitCtrl.setValue(null);
+            this.diasSemanasCtrl.setValue(null);
         }
     }
     
-    remove(fruit: string): void {
-        const index = this.dias.indexOf(fruit);
+    remove(item: string): void {
+        const index = this.dias.indexOf(item);         
         if (index >= 0) {
+            const diaSemana = this.dias[index];
+            Array.prototype.splice.apply(this.diasSemanas, [diaSemana.id - 1, 0].concat(diaSemana));
             this.dias.splice(index, 1);
+            this.iniciarFiltroAutoComplete();
         }
     }
     
     selected(event: MatAutocompleteSelectedEvent): void {
-        this.dias.push(event.option.viewValue);
-        this.fruitInput.nativeElement.value = '';
-        this.fruitCtrl.setValue(null);
+        const dia = event.option.viewValue;
+        const index = this.diasSemanas.findIndex(item => dia.toLowerCase() === item.descricao.toLowerCase());        
+        this.dias.push(this.diasSemanas[index]);
+        this.diaSemanaInput.nativeElement.value = '';
+        this.diasSemanasCtrl.setValue(null);
+        this.diasSemanas.splice(index, 1);       
     }
 
-    private _filter(value: string): string[] {
-        const filterValue = value.toLowerCase();
-        return this.diasSemanas.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+    private filtrar(value): Array<any> {
+        const filterValue = (typeof value === 'string' || value instanceof String) ? value : value.descricao.toLowerCase();
+        return this.diasSemanas
+            .filter(item => item.descricao.toLowerCase().indexOf(filterValue) === 0)
+            .filter(item => !this.isContem(item, this.dias));
+    }
+
+    private isContem(dia, dias): boolean {
+        let contem = false;
+        for (const d of dias) {
+            if (d.id === dia.id) {
+                contem = true;
+                break;
+            }
+        }
+        return contem;
     }
 
 }
