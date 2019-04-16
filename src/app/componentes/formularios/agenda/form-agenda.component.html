@@ -7,23 +7,23 @@
         </mat-form-field>   
         <mat-form-field fxFlex="25%" fxFill appearance="outline">
             <mat-label>Médico*</mat-label>
-            <mat-select formControlName="medico">
+            <mat-select formControlName="idMedico">
                 <mat-option>Selecione</mat-option>
                 <mat-option *ngFor="let medico of medicos" [value]="medico.id">
                     {{ medico.nome }}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="formAgenda.controls.medico.invalid">{{ getErrorMessage() }}</mat-error>
+            <mat-error *ngIf="formAgenda.controls.idMedico.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field>   
         <mat-form-field fxFlex="25%" fxFill appearance="outline">
             <mat-label>Consultorio*</mat-label>
-            <mat-select formControlName="medico">
+            <mat-select formControlName="idConsultorio">
                 <mat-option>Selecione</mat-option>
                 <mat-option *ngFor="let consultorio of consultorios" [value]="consultorio.id">
                     {{ consultorio.nome }}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="formAgenda.controls.consultorio.invalid">{{ getErrorMessage() }}</mat-error>
+            <mat-error *ngIf="formAgenda.controls.idConsultorio.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field>  
     </div>
     <div linha fxLayoutGap="2%">
@@ -32,11 +32,6 @@
             <input type="text" matInput formControlName="horaInicio" mascara="HORA" maxlength="5">
             <mat-error *ngIf="formAgenda.controls.horaInicio.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field>
-        <mat-form-field fxFlex="20%" fxFill appearance="outline">
-            <mat-label>Hora Ínicio Atendimento*</mat-label>
-            <input type="text" matInput formControlName="horaInicio" mascara="HORA" maxlength="5">
-            <mat-error *ngIf="formAgenda.controls.horaInicio.invalid">{{ getErrorMessage() }}</mat-error>
-        </mat-form-field> 
         <mat-form-field fxFlex="20%" fxFill appearance="outline">
             <mat-label>Hora Fim Atendimento*</mat-label>
             <input type="text" matInput formControlName="horaFim" mascara="HORA" maxlength="5">
@@ -72,7 +67,7 @@
     </div>
     <div linha fxLayoutGap="2%" >
         <mat-form-field class="chip-list-agenda">
-                <mat-chip-list #chipList>
+                <mat-chip-list #chipList formArrayName="diasAtendimentos">
                   <mat-chip
                     class="chip-agenda"
                     [color]="primary"
@@ -87,7 +82,7 @@
                   <input
                     placeholder="Dias da Semana" matInput
                     #diaSemanaInput
-                    formControlName="diasSemana"
+                    [formControl]="diasSemanasCtrl"
                     [matAutocomplete]="auto"
                     [matChipInputFor]="chipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"

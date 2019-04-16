@@ -1,3 +1,4 @@
+import { Agenda } from './../../modelos/agenda/agenda';
 import { AgendaService } from './../../servicos/agenda/agenda.service';
 import { AgendaFormGroup } from './agenda.form.group';
 import { Component, OnInit, Input } from '@angular/core';
@@ -24,7 +25,9 @@ export class AgendaComponent extends FormBase implements OnInit {
     }
 
     salvar() {
-        this.agendaService.salvar({});
+        const agenda: Agenda = { ...this.formAgenda.value };
+        debugger;
+        this.agendaService.salvar(agenda);
     }
 
 }

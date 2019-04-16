@@ -30,7 +30,7 @@ export class FormAgendaComponent extends FormBase implements OnInit {
     public addOnBlur = true;
     public separatorKeysCodes: number[] = [ENTER, COMMA];
     public filteredDiasSemanas: Observable<Array<any>>;
-    private diasSemanasCtrl;
+    private diasSemanasCtrl = new FormControl();
 
     @ViewChild('diaSemanaInput') diaSemanaInput: ElementRef<HTMLInputElement>;
     @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -71,7 +71,6 @@ export class FormAgendaComponent extends FormBase implements OnInit {
     }
 
     private iniciarFiltroAutoComplete() {
-        this.diasSemanasCtrl = this.formAgenda.get('diasSemana');        
         this.filteredDiasSemanas = this.diasSemanasCtrl.valueChanges.pipe(
             startWith(null),
             map((item) => item ? this.filtrar(item) : this.diasSemanas.slice())
@@ -110,7 +109,10 @@ export class FormAgendaComponent extends FormBase implements OnInit {
         this.dias.push(this.diasSemanas[index]);
         this.diaSemanaInput.nativeElement.value = '';
         this.diasSemanasCtrl.setValue(null);
-        this.diasSemanas.splice(index, 1);       
+        this.diasSemanas.splice(index, 1);   
+       // this.diasSemanasCtrl.value = this.dias;
+       this.formAgenda.value.diasAtendimentos = this.dias;
+       // debugger;         
     }
 
     private filtrar(value): Array<any> {
