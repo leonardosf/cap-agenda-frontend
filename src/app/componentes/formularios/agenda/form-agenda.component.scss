@@ -1,13 +1,14 @@
-.chip-list-agenda {
-    width: 100%;
-}
+.check-box-agenda {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
 
-.chip-agenda {
-    background-color: #673ab7;
-    color: #fff;
+ul#dia-semana-check li {
+    display: inline;
+    margin-right: 2%;
 }
-
-.chip-icone {
-    color: #fff !important;
-    opacity: 1 !important;
+ul#dia-semana-check {
+    padding-left: 0;
 }

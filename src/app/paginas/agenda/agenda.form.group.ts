@@ -1,4 +1,4 @@
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators, FormArray, ValidatorFn } from '@angular/forms';
 export class AgendaFormGroup {
 
     private fb: FormBuilder;
@@ -18,18 +18,19 @@ export class AgendaFormGroup {
             competencia: new FormControl('', Validators.required),
             horaInicioIntervalo: new FormControl('', Validators.required),
             horaFimIntervalo: new FormControl('', Validators.required),
-            diasAtendimentos: this.fb.array([], this.validateArrayNotEmpty)
+            diasAtendimentos: new FormArray([], this.minSelectedCheckboxes(1))
         });
     }
 
-    validateArrayNotEmpty(c: FormControl) {
-        if (c.value && c.value.length === 0) {
-          return { 
-            validateArrayNotEmpty: { valid: false }
-          };
-        }
-        return null;
-      }
+    minSelectedCheckboxes(min = 1) {
+      const validator: ValidatorFn = (formArray: FormArray) => {
+        const totalSelected = formArray.controls
+          .map(control => control.value)
+          .reduce((prev, next) => next ? prev + next : prev, 0);
+        return totalSelected >= min ? null : { required: true };
+      };    
+      return validator;
+    }
     
 }
 
