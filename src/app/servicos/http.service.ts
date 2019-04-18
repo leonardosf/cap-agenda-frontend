@@ -25,6 +25,7 @@ export class HttpService {
             () => {
                 this.mensagem.mostrar("Cadastrado com sucesso!", "OK");
             }, (erro) => {
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("ERRROOOOR = " + erro);
             });
     }
@@ -43,6 +44,7 @@ export class HttpService {
             (retorno) => {
                 return callback(retorno);
             }, (erro) => {
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("EERRRROOO = " + erro);
             });
     }
@@ -61,6 +63,7 @@ export class HttpService {
             () => {
                 this.mensagem.mostrar("Atualizado com sucesso!", "OK");
             }, (erro) => {
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("EERRRROOO = " + erro);
             });
     }
@@ -70,6 +73,7 @@ export class HttpService {
             (retorno) => {
                 return callback(retorno);
             }, (erro) => {
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("EERRRROOO = " + erro);
             });
     }
@@ -79,6 +83,7 @@ export class HttpService {
             (retorno) => {
                 return callback(retorno);
             }, (erro) => {
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("EERRRROOO = " + erro);
             });
     }
@@ -88,6 +93,7 @@ export class HttpService {
             (retorno) => {
                 return callback(retorno);
             }, (erro) => {
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("EERRRROOO = " + erro);
             });
     }
@@ -101,6 +107,7 @@ export class HttpService {
                 this.mensagem.mostrar("Nenhum registro encontrado!");
                 return callback(new Array<AssociadoModelo>())
             }, (erro) => {
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("EERRRROOO = " + erro);
             });
 
