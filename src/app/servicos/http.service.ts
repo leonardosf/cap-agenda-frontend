@@ -25,9 +25,9 @@ export class HttpService {
             () => {
                 this.mensagem.mostrar("Cadastrado com sucesso!", "OK");
             }, (erro) => {
-                console.log('ERRROOOOR', erro.error.mensagem);
-                this.mensagem.mostrar(erro.error.mensagem, "OK");
-        });
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
+                console.log("ERRROOOOR = " + erro);
+            });
     }
 
     recuperarTodos(callBackSucesso, callbackErro) {
@@ -44,6 +44,7 @@ export class HttpService {
             (retorno) => {
                 return callback(retorno);
             }, (erro) => {
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("EERRRROOO = " + erro);
             });
     }
@@ -62,6 +63,7 @@ export class HttpService {
             () => {
                 this.mensagem.mostrar("Atualizado com sucesso!", "OK");
             }, (erro) => {
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("EERRRROOO = " + erro);
             });
     }
@@ -71,6 +73,7 @@ export class HttpService {
             (retorno) => {
                 return callback(retorno);
             }, (erro) => {
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("EERRRROOO = " + erro);
             });
     }
@@ -80,6 +83,7 @@ export class HttpService {
             (retorno) => {
                 return callback(retorno);
             }, (erro) => {
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("EERRRROOO = " + erro);
             });
     }
@@ -89,6 +93,7 @@ export class HttpService {
             (retorno) => {
                 return callback(retorno);
             }, (erro) => {
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("EERRRROOO = " + erro);
             });
     }
@@ -102,6 +107,7 @@ export class HttpService {
                 this.mensagem.mostrar("Nenhum registro encontrado!");
                 return callback(new Array<AssociadoModelo>())
             }, (erro) => {
+                this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("EERRRROOO = " + erro);
             });
 
