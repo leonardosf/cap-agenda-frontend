@@ -15,9 +15,7 @@ export class AgendaFormGroup {
             horaInicio: new FormControl('', Validators.required),
             horaFim: new FormControl('', Validators.required),
             tempoAtendimento: new FormControl('', Validators.required),
-            competencia: new FormControl('', Validators.required),
-            horaInicioIntervalo: new FormControl('', Validators.required),
-            horaFimIntervalo: new FormControl('', Validators.required),
+            competencia: new FormControl('', Validators.required),            
             diasAtendimentos: new FormArray([], this.minSelectedCheckboxes(1))
         });
     }

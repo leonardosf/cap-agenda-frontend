@@ -25,9 +25,15 @@ export class AgendaComponent extends FormBase implements OnInit {
     }
 
     salvar() {
-        const agenda: Agenda = { ...this.formAgenda.value };
-        debugger;
-        this.agendaService.salvar(agenda);
+        if (this.formAgenda.valid) {
+            const agenda: Agenda = { ...this.formAgenda.value };
+            agenda.diasAtendimentos = this.formAgenda.value.diasAtendimentos.map(this.filtrarDiasAtendimentoSelecionados).filter(dia => dia !== undefined);
+            this.agendaService.save(agenda);
+        }        
+    }
+
+    filtrarDiasAtendimentoSelecionados(dia, index) {
+        if (dia === true) return { id: index + 1 }
     }
 
 }

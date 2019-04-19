@@ -12,7 +12,7 @@ export class HttpService {
     resource = "http://localhost:8080/cap-agenda/api/";
     path;
 
-    constructor(private http: HttpClient, private mensagem:MensagemToast) {
+    constructor(protected http: HttpClient, protected mensagem:MensagemToast) {
 
     }
 
@@ -25,8 +25,9 @@ export class HttpService {
             () => {
                 this.mensagem.mostrar("Cadastrado com sucesso!", "OK");
             }, (erro) => {
-                console.log("ERRROOOOR = " + erro);
-            });
+                console.log('ERRROOOOR', erro.error.mensagem);
+                this.mensagem.mostrar(erro.error.mensagem, "OK");
+        });
     }
 
     recuperarTodos(callBackSucesso, callbackErro) {

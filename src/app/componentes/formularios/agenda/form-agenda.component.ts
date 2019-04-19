@@ -3,7 +3,7 @@ import { MedicoService } from './../../../servicos/medicos/medico.service';
 import { FormBase } from './../form.base';
 import { Component, Input, OnInit } from "@angular/core";
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { FormGroup, FormControl, FormArray } from "@angular/forms";
+import { FormGroup, FormControl, FormArray, Validators } from "@angular/forms";
 import { DiasAtendimentoService } from 'src/app/servicos/dias-atendimento/dias-atendimento.service';
 import { MatCheckbox } from '@angular/material';
 import { DiaAtendimento } from 'src/app/modelos/dias-atendimentos/dias-atendimentos';
@@ -22,6 +22,7 @@ export class FormAgendaComponent extends FormBase implements OnInit {
     public dias = [];
     public medicos = [];
     public consultorios = [];
+    public possuiIntervalo = false
 
     constructor(private medicoService: MedicoService,
                 private diasAtendimentosService: DiasAtendimentoService,
@@ -60,9 +61,20 @@ export class FormAgendaComponent extends FormBase implements OnInit {
         });
     }
 
-    checkboxChange(indice: number, checked: boolean, valor: DiaAtendimento) {
-        if (checked === true) this.formAgenda.value.diasAtendimentos[indice] = valor;
-        else this.formAgenda.value.diasAtendimentos[indice] = undefined;
+    checkboxChange(checked: boolean) {
+        this.possuiIntervalo = checked
+        this.adicionarRemoverFormValidadorIntervalo()
+    }
+
+    private adicionarRemoverFormValidadorIntervalo() {
+        if (this.possuiIntervalo) {
+            this.formAgenda.controls.horaInicioIntervalo = new FormControl('', Validators.required);
+            this.formAgenda.controls.horaFimIntervalo = new FormControl('', Validators.required);
+        } else {
+            delete this.formAgenda.controls.horaInicioIntervalo;
+            delete this.formAgenda.controls.horaFimIntervalo;
+        }
+        this.formAgenda.updateValueAndValidity()        
     }
    
 }
