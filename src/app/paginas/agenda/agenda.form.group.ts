@@ -36,14 +36,22 @@ export class AgendaFormGroup {
         }      
     } 
 
-    minSelectedCheckboxes(min = 1) {
-      const validator: ValidatorFn = (formArray: FormArray) => {
+    private minSelectedCheckboxes(min = 1) {
+        const validator: ValidatorFn = (formArray: FormArray) => {
         const totalSelected = formArray.controls
-          .map(control => control.value)
-          .reduce((prev, next) => next ? prev + next : prev, 0);
-        return totalSelected >= min ? null : { required: true };
-      };    
-      return validator;
+            .map(control => control.value)
+            .reduce((prev, next) => next ? prev + next : prev, 0);
+            return totalSelected >= min ? null : { required: true };
+        };    
+        return validator;
+    }
+
+    montarFormGroupPesquisa() {
+        return this.fb.group({
+            nome: new FormControl(null),
+            idMedico: new FormControl(null),
+            idConsultorio: new FormControl(null),
+        });
     }
     
 }

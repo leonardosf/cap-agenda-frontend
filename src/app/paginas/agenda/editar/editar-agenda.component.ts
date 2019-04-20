@@ -33,6 +33,9 @@ export class EditarAgendaComponent extends FormBase implements OnInit {
         })  
      }
 
+    ngOnInit() {
+    }
+
      private prencherDiasAtendimentos(diasAtendimentos): Array<boolean> {
         const dias = [false, false, false, false, false, false, false];
         for (const dia of diasAtendimentos) {
@@ -41,18 +44,8 @@ export class EditarAgendaComponent extends FormBase implements OnInit {
         return dias;
      }
 
-     private removerObrigatoriedadeIntervalo(agenda: Agenda) {
-        if (agenda.possuiIntervalo === false) {
-            this.formAgenda.controls.horaInicioIntervalo = new FormControl(null, null);
-            this.formAgenda.controls.horaFimIntervalo = new FormControl(null, null);
-        }        
-     }
-
     private preencherPossuiIntervalo(agenda: Agenda): boolean {
         return Utils.isNull(agenda.horaFimIntervalo) && Utils.isNull(agenda.horaFimIntervalo);
-    }
-
-    ngOnInit() {
     }
 
     salvar() {
