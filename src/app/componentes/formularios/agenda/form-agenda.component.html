@@ -53,9 +53,10 @@
             <mat-error *ngIf="formAgenda.controls.competencia.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field>     
         <mat-list fxFlex="10%" fxFill appearance="outline">
-            <mat-checkbox color="primary" (change)="checkboxChange($event.checked)">Possui Intervalo</mat-checkbox>
+            <mat-checkbox color="primary" formControlName="possuiIntervalo" >Possui Intervalo</mat-checkbox>
         </mat-list>    
     </div>
+    <!--(change)="checkboxChange($event.checked)"-->
     <div linha fxLayoutGap="2%">        
         <mat-form-field fxFlex="20%" fxFill appearance="outline" *ngIf="possuiIntervalo">
             <mat-label>Hora Ínicio Intervado*</mat-label>
@@ -75,7 +76,5 @@
                 <mat-checkbox color="primary" [formControlName]="i">{{ diaSemana.descricao }}</mat-checkbox>
             </li>
         </ul>
-    </div>
-    {{formAgenda.invalid}}
-    
+    </div>    
 </div>

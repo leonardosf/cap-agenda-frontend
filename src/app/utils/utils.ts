@@ -101,4 +101,8 @@ export class Utils {
             ])
         })
     }
+
+    static isNull(valor): boolean {
+        return valor !== undefined && valor !== null;
+    }
 }

@@ -1,5 +1,6 @@
 import { DiaAtendimento } from './../dias-atendimentos/dias-atendimentos';
 export class Agenda  {
+    id: number;
     nome: string;
     idMedico: number;
     idConsultorio: number;
@@ -10,4 +11,5 @@ export class Agenda  {
     tempoAtendimento: number;
     competencia: string;
     diasAtendimentos: Array<DiaAtendimento> = new Array<DiaAtendimento>();	
+    possuiIntervalo: boolean = false;
 }

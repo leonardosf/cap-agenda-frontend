@@ -1,12 +1,9 @@
 import { ConsultorioService } from './../../../servicos/consultorios/consultorio.service';
 import { MedicoService } from './../../../servicos/medicos/medico.service';
 import { FormBase } from './../form.base';
-import { Component, Input, OnInit } from "@angular/core";
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { FormGroup, FormControl, FormArray, Validators } from "@angular/forms";
+import { Component, Input, OnInit, ChangeDetectorRef } from "@angular/core";
+import { FormGroup, Validators } from "@angular/forms";
 import { DiasAtendimentoService } from 'src/app/servicos/dias-atendimento/dias-atendimento.service';
-import { MatCheckbox } from '@angular/material';
-import { DiaAtendimento } from 'src/app/modelos/dias-atendimentos/dias-atendimentos';
 
 @Component({
     selector: 'form-agenda',
@@ -26,7 +23,8 @@ export class FormAgendaComponent extends FormBase implements OnInit {
 
     constructor(private medicoService: MedicoService,
                 private diasAtendimentosService: DiasAtendimentoService,
-                private consultorioService: ConsultorioService) {
+                private consultorioService: ConsultorioService,
+                private cdref: ChangeDetectorRef) {
         super();        
     }
 
@@ -34,15 +32,20 @@ export class FormAgendaComponent extends FormBase implements OnInit {
         this.carregarDiasAtendimentos();
         this.carregarMedicos();
         this.carregarConsultorios();
+
+        this.formAgenda.controls.possuiIntervalo.valueChanges.subscribe(
+            selectedValue => {
+                this.possuiIntervalo = selectedValue;  
+                this.adicionarRemoverFormValidadorIntervalo(); 
+                this.removerValoresIntervalo();
+                this.cdref.detectChanges();
+            }
+        );
     }
 
     private carregarDiasAtendimentos() {
         this.diasAtendimentosService.recuperarTodos(response => {
             this.diasSemanas = response;
-            this.diasSemanas.map((o, i) => {
-                const control = new FormControl(); // if first item set to true, else false
-                (this.formAgenda.controls.diasAtendimentos as FormArray).push(control);
-              });
         }, () => {
         });
     }
@@ -61,20 +64,23 @@ export class FormAgendaComponent extends FormBase implements OnInit {
         });
     }
 
-    checkboxChange(checked: boolean) {
-        this.possuiIntervalo = checked
-        this.adicionarRemoverFormValidadorIntervalo()
-    }
-
     private adicionarRemoverFormValidadorIntervalo() {
         if (this.possuiIntervalo) {
-            this.formAgenda.controls.horaInicioIntervalo = new FormControl('', Validators.required);
-            this.formAgenda.controls.horaFimIntervalo = new FormControl('', Validators.required);
+            this.formAgenda.controls.horaInicioIntervalo.setValidators(Validators.required);
+            this.formAgenda.controls.horaFimIntervalo.setValidators(Validators.required);
         } else {
-            delete this.formAgenda.controls.horaInicioIntervalo;
-            delete this.formAgenda.controls.horaFimIntervalo;
+            this.formAgenda.controls.horaInicioIntervalo.setValidators(null);
+            this.formAgenda.controls.horaFimIntervalo.setValidators(null);
         }
-        this.formAgenda.updateValueAndValidity()        
+        this.formAgenda.updateValueAndValidity();       
+    }
+
+    private removerValoresIntervalo() {
+        if (!this.possuiIntervalo) {
+            this.formAgenda.controls.horaInicioIntervalo.setValue(null);
+            this.formAgenda.controls.horaFimIntervalo.setValue(null);
+        } 
+        this.formAgenda.updateValueAndValidity(); 
     }
    
 }

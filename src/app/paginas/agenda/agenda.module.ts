@@ -1,3 +1,4 @@
+import { EditarAgendaComponent } from './editar/editar-agenda.component';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
@@ -11,6 +12,9 @@ const router: Routes = [
         children: [
             {
                 path: 'cadastrar', component: CadastrarAgendaComponent
+            },
+            {
+                path: 'editar/:id', component: EditarAgendaComponent
             }
         ]
     }
@@ -18,6 +22,6 @@ const router: Routes = [
 
 @NgModule({
     imports:[CommonModule, RouterModule.forChild(router), ModuleCompartilhado],
-    declarations: [CadastrarAgendaComponent, FormAgendaComponent]
+    declarations: [CadastrarAgendaComponent, EditarAgendaComponent, FormAgendaComponent]
 })
 export class AgendaModule {}

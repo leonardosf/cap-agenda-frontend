@@ -23,5 +23,16 @@ export class AgendaService extends HttpService {
             }
         );
     }
+
+    update(agenda: Agenda) {
+        this.http.put(`${this.resource}${this.path}`, agenda).subscribe(
+            () => {
+                this.mensagem.mostrar("Atualizado com sucesso!", "OK");
+            }, erro => {
+                console.log('ERRO EDITAR AGENDA', erro.error.mensagem);
+                this.mensagem.mostrar(erro.error.mensagem, "OK");
+            }
+        );
+    }
     
 }
