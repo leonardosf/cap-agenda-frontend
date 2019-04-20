@@ -1,17 +1,17 @@
-import { Agenda } from './../../modelos/agenda/agenda';
-import { AgendaService } from './../../servicos/agenda/agenda.service';
-import { AgendaFormGroup } from './agenda.form.group';
+import { Agenda } from '../../../modelos/agenda/agenda';
+import { AgendaService } from '../../../servicos/agenda/agenda.service';
+import { AgendaFormGroup } from '../agenda.form.group';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { FormBase } from '../../componentes/formularios/form.base';
+import { FormBase } from '../../../componentes/formularios/form.base';
 
 
 @Component({
-    selector: 'app-agenda',
-    templateUrl: './agenda.component.html',
-    styleUrls: ['./agenda.component.css']
+    selector: 'app-cad-agenda',
+    templateUrl: './cadastrar-agenda.component.html',
+    styleUrls: ['./cadastrar-agenda.component.css']
 })
-export class AgendaComponent extends FormBase implements OnInit {
+export class CadastrarAgendaComponent extends FormBase implements OnInit {
 
     public formAgenda: FormGroup;
 

@@ -4,7 +4,7 @@ import { PaginaComponent } from "./pagina.component";
 import { ModuleCompartilhado } from "../modulos-compartilhados/compartilhado.module";
 import { MascaraDirective } from "../diretivas/mascaras/mascara";
 import { NumeroDiretiva } from "../diretivas/validadores/numero.diretiva";
-import { AgendaComponent } from "./agenda/agenda.component";
+import { CadastrarAgendaComponent } from "./agenda/cadastrar/cadastrar-agenda.component";
 import { EditarAssociadoComponent } from "./associado/editar/editar-associado.component";
 import { VisualizarAssociadoComponent } from "./associado/visualizar/visualizar-associado.component";
 import { TabelaAssociadoComponent } from "../componentes/tabelas/associado/tabela-associado.component";
