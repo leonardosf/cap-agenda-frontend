@@ -7,14 +7,12 @@ import { VisualizarAssociadoComponent } from "./visualizar/visualizar-associado.
 import { FormDependenteComponent } from "src/app/componentes/formularios/dependente/form-dependente.component";
 import { FormEnderecoComponent } from "src/app/componentes/formularios/endereco/form-endereco.component";
 import { FormTelefoneComponent } from "src/app/componentes/formularios/telefone/form-telefone.component";
-import { BrowserModule } from "@angular/platform-browser";
 import { CommonModule } from "@angular/common";
-import { MenuComponent } from "src/app/menu/menu.component";
 import { EditarAssociadoComponent } from "./editar/editar-associado.component";
 import { PesquisarAssociadoComponent } from "./pesquisar/pesquisar-associado.component";
 import { TabelaAssociadoComponent } from "src/app/componentes/tabelas/associado/tabela-associado.component";
 
-const router:Routes = [
+const router: Routes = [
     {
         path: '',
         children: [
@@ -34,11 +32,11 @@ const router:Routes = [
     }
 ]
 @NgModule({
-    declarations:[CadastrarAssociadoComponent, FormAssociadoComponent, FormAssociadoComponent,
+    declarations: [CadastrarAssociadoComponent, FormAssociadoComponent, FormAssociadoComponent,
         FormEnderecoComponent, FormTelefoneComponent, FormDependenteComponent,
         EditarAssociadoComponent, VisualizarAssociadoComponent, PesquisarAssociadoComponent,
         TabelaAssociadoComponent],
-    exports:[],
+    exports: [],
     imports: [CommonModule, RouterModule.forChild(router), ModuleCompartilhado]
 })
-export class AssociadoModule {}
+export class AssociadoModule { }

@@ -4,6 +4,7 @@ import { AssociadoService } from 'src/app/servicos/associado/associado.service';
 import { AssociadoModelo } from 'src/app/modelos/associado/associadoModelo';
 import { Utils } from 'src/app/utils/utils';
 import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
+import { AssociadoFormGroup } from '../associado.form.group';
 
 @Component({
   selector: 'cadastrar-associado',
@@ -18,13 +19,13 @@ export class CadastrarAssociadoComponent implements OnInit {
   constructor(public fb: FormBuilder, public associadoService: AssociadoService) {}
 
   ngOnInit() {
-
-    this.formAssociado = Utils.montarForGroupAssociado(this.fb);
+    const associadoFormGroup = new AssociadoFormGroup(this.fb);
+    this.formAssociado = associadoFormGroup.montarForGroup();
   }
 
   salvar() {
     this.associadoModelo = {...this.formAssociado.value};
-    this.removerCarateresEspeciais(this.associadoModelo);
+    this.removerCaracteresEspeciais(this.associadoModelo);
     this.comporDependentes(this.associadoModelo);
     this.associadoService.salvar(this.associadoModelo);
   }
@@ -43,7 +44,7 @@ export class CadastrarAssociadoComponent implements OnInit {
     }
   }
 
-  removerCarateresEspeciais(associadoModelo: AssociadoModelo): any {
+  removerCaracteresEspeciais(associadoModelo: AssociadoModelo): any {
     associadoModelo.cpf = Utils.somenteNumeros(associadoModelo.cpf);
     associadoModelo.numeroRG = Utils.somenteNumeros(associadoModelo.numeroRG);
     associadoModelo.endereco.cep = Utils.somenteNumeros(associadoModelo.endereco.cep);

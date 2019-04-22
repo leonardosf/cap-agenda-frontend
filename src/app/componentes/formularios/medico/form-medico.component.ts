@@ -5,14 +5,14 @@ import { SexoEnum } from "src/app/enums/sexoEnum";
 import { FormBase } from "../form.base";
 
 @Component({
-    selector: 'form-associado',
-    templateUrl: './form-associado.component.html',
-    styleUrls: ['./form-associado.component.scss']
+    selector: 'form-medico',
+    templateUrl: './form-medico.component.html',
+    styleUrls: ['./form-medico.component.scss']
 })
-export class FormAssociadoComponent extends FormBase {
+export class FormMedicoComponent extends FormBase {
 
     @Input()
-    public formAssociado:FormGroup;
+    public formMedico:FormGroup;
 
     public estadoCivilEnum = EstadoCivilEnum.values();
     public sexoEnum = SexoEnum.values();
@@ -20,5 +20,5 @@ export class FormAssociadoComponent extends FormBase {
     constructor() {
         super();
     }
-    
+
 }

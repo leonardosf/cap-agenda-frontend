@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AssociadoService } from 'src/app/servicos/associado/associado.service';
-import { AssociadoModelo } from 'src/app/modelos/associado/associadoModelo';
 import { Utils } from 'src/app/utils/utils';
-import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
+import { MedicoFormGroup } from '../medico.form.group';
+import { MedicoModelo } from 'src/app/modelos/medico/medicoModelo';
 
 @Component({
   selector: 'cadastrar-medico',
@@ -12,44 +12,29 @@ import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
 })
 export class CadastrarMedicoComponent implements OnInit {
 
-  formAssociado: FormGroup;
-  associadoModelo:AssociadoModelo;
+  formMedico: FormGroup;
+  medicoModelo:MedicoModelo;
 
   constructor(public fb: FormBuilder, public associadoService: AssociadoService) {}
 
   ngOnInit() {
-
-    this.formAssociado = Utils.montarForGroupAssociado(this.fb);
+    const medicoFormGroup = new MedicoFormGroup(this.fb);
+    this.formMedico = medicoFormGroup.montarForGroup();
   }
 
   salvar() {
-    this.associadoModelo = {...this.formAssociado.value};
-    this.removerCarateresEspeciais(this.associadoModelo);
-    this.comporDependentes(this.associadoModelo);
-    this.associadoService.salvar(this.associadoModelo);
+    this.medicoModelo = {...this.formMedico.value};
+    this.removerCarateresEspeciais(this.medicoModelo);
+    // this.medicoService.salvar(this.medicoModelo);
   }
 
-  comporDependentes(associadoModelo: AssociadoModelo): any {
-    for(let dep of associadoModelo.dependentes) {
-      if(dep.nome) {
-        dep.endereco = associadoModelo.endereco;
-        dep.matricula = associadoModelo.matricula;
-        dep.estadoCivil = associadoModelo.estadoCivil;
-        dep.telefones = associadoModelo.telefones;
-        dep.tipoParentesco.id = TipoParentescoEnum.getByDescCompleta(dep.tipoParentesco.descricao.toUpperCase()).codigo;
-      } else {
-        delete associadoModelo.dependentes;
-      }
-    }
-  }
+  removerCarateresEspeciais(medicoModelo: MedicoModelo): any {
+    medicoModelo.cpf = Utils.somenteNumeros(medicoModelo.cpf);
+    medicoModelo.numeroRG = Utils.somenteNumeros(medicoModelo.numeroRG);
+    medicoModelo.endereco.cep = Utils.somenteNumeros(medicoModelo.endereco.cep);
 
-  removerCarateresEspeciais(associadoModelo: AssociadoModelo): any {
-    associadoModelo.cpf = Utils.somenteNumeros(associadoModelo.cpf);
-    associadoModelo.numeroRG = Utils.somenteNumeros(associadoModelo.numeroRG);
-    associadoModelo.endereco.cep = Utils.somenteNumeros(associadoModelo.endereco.cep);
-
-    if(associadoModelo.telefones.length > 0) {
-      for(let tel of associadoModelo.telefones) {
+    if(medicoModelo.telefones.length > 0) {
+      for(let tel of medicoModelo.telefones) {
         tel.numero = Utils.somenteNumeros(tel.numero);
       }
     }

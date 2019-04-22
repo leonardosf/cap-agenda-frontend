@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { Utils } from 'src/app/utils/utils';
 import { AssociadoService } from 'src/app/servicos/associado/associado.service';
 import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
+import { AssociadoFormGroup } from '../associado.form.group';
 
 @Component({
   selector: 'editar-associado',
@@ -17,12 +18,13 @@ export class EditarAssociadoComponent implements OnInit {
   formAssociado: FormGroup;
   associadoModelo:AssociadoModelo;
 
-  constructor(public router:ActivatedRoute, public fb: FormBuilder, public location:Location,
-      public associadoService:AssociadoService){
+  constructor(public router: ActivatedRoute, public fb: FormBuilder, public location: Location,
+    public associadoService: AssociadoService) {
 
-    this.router.queryParams.subscribe(parametro => {this.associadoModelo = JSON.parse(parametro['associado'])});
-    this.formAssociado = Utils.montarForGroupAssociado(this.fb);
+    this.router.queryParams.subscribe(parametro => { this.associadoModelo = JSON.parse(parametro['associado']) });
 
+    const associadoFormGroup = new AssociadoFormGroup(this.fb);
+    this.formAssociado = associadoFormGroup.montarForGroup();
     this.formAssociado.patchValue(this.associadoModelo);
   }
 

@@ -6,7 +6,7 @@
         <form [formGroup]="formAssociado" (ngSubmit)="atualizar()">
             <form-associado [formAssociado]="formAssociado"></form-associado>
             <div fxLayoutGap="2%">
-                <button color="primary" mat-raised-button type="submit" [disabled]="!formAssociado.valid">Atualizar</button>
+                <button color="primary" mat-raised-button type="submit" [disabled]="formAssociado.invalid">Atualizar</button>
                 <button color="primary" mat-raised-button type="button" (click)="voltar()">Voltar</button>
             </div>
         </form>

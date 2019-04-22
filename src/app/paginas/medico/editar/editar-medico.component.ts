@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { Utils } from 'src/app/utils/utils';
 import { AssociadoService } from 'src/app/servicos/associado/associado.service';
 import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
+import { MedicoFormGroup } from '../medico.form.group';
 
 @Component({
   selector: 'editar-medico',
@@ -21,8 +22,9 @@ export class EditarMedicoComponent implements OnInit {
       public associadoService:AssociadoService){
 
     this.router.queryParams.subscribe(parametro => {this.associadoModelo = JSON.parse(parametro['associado'])});
-    this.formAssociado = Utils.montarForGroupAssociado(this.fb);
 
+    const medicoFormGroup = new MedicoFormGroup(this.fb);
+    this.formAssociado = medicoFormGroup.montarForGroup();
     this.formAssociado.patchValue(this.associadoModelo);
   }
 

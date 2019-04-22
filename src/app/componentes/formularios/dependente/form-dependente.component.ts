@@ -2,13 +2,14 @@ import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { HttpService } from "src/app/servicos/http.service";
 import { SexoEnum } from "src/app/enums/sexoEnum";
+import { FormBase } from "../form.base";
 
 @Component({
     selector: 'form-dependente',
     templateUrl: './form-dependente.component.html',
     styleUrls: ['./form-dependente.component.scss']
 })
-export class FormDependenteComponent implements OnInit{
+export class FormDependenteComponent extends FormBase implements OnInit{
 
     @Input()
     public formAssociado:FormGroup;
@@ -17,14 +18,12 @@ export class FormDependenteComponent implements OnInit{
 
     tipoParentesco;
 
-    constructor(public http:HttpService) {}
+    constructor(public http:HttpService) {
+        super();
+    }
 
     ngOnInit(): void {
         this.comporParentescos();
-    }
-
-    getErrorMessage() {
-        return 'Campo obrigatório';
     }
 
     comporParentescos() {
