@@ -4,7 +4,7 @@ import { ConsultorioService } from './../../../servicos/consultorios/consultorio
 import { MensagemToast } from './../../../componentes/mensagens/mensagem-toast';
 import { AgendaService } from './../../../servicos/agenda/agenda.service';
 import { Agenda } from './../../../modelos/agenda/agenda';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Utils } from 'src/app/utils/utils';
 
@@ -16,10 +16,13 @@ import { Utils } from 'src/app/utils/utils';
 export class PesquisarAgendaComponent implements OnInit {
 
     formPesquisaAgenda: FormGroup;
-    agendas: Array<Agenda>;
+    agendas: Array<Agenda> = new Array<Agenda>();
     consultorios = [];
     medicos = [];
-    private filtro;
+    private filtro = { pagina: 0, limite: 5 };
+
+    colunas = [ { property: 'id', name: 'Codigo' }, { property: 'nome', name: 'Nome' }, { property: 'competencia', name: 'Competencia'}];
+    total = 0;
 
     constructor(
         private fb: FormBuilder, 
@@ -29,6 +32,17 @@ export class PesquisarAgendaComponent implements OnInit {
         private medicoService: MedicoService) {
         const agendaFormGroup = new AgendaFormGroup(this.fb);
         this.formPesquisaAgenda = agendaFormGroup.montarFormGroupPesquisa();
+      //  this.criarItens();
+    }
+
+    criarItens() {
+        for (let i = 0; i < 28; i++) {
+            const agenda = new Agenda();
+            agenda.id = i;
+            agenda.nome = 'teste' + i;
+            agenda.competencia = '04/2019';
+            this.agendas.push(agenda);
+        }
     }
 
     ngOnInit(): void {
@@ -51,10 +65,12 @@ export class PesquisarAgendaComponent implements OnInit {
     }
 
     pesquisar() {
-        this.filtro = { ...this.formPesquisaAgenda.value };
+        //this.filtro = { ...this.formPesquisaAgenda.value };
+        this.filtro = { ...this.filtro, ...this.formPesquisaAgenda.value };
         debugger;
         this.http.recuperarPaginada(this.filtro, resposta => {
-            this.agendas = resposta.content;
+            this.agendas = resposta.conteudo;
+            this.total = resposta.total;
         }, erro => {
             console.log('ERRO CONSULTAR AGENDA', erro.error.mensagem);
             this.mensagem.mostrar(erro.error.mensagem, "OK");

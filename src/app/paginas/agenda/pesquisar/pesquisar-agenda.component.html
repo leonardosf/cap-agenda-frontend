@@ -37,5 +37,6 @@
 
 <mat-card>
     <mat-card-content>
+        <tabela-paginada [columns]="colunas" [dataSource]="agendas" [tamanhoPaginas]="[5, 10, 20]" [destino]="'agendas'" [total]="total"></tabela-paginada>
     </mat-card-content>
 </mat-card>

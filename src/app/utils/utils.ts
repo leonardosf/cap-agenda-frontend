@@ -8,7 +8,7 @@ export class Utils {
         if (Object.values(filtro).length > 0) {
             for (let key in filtro) {
                 if (typeof filtro[key] === 'object') {
-                    if (key != "constructor") {
+                    if (key != "constructor" && filtro[key] !== undefined && filtro[key] !== null) {
                         params = params.set(key, filtro[key]);
                     }
                 } else {
@@ -32,6 +32,7 @@ export class Utils {
 
     // Remove ponto, virgula e traço
     static removerCarateresEsp(valor) {
+        if (valor === 0) return valor;
         if (!valor) {
             return;
         }

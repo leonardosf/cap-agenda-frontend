@@ -1,3 +1,4 @@
+import { TabelaComponent } from './../../componentes/tabela-paginada/tabela.component';
 import { EditarAgendaComponent } from './editar/editar-agenda.component';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -26,6 +27,6 @@ const router: Routes = [
 
 @NgModule({
     imports:[CommonModule, RouterModule.forChild(router), ModuleCompartilhado],
-    declarations: [CadastrarAgendaComponent, EditarAgendaComponent, PesquisarAgendaComponent, FormAgendaComponent]
+    declarations: [CadastrarAgendaComponent, EditarAgendaComponent, PesquisarAgendaComponent, FormAgendaComponent, TabelaComponent]
 })
 export class AgendaModule {}
