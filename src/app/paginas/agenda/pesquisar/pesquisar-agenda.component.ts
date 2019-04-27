@@ -1,3 +1,4 @@
+import { TabelaBuilder, AcaoBuilder } from './../../../componentes/tabela-paginada/tabela';
 import { AgendaFormGroup } from './../agenda.form.group';
 import { MedicoService } from './../../../servicos/medicos/medico.service';
 import { ConsultorioService } from './../../../servicos/consultorios/consultorio.service';
@@ -7,6 +8,7 @@ import { Agenda } from './../../../modelos/agenda/agenda';
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Utils } from 'src/app/utils/utils';
+import { Tabela } from 'src/app/componentes/tabela-paginada/tabela';
 
 @Component({
     selector: 'app-pesquisar-agenda',
@@ -19,10 +21,9 @@ export class PesquisarAgendaComponent implements OnInit {
     agendas: Array<Agenda> = new Array<Agenda>();
     consultorios = [];
     medicos = [];
-    private filtro = { pagina: 0, limite: 5 };
-
-    colunas = [ { property: 'id', name: 'Codigo' }, { property: 'nome', name: 'Nome' }, { property: 'competencia', name: 'Competencia'}];
+    private filtro = { pagina: 0, limite: 10 };
     total = 0;
+    tabela: Tabela;
 
     constructor(
         private fb: FormBuilder, 
@@ -32,7 +33,31 @@ export class PesquisarAgendaComponent implements OnInit {
         private medicoService: MedicoService) {
         const agendaFormGroup = new AgendaFormGroup(this.fb);
         this.formPesquisaAgenda = agendaFormGroup.montarFormGroupPesquisa();
-      //  this.criarItens();
+     // this.criarItens();
+        const acoes = AcaoBuilder.getBuilder()
+                                 .add('edit', this.editar)
+                                 .add('delete_outline', this.apagar)
+                                 .add('search', this.visualizar)
+                                 .build();
+        this.tabela = TabelaBuilder.getBuilder()
+                                   .addColunaTexto('id', 'Código', 3)
+                                   .addColunaTexto('nome', 'Nome', 3)
+                                   .addColunaTexto('competencia', 'Competência', 3)
+                                   .addColunaAcao('Ações', 3, acoes)
+                                   .build();
+    }
+
+    editar(agenda) {
+        debugger;
+        alert('editar' + agenda.nome);
+    }
+
+    apagar() {
+        alert('apagar');
+    }
+
+    visualizar() {
+        alert('visualizaer')
     }
 
     criarItens() {
@@ -65,9 +90,7 @@ export class PesquisarAgendaComponent implements OnInit {
     }
 
     pesquisar() {
-        //this.filtro = { ...this.formPesquisaAgenda.value };
         this.filtro = { ...this.filtro, ...this.formPesquisaAgenda.value };
-        debugger;
         this.http.recuperarPaginada(this.filtro, resposta => {
             this.agendas = resposta.conteudo;
             this.total = resposta.total;

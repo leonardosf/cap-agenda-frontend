@@ -1,16 +1,56 @@
 <div class="mat-elevation-z2">
-    <table mat-table [dataSource]="rows">
-        <div *ngFor="let column of columns">
-            <ng-container matColumnDef="{{ column.property }}">
-                <th mat-header-cell *matHeaderCellDef> {{ column.name }} </th>
-                <td mat-cell *matCellDef="let element"> {{ element[column.property] }} </td>
-            </ng-container>
-        </div>        
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>    
-    <mat-paginator [length]="total" 
-                   [pageSizeOptions]="tamanhoPaginas" 
-                   showFirstLastButtons 
-                   (page)="pageEvent = getServerData($event)"></mat-paginator>
+    <ngx-datatable
+        id="tabela"
+        class="material"
+        [rows]="dados"
+        [columnMode]="'flex'"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [externalPaging]="true"
+        [count]="pagina.total"
+        [offset]="pagina.numero"
+        [limit]="pagina.limite"
+        [messages]="mensagem"
+        (page)='setPage($event)'>
+        <div *ngFor="let coluna of colunas">
+            <ngx-datatable-column prop="{{coluna.prop}}" name="{{coluna.name}}" [flexGrow]="coluna.flexGrow">
+                <ng-template let-value="value" ngx-datatable-cell-template *ngIf="coluna.tipo === 'texto'">
+                    {{value}}
+                </ng-template>
+                <ng-template let-row="elemento" ngx-datatable-cell-template *ngIf="coluna.tipo === 'acao'">
+                    <div *ngFor="let acao of coluna.acoes" fxLayout="row" fxLayoutAlign.xs="center center" fxLayoutAlign="center center" fxFlex="auto">
+                        <a class="hand" (click)="acao.onClick(elemento)">
+                            <mat-icon>{{acao.icone}}</mat-icon>
+                        </a>
+                    </div>
+                </ng-template>
+            </ngx-datatable-column>
+        </div>
+        <!--ngx-datatable-column prop="id" name="Código" [flexGrow]="3">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column prop="nome" name="Nome" [flexGrow]="3">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column prop="competencia" name="Competencia" [flexGrow]="3">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Ação" [flexGrow]="3">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                acao
+            </ng-template>
+        </ngx-datatable-column-->
+
+    </ngx-datatable>    
 </div>

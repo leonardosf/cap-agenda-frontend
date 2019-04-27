@@ -23,6 +23,7 @@
     "@angular/platform-browser": "7.2.9",
     "@angular/platform-browser-dynamic": "7.2.9",
     "@angular/router": "7.2.9",
+    "@swimlane/ngx-datatable": "^14.0.0",
     "angular-calendar-scheduler": "1.0.6",
     "core-js": "2.5.4",
     "date-fns": "1.30.1",

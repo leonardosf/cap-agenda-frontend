@@ -3,16 +3,35 @@
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
 body { 
-  font-family: Roboto, Arial, sans-serif;
-  margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+    margin: 0;
 }
 
 .basic-container {
-  padding: 30px;
+    padding: 30px;
 }
 
 .version-info {
-  font-size: 8pt;
-  float: right;
+    font-size: 8pt;
+    float: right;
+}
+
+.ngx-datatable.material .empty-row {
+    text-align: center !important;
+    padding-top: 1% !important;
+}
+
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+    background-color: #673ab7;
+    color: white;
+    font-weight: bold;
+}
+
+.hand:hover {
+    cursor: pointer;
 }

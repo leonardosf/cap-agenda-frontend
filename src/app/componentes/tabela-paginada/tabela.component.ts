@@ -1,6 +1,6 @@
+import { Pagina } from './pagina';
 import { HttpService } from 'src/app/servicos/http.service';
-import { MatPaginator, MatPaginatorIntl, MatTableDataSource, PageEvent } from '@angular/material';
-import { Component, Input, OnInit, ViewChild, SimpleChanges, OnChanges } from "@angular/core";
+import { Component, Input, OnInit, ViewChild, SimpleChanges, OnChanges, ChangeDetectorRef } from "@angular/core";
 import { Router } from '@angular/router';
 import { MensagemToast } from '../mensagens/mensagem-toast';
 
@@ -12,13 +12,9 @@ import { MensagemToast } from '../mensagens/mensagem-toast';
 export class TabelaComponent implements OnInit, OnChanges {
 
     @Input()
-    public columns = [];
+    public colunas = [];
     @Input()
-    public dataSource = [];
-    @Input()
-    public page = 0;
-    @Input()
-    public tamanhoPaginas = [5, 10, 20];
+    public dados = [];
     @Input()
     public filtro = { pagina: 0, limite: 10 };    
     @Input()
@@ -27,71 +23,43 @@ export class TabelaComponent implements OnInit, OnChanges {
     @Input()
     public total = 0;
 
-    public displayedColumns: string [] = []
+    public pagina = new Pagina();
 
-    public rows;    
+    public mensagem = { emptyMessage:'Nenhum resultado encontrado.' };
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-
-    constructor(
-                private mat: MatPaginatorIntl, 
-                private http: HttpService) {
-        mat.itemsPerPageLabel = 'Itens por pagina';
-        this.mat.getRangeLabel = this.rage;
-        this.mat.nextPageLabel = 'Próxima Página';
-        this.mat.firstPageLabel = 'Primeira Página';
-        this.mat.lastPageLabel = 'Última Página';
-        this.mat.previousPageLabel = 'Página Anterior';
+    constructor(private http: HttpService, private cd: ChangeDetectorRef) {
     }
 
     ngOnInit() {
-        this.getServerData(null);
-        this.updateTable();
-        this.total = 50;
     }
 
     ngOnChanges(changes: SimpleChanges) {
         for (let propName in changes) {
-            if (propName === 'dataSource') {
-                this.dataSource = changes[propName].currentValue;                
-                this.updateTable();
+            if (propName === 'dados') {    
+                const dados = changes['dados'].currentValue;    
+                const total = changes['total'].currentValue;    
+                this.atualizarTabela({conteudo: dados, total: total, pagina: 0 });
             }
-            if (propName === 'total') {
-                this.total = changes[propName].currentValue; 
-                this.updateTable();
+            if (propName === 'filtro') {
+                this.filtro = changes['filtro'].currentValue
             }
         }
     }
 
-    private updateTable() {
-        if (this.dataSource === undefined) this.dataSource = []; 
-        this.rows = new MatTableDataSource(this.dataSource);
-        this.rows.paginator = this.paginator;
-        this.displayedColumns = this.columns.map(item => item.property);
+    private atualizarTabela(resposta) {
+        this.dados = [ ...resposta.conteudo ];
+        this.pagina.numero = resposta.pagina;
+        this.pagina.total = resposta.total;
+        this.dados = this.dados.splice(0, 10);
     }
 
-    private rage(page: number, pageSize: number, length: number) {
-        if (length == 0 || pageSize == 0) { 
-            return `0 of ${length}`; 
-        } 
-        length = Math.max(length, 0); 
-        const startIndex = page * pageSize; 
-        const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize; return `${startIndex + 1} - ${endIndex} de ${length}`; 
-    }
-
-    public getServerData(event?: PageEvent) {
-        if (event === null) return;
-        debugger;
-        this.filtro = { ...this.filtro, pagina: event.pageIndex, limite: event.pageSize };
+    setPage(paginaInfo) {
+        this.filtro = { ...this.filtro, pagina: paginaInfo.offset, limite: paginaInfo.pageSize };
         this.http.path = this.destino;
-        this.http.recuperarPaginada(this.filtro, response => {            
-            this.dataSource = response.conteudo;
-            this.page = response.pagina;
-            this.total = response.total;
-            this.rows = new MatTableDataSource(this.dataSource);
-            return event;
+        this.http.recuperarPaginada(this.filtro, resposta => {        
+            this.atualizarTabela(resposta);
         }, erro => {
-            return event;
+            
         });
     }
 

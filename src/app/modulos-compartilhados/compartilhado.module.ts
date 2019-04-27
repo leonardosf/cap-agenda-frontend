@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import {
   MatAutocompleteModule,
@@ -83,7 +84,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     ReactiveFormsModule,
     LayoutModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxDatatableModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -124,6 +126,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     ReactiveFormsModule,
     LayoutModule,
-    FlexLayoutModule]
+    FlexLayoutModule,
+    NgxDatatableModule]
 })
 export class ModuleCompartilhado { }

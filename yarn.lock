@@ -18,7 +18,7 @@
     "@angular-devkit/core" "7.3.8"
     rxjs "6.3.3"
 
-"@angular-devkit/build-angular@^0.13.6":
+"@angular-devkit/build-angular@0.13.8":
   version "0.13.8"
   resolved "https://registry.yarnpkg.com/@angular-devkit/build-angular/-/build-angular-0.13.8.tgz#7ff949db46c78115e0bc45b3a2f9cad64459c016"
   integrity sha512-uRb8CKC0hUdcE+Fv2Ov9LJNelyjsiMuddBpo8pdTKCIHVVC6hvip9S/Z18Tvb207kKI3k7Dn+Ji1J63mCqmQzA==
@@ -192,7 +192,7 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/flex-layout@^7.0.0-beta.24":
+"@angular/flex-layout@7.0.0-beta.24":
   version "7.0.0-beta.24"
   resolved "https://registry.yarnpkg.com/@angular/flex-layout/-/flex-layout-7.0.0-beta.24.tgz#ad2fd2b0ff5e49119a6e0bc2052256967ad749af"
   integrity sha512-ll6sK0nLGxqI/f5+z4jbd+pve1QITzgehv2AuGvfSDgIjPMeqUDB5YZqQmIGM/dQRk/vIio5KCW5LQPJWzMMYQ==
@@ -279,6 +279,11 @@
     rxjs "6.3.3"
     semver "5.6.0"
     semver-intersect "1.4.0"
+
+"@swimlane/ngx-datatable@^14.0.0":
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/@swimlane/ngx-datatable/-/ngx-datatable-14.0.0.tgz#6227625e2ce2e9143735d4deeb3ab34b88745c26"
+  integrity sha512-zgRY58MzTpg9Jb575cg0O87mLtXYi6fx7NLRPRHdQ/FqH9mKjZ3i7+OjqtR8/w3KRmFP2Hnkmx52VzldZIKspg==
 
 "@types/jasmine@*":
   version "3.3.12"
@@ -589,7 +594,7 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
-angular-calendar-scheduler@^1.0.6:
+angular-calendar-scheduler@1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/angular-calendar-scheduler/-/angular-calendar-scheduler-1.0.6.tgz#1cbd949e58b5139b4dd7818f019fb70e2f44fa99"
   integrity sha512-6mLOni+Brp8Z3xbaCCi6zvH84BxR0m5FYuo6dtaov2Ql26pUirLWXf4xsqsPxMLF5/m1UY10mxM7C6b1tSkioA==
@@ -1814,7 +1819,7 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-date-fns@^1.30.1:
+date-fns@1.30.1:
   version "1.30.1"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
