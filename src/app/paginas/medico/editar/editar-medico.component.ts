@@ -39,7 +39,7 @@ export class EditarMedicoComponent implements OnInit {
 
   atualizar() {
     this.medicoModelo = {...this.formMedico.value};
-    Utils.removerCarateresEspeciais(this.medicoModelo)
+    Utils.removerCaracteresEspeciais(this.medicoModelo)
     this.associadoService.atualizar(this.medicoModelo);
   }
 

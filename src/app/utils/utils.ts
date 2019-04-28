@@ -1,5 +1,4 @@
 import { HttpParams } from "@angular/common/http";
-import { FormControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 export class Utils {
 
@@ -50,14 +49,22 @@ export class Utils {
         return valor !== undefined && valor !== null;
     }
 
-    static removerCarateresEspeciais(modelo): any {
-        modelo.cpf = Utils.somenteNumeros(modelo.cpf.toString());
-        modelo.numeroRG = Utils.somenteNumeros(modelo.numeroRG.toString());
-        modelo.endereco.cep = Utils.somenteNumeros(modelo.endereco.cep.toString());
-
-        if (modelo.telefones.length > 0) {
-            for (let tel of modelo.telefones) {
-                tel.numero = Utils.somenteNumeros(tel.numero.toString());
+    static removerCaracteresEspeciais(modelo): any {
+        for(let key in modelo) {
+            if (typeof modelo[key] === 'object') {
+                if(modelo[key] instanceof Array) {
+                    for(let array of modelo[key]) {
+                        for(let a in array) {
+                            modelo[key][array][a] = Utils.somenteNumeros(modelo[key][array][a].toString());
+                        }
+                    }
+                } else {
+                    for(let obj in  modelo[key]) {
+                        modelo[key][obj] = Utils.somenteNumeros(modelo[key][obj].toString());
+                    }
+                }
+            } else {
+                modelo[key] = Utils.somenteNumeros(modelo[key].toString());
             }
         }
     }

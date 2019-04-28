@@ -2,12 +2,17 @@
     <div linha fxLayoutGap="2%">
         <mat-form-field fxFlex="50%" fxFill appearance="outline">
             <mat-label>Nome Completo*</mat-label>
-            <input type="text" matInput formControlName="nome" maxlength="50" numero>
+            <input type="text" matInput formControlName="nome" maxlength="50">
             <mat-error *ngIf="formMedico.controls.nome.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="20%" fxFill appearance="outline">
             <mat-label>Conselho*</mat-label>
-            <input type="text" matInput formControlName="conselhoMedicina" maxlength="50" numero>
+            <mat-select formControlName="conselhoMedicina">
+                <mat-option>NENHUM</mat-option>
+                <mat-option *ngFor="let conselho of conselhoEnum" [value]="conselho.descricao">
+                    {{conselho.descSigla}}
+                </mat-option>
+            </mat-select>
             <mat-error *ngIf="formMedico.controls.conselhoMedicina.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="20%" fxFill appearance="outline">
@@ -17,27 +22,37 @@
         </mat-form-field>
         <mat-form-field fxFlex="10%" fxFill appearance="outline">
             <mat-label>UF Conselho*</mat-label>
-            <input type="text" matInput formControlName="ufConselho" maxlength="2">
+            <mat-select formControlName="ufConselho">
+                <mat-option>NENHUM</mat-option>
+                <mat-option *ngFor="let uf of ufEnum" [value]="uf.descSigla">
+                    {{uf.descSigla}}
+                </mat-option>
+            </mat-select>
             <mat-error *ngIf=formMedico.controls.ufConselho.invalid>{{getErrorMessage()}}</mat-error>
         </mat-form-field>
     </div>
     <div linha fxLayoutGap="2%">
-        <mat-form-field fxFlex="33%" fxFill appearance="outline">
+        <mat-form-field fxFlex="25%" fxFill appearance="outline">
+            <mat-label>CPF*</mat-label>
+            <input type="text" matInput formControlName="cpf" maxlength="14" mascara="CPF">
+            <mat-error *ngIf="formMedico.controls.cpf.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex="25%" fxFill appearance="outline">
             <mat-label>Nº RG*</mat-label>
             <input type="text" matInput formControlName="numeroRG" maxlength="9" mascara="RG">
-            <mat-error *ngIf="formMedico.controls.numeroRG.valid">{{getErrorMessage()}}</mat-error>
+            <mat-error *ngIf="formMedico.controls.numeroRG.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
-        <mat-form-field fxFlex="33%" fxFill appearance="outline">
+        <mat-form-field fxFlex="25%" fxFill appearance="outline">
             <mat-label>Data Emissão RG*</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="dataEmissaoRG">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="formMedico.controls.dataEmissaoRG.valid">{{getErrorMessage()}}</mat-error>
+            <mat-error *ngIf="formMedico.controls.dataEmissaoRG.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
-        <mat-form-field fxFlex="33%" fxFill appearance="outline">
+        <mat-form-field fxFlex="25%" fxFill appearance="outline">
             <mat-label>Orgão Emissor RG*</mat-label>
             <input type="text" matInput formControlName="orgaoEmissor" maxlength="5">
-            <mat-error *ngIf="formMedico.controls.orgaoEmissor.valid">{{getErrorMessage()}}</mat-error>
+            <mat-error *ngIf="formMedico.controls.orgaoEmissor.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
     </div>
     <div linha fxLayoutGap="2%">
@@ -46,12 +61,12 @@
             <input matInput [matDatepicker]="pickerDTNasc" formControlName="dataNascimento">
             <mat-datepicker-toggle matSuffix [for]="pickerDTNasc"></mat-datepicker-toggle>
             <mat-datepicker #pickerDTNasc></mat-datepicker>
-            <mat-error *ngIf="formMedico.controls.dataNascimento.valid">{{getErrorMessage()}}</mat-error>
+            <mat-error *ngIf="formMedico.controls.dataNascimento.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="33%" fxFill appearance="outline">
             <mat-label>Email*</mat-label>
             <input type="email" matInput formControlName="email" maxlength="40">
-            <mat-error *ngIf="formMedico.controls.email.valid">{{getErrorMessage()}}</mat-error>
+            <mat-error *ngIf="formMedico.controls.email.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field formGroupName="estadoCivil" fxFlex="33%" fxFill appearance="outline">
             <mat-label>Estado Civil*</mat-label>
@@ -61,7 +76,7 @@
                     {{estado.descricao}}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="formMedico.controls.estadoCivil.controls.descricao.valid">
+            <mat-error *ngIf="formMedico.controls.estadoCivil.controls.id.invalid">
                 {{getErrorMessage()}}</mat-error>
         </mat-form-field>
     </div>
@@ -69,12 +84,12 @@
         <mat-form-field fxFlex="33%" fxFill appearance="outline">
             <mat-label>Naturalidade*</mat-label>
             <input type="text" matInput formControlName="naturalidade" maxlength="15">
-            <mat-error *ngIf="formMedico.controls.naturalidade.valid">{{getErrorMessage()}}</mat-error>
+            <mat-error *ngIf="formMedico.controls.naturalidade.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="33%" fxFill appearance="outline">
             <mat-label>Nacionalidade*</mat-label>
             <input type="text" matInput formControlName="nacionalidade" maxlength="15">
-            <mat-error *ngIf="formMedico.controls.nacionalidade.valid">{{getErrorMessage()}}</mat-error>
+            <mat-error *ngIf="formMedico.controls.nacionalidade.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="33%" fxFill appearance="outline">
             <mat-label>Sexo*</mat-label>
@@ -84,19 +99,19 @@
                     {{sexo.descricao}}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="formMedico.controls.sexo.valid">{{getErrorMessage()}}</mat-error>
+            <mat-error *ngIf="formMedico.controls.sexo.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
     </div>
     <div linha fxLayoutGap="2%">
         <mat-form-field fxFlex="50%" fxFill appearance="outline">
             <mat-label>Nome Mãe*</mat-label>
             <input type="text" matInput formControlName="nomeMae" maxlength="50">
-            <mat-error *ngIf="formMedico.controls.nomeMae.valid">{{getErrorMessage()}}</mat-error>
+            <mat-error *ngIf="formMedico.controls.nomeMae.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="50%" fxFill appearance="outline">
             <mat-label>Nome Pai*</mat-label>
             <input type="text" matInput formControlName="nomePai" maxlength="50">
-            <mat-error *ngIf="formMedico.controls.nomePai.valid">{{getErrorMessage()}}</mat-error>
+            <mat-error *ngIf="formMedico.controls.nomePai.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
     </div>
 

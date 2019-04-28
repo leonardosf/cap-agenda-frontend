@@ -4,37 +4,37 @@
             <div linha fxLayoutGap="2%">
                 <mat-form-field fxFlex="25%" fxFill appearance="outline">
                     <mat-label>Matricula*</mat-label>
-                    <input type="text" matInput formControlName="matricula" maxlength="15" numero>
-                    <mat-error *ngIf="!formAssociado.controls.matricula.valid">{{getErrorMessage()}}</mat-error>
+                    <input type="text" matInput formControlName="matricula" maxlength="15">
+                    <mat-error *ngIf="formAssociado.controls.matricula.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="25%" fxFill appearance="outline">
                     <mat-label>CPF*</mat-label>
                     <input type="text" matInput formControlName="cpf" maxlength="14" mascara="CPF">
-                    <mat-error *ngIf="!formAssociado.controls.cpf.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="formAssociado.controls.cpf.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="50%" fxFill appearance="outline">
                     <mat-label>Nome Completo*</mat-label>
                     <input type="text" matInput formControlName="nome" maxlength="50">
-                    <mat-error *ngIf="!formAssociado.controls.nome.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="formAssociado.controls.nome.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
             <div linha fxLayoutGap="2%">
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
                     <mat-label>Nº RG*</mat-label>
                     <input type="text" matInput formControlName="numeroRG" maxlength="9" mascara="RG">
-                    <mat-error *ngIf="!formAssociado.controls.numeroRG.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="formAssociado.controls.numeroRG.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
                     <mat-label>Data Emissão RG*</mat-label>
                     <input matInput [matDatepicker]="picker" formControlName="dataEmissaoRG">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngIf="!formAssociado.controls.dataEmissaoRG.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="formAssociado.controls.dataEmissaoRG.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
                     <mat-label>Orgão Emissor RG*</mat-label>
                     <input type="text" matInput formControlName="orgaoEmissor" maxlength="5">
-                    <mat-error *ngIf="!formAssociado.controls.orgaoEmissor.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="formAssociado.controls.orgaoEmissor.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
             <div linha fxLayoutGap="2%">
@@ -43,12 +43,12 @@
                     <input matInput [matDatepicker]="pickerDTNasc" formControlName="dataNascimento">
                     <mat-datepicker-toggle matSuffix [for]="pickerDTNasc"></mat-datepicker-toggle>
                     <mat-datepicker #pickerDTNasc></mat-datepicker>
-                    <mat-error *ngIf="!formAssociado.controls.dataNascimento.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="formAssociado.controls.dataNascimento.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
                     <mat-label>Email*</mat-label>
                     <input type="email" matInput formControlName="email" maxlength="40">
-                    <mat-error *ngIf="!formAssociado.controls.email.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="formAssociado.controls.email.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field formGroupName="estadoCivil" fxFlex="33%" fxFill appearance="outline">
                     <mat-label>Estado Civil*</mat-label>
@@ -58,7 +58,7 @@
                             {{estado.descricao}}
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="!formAssociado.controls.estadoCivil.controls.descricao.valid">
+                    <mat-error *ngIf="formAssociado.controls.estadoCivil.controls.descricao.invalid">
                         {{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
@@ -66,12 +66,12 @@
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
                     <mat-label>Naturalidade*</mat-label>
                     <input type="text" matInput formControlName="naturalidade" maxlength="15">
-                    <mat-error *ngIf="!formAssociado.controls.naturalidade.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="formAssociado.controls.naturalidade.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
                     <mat-label>Nacionalidade*</mat-label>
                     <input type="text" matInput formControlName="nacionalidade" maxlength="15">
-                    <mat-error *ngIf="!formAssociado.controls.nacionalidade.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="formAssociado.controls.nacionalidade.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
                     <mat-label>Sexo*</mat-label>
@@ -81,19 +81,19 @@
                             {{sexo.descricao}}
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="!formAssociado.controls.sexo.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="formAssociado.controls.sexo.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
             <div linha fxLayoutGap="2%">
                 <mat-form-field fxFlex="50%" fxFill appearance="outline">
                     <mat-label>Nome Mãe*</mat-label>
                     <input type="text" matInput formControlName="nomeMae" maxlength="50">
-                    <mat-error *ngIf="!formAssociado.controls.nomeMae.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="formAssociado.controls.nomeMae.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="50%" fxFill appearance="outline">
                     <mat-label>Nome Pai*</mat-label>
                     <input type="text" matInput formControlName="nomePai" maxlength="50">
-                    <mat-error *ngIf="!formAssociado.controls.nomePai.valid">{{getErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="formAssociado.controls.nomePai.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 

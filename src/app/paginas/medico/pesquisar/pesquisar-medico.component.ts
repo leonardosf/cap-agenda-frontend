@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { AssociadoService } from 'src/app/servicos/associado/associado.service';
 import { Utils } from 'src/app/utils/utils';
 import { MedicoModelo } from 'src/app/modelos/medico/medicoModelo';
+import { MedicoService } from 'src/app/servicos/medicos/medico.service';
 
 @Component({
   selector: 'pesquisar-medico',
@@ -15,12 +15,12 @@ export class PesquisarMedicoComponent implements OnInit {
   lstMedico:Array<MedicoModelo>;
   medicoModelo
 
-  constructor(public fb: FormBuilder, public http:AssociadoService){}
+  constructor(public fb: FormBuilder, public http:MedicoService){}
 
   ngOnInit(): void {
 
     this.formPesquisaMedico = this.fb.group({
-      matricula: new FormControl(''),
+      numeroConselho: new FormControl(''),
       cpf: new FormControl(''),
       nome: new FormControl(''),
     })
@@ -28,7 +28,7 @@ export class PesquisarMedicoComponent implements OnInit {
 
   pesquisar() {
     this.medicoModelo = {...this.formPesquisaMedico.value};
-    Utils.removerCarateresEspeciais(this.medicoModelo);
+    Utils.removerCaracteresEspeciais(this.medicoModelo);
     this.http.pesquisarAssociado(this.medicoModelo,
       (callback) => {
         this.lstMedico = callback;

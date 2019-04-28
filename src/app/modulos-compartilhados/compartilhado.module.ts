@@ -45,9 +45,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormEnderecoComponent } from '../componentes/formularios/endereco/form-endereco.component';
 import { FormTelefoneComponent } from '../componentes/formularios/telefone/form-telefone.component';
 import { CommonModule } from '@angular/common';
+import { MascaraDirective } from '../diretivas/mascaras/mascara';
+import { NumeroDiretiva } from '../diretivas/validadores/numero.diretiva';
 
 @NgModule({
-  declarations: [FormEnderecoComponent, FormTelefoneComponent],
+  declarations: [FormEnderecoComponent, FormTelefoneComponent, 
+    MascaraDirective, NumeroDiretiva
+  ],
   imports: [
     CommonModule,
     MatAutocompleteModule,
@@ -133,6 +137,9 @@ import { CommonModule } from '@angular/common';
     LayoutModule,
     FlexLayoutModule,
     NgxDatatableModule,
-    FormEnderecoComponent, FormTelefoneComponent]
+    // Componentes da aplicação e diretivas
+    FormEnderecoComponent, FormTelefoneComponent,
+    MascaraDirective, NumeroDiretiva
+  ]
 })
 export class ModuleCompartilhado { }

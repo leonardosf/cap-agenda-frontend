@@ -4,6 +4,7 @@ import { AssociadoService } from 'src/app/servicos/associado/associado.service';
 import { Utils } from 'src/app/utils/utils';
 import { MedicoFormGroup } from '../medico.form.group';
 import { MedicoModelo } from 'src/app/modelos/medico/medicoModelo';
+import { MedicoService } from 'src/app/servicos/medicos/medico.service';
 
 @Component({
   selector: 'cadastrar-medico',
@@ -15,7 +16,7 @@ export class CadastrarMedicoComponent implements OnInit {
   formMedico: FormGroup;
   medicoModelo:MedicoModelo;
 
-  constructor(public fb: FormBuilder, public associadoService: AssociadoService) {}
+  constructor(public fb: FormBuilder, public medicoService: MedicoService) {}
 
   ngOnInit() {
     const medicoFormGroup = new MedicoFormGroup(this.fb);
@@ -25,7 +26,7 @@ export class CadastrarMedicoComponent implements OnInit {
   salvar() {
     this.medicoModelo = {...this.formMedico.value};
     this.removerCarateresEspeciais(this.medicoModelo);
-    // this.medicoService.salvar(this.medicoModelo);
+    this.medicoService.salvar(this.medicoModelo);
   }
 
   removerCarateresEspeciais(medicoModelo: MedicoModelo): any {
