@@ -5,7 +5,7 @@
                 <mat-form-field fxFlex="25%" fxFill appearance="outline">
                     <mat-label>Número Telefone*</mat-label>
                     <input type="text" matInput formControlName="numero" maxlength="15" mascara="TELEFONE">
-                    <mat-error *ngIf="!formGenerico.controls.telefones.controls[i].controls.numero.valid">
+                    <mat-error *ngIf="formGenerico.controls.telefones.controls[i].controls.numero.invalid">
                         {{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field formGroupName="tipoTelefone" fxFlex="25%" fxFill appearance="outline">

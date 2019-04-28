@@ -7,6 +7,7 @@ import { Utils } from 'src/app/utils/utils';
 import { AssociadoService } from 'src/app/servicos/associado/associado.service';
 import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
 import { MedicoFormGroup } from '../medico.form.group';
+import { MedicoModelo } from 'src/app/modelos/medico/medicoModelo';
 
 @Component({
   selector: 'editar-medico',
@@ -15,17 +16,17 @@ import { MedicoFormGroup } from '../medico.form.group';
 })
 export class EditarMedicoComponent implements OnInit {
 
-  formAssociado: FormGroup;
-  associadoModelo:AssociadoModelo;
+  formMedico: FormGroup;
+  medicoModelo:MedicoModelo;
 
   constructor(public router:ActivatedRoute, public fb: FormBuilder, public location:Location,
       public associadoService:AssociadoService){
 
-    this.router.queryParams.subscribe(parametro => {this.associadoModelo = JSON.parse(parametro['associado'])});
+    this.router.queryParams.subscribe(parametro => {this.medicoModelo = JSON.parse(parametro['associado'])});
 
     const medicoFormGroup = new MedicoFormGroup(this.fb);
-    this.formAssociado = medicoFormGroup.montarForGroup();
-    this.formAssociado.patchValue(this.associadoModelo);
+    this.formMedico = medicoFormGroup.montarForGroup();
+    this.formMedico.patchValue(this.medicoModelo);
   }
 
   ngOnInit() {
@@ -37,10 +38,9 @@ export class EditarMedicoComponent implements OnInit {
   }
 
   atualizar() {
-    this.associadoModelo = {...this.formAssociado.value};
-    this.removerCarateresEspeciais(this.associadoModelo)
-    this.comporDependentes(this.associadoModelo);
-    this.associadoService.atualizar(this.associadoModelo);
+    this.medicoModelo = {...this.formMedico.value};
+    Utils.removerCaracteresEspeciais(this.medicoModelo)
+    this.associadoService.atualizar(this.medicoModelo);
   }
 
   comporDependentes(associadoModelo: AssociadoModelo): any {
@@ -56,18 +56,5 @@ export class EditarMedicoComponent implements OnInit {
       }
     }
   }
-
-  removerCarateresEspeciais(associadoModelo: AssociadoModelo): any {
-    associadoModelo.cpf = Utils.somenteNumeros(associadoModelo.cpf.toString());
-    associadoModelo.numeroRG = Utils.somenteNumeros(associadoModelo.numeroRG.toString());
-    associadoModelo.endereco.cep = Utils.somenteNumeros(associadoModelo.endereco.cep.toString());
-
-    if(associadoModelo.telefones.length > 0) {
-      for(let tel of associadoModelo.telefones) {
-        tel.numero = Utils.somenteNumeros(tel.numero.toString());
-      }
-    }
-  }
-
 
 }

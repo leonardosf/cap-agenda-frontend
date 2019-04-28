@@ -3,11 +3,11 @@
         Pesquisa de Associado
     </mat-card-title>
     <mat-card-content>
-        <form [formGroup]="formPesquisaAssociado" (ngSubmit)="pesquisar()">
+        <form [formGroup]="formPesquisaMedico" (ngSubmit)="pesquisar()">
             <div linha fxLayoutGap="2%">
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
-                    <mat-label>Matricula</mat-label>
-                    <input type="text" matInput formControlName="matricula" maxlength="15">
+                    <mat-label>Nº Conselho</mat-label>
+                    <input type="text" matInput formControlName="numeroConselho" maxlength="15" numero>
                 </mat-form-field>
                 <mat-form-field fxFlex="33%" fxFill appearance="outline">
                     <mat-label>CPF</mat-label>
@@ -25,6 +25,6 @@
 
 <mat-card>
     <mat-card-content>
-        <tabela-associado *ngIf="lstAssociado" [lstAssociado]="lstAssociado"></tabela-associado>
+        <!-- <tabela-associado *ngIf="lstAssociado" [lstAssociado]="lstAssociado"></tabela-associado> -->
     </mat-card-content>
 </mat-card>

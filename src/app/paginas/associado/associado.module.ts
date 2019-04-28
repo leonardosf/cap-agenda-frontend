@@ -5,8 +5,6 @@ import { ModuleCompartilhado } from "src/app/modulos-compartilhados/compartilhad
 import { FormAssociadoComponent } from "src/app/componentes/formularios/associado/form-associado.component";
 import { VisualizarAssociadoComponent } from "./visualizar/visualizar-associado.component";
 import { FormDependenteComponent } from "src/app/componentes/formularios/dependente/form-dependente.component";
-import { FormEnderecoComponent } from "src/app/componentes/formularios/endereco/form-endereco.component";
-import { FormTelefoneComponent } from "src/app/componentes/formularios/telefone/form-telefone.component";
 import { CommonModule } from "@angular/common";
 import { EditarAssociadoComponent } from "./editar/editar-associado.component";
 import { PesquisarAssociadoComponent } from "./pesquisar/pesquisar-associado.component";
@@ -32,10 +30,9 @@ const router: Routes = [
     }
 ]
 @NgModule({
-    declarations: [CadastrarAssociadoComponent, FormAssociadoComponent, FormAssociadoComponent,
-        FormEnderecoComponent, FormTelefoneComponent, FormDependenteComponent,
-        EditarAssociadoComponent, VisualizarAssociadoComponent, PesquisarAssociadoComponent,
-        TabelaAssociadoComponent],
+    declarations: [CadastrarAssociadoComponent, FormAssociadoComponent,
+        FormDependenteComponent, EditarAssociadoComponent, VisualizarAssociadoComponent,
+        PesquisarAssociadoComponent, TabelaAssociadoComponent],
     exports: [],
     imports: [CommonModule, RouterModule.forChild(router), ModuleCompartilhado]
 })

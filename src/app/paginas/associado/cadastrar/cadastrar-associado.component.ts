@@ -25,7 +25,7 @@ export class CadastrarAssociadoComponent implements OnInit {
 
   salvar() {
     this.associadoModelo = {...this.formAssociado.value};
-    this.removerCaracteresEspeciais(this.associadoModelo);
+    Utils.removerCaracteresEspeciais(this.associadoModelo);
     this.comporDependentes(this.associadoModelo);
     this.associadoService.salvar(this.associadoModelo);
   }
@@ -40,18 +40,6 @@ export class CadastrarAssociadoComponent implements OnInit {
         dep.tipoParentesco.id = TipoParentescoEnum.getByDescCompleta(dep.tipoParentesco.descricao.toUpperCase()).codigo;
       } else {
         delete associadoModelo.dependentes;
-      }
-    }
-  }
-
-  removerCaracteresEspeciais(associadoModelo: AssociadoModelo): any {
-    associadoModelo.cpf = Utils.somenteNumeros(associadoModelo.cpf);
-    associadoModelo.numeroRG = Utils.somenteNumeros(associadoModelo.numeroRG);
-    associadoModelo.endereco.cep = Utils.somenteNumeros(associadoModelo.endereco.cep);
-
-    if(associadoModelo.telefones.length > 0) {
-      for(let tel of associadoModelo.telefones) {
-        tel.numero = Utils.somenteNumeros(tel.numero);
       }
     }
   }
