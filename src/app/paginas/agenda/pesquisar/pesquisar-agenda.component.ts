@@ -9,6 +9,7 @@ import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Utils } from 'src/app/utils/utils';
 import { Tabela } from 'src/app/componentes/tabela-paginada/tabela';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-pesquisar-agenda',
@@ -30,14 +31,15 @@ export class PesquisarAgendaComponent implements OnInit {
         private http: AgendaService,
         private mensagem: MensagemToast,
         private consultorioService: ConsultorioService,
-        private medicoService: MedicoService) {
+        private medicoService: MedicoService,
+        private router: Router) {
         const agendaFormGroup = new AgendaFormGroup(this.fb);
         this.formPesquisaAgenda = agendaFormGroup.montarFormGroupPesquisa();
-     // this.criarItens();
+   
         const acoes = AcaoBuilder.getBuilder()
-                                 .add('edit', this.editar)
-                                 .add('delete_outline', this.apagar)
-                                 .add('search', this.visualizar)
+                                 .add('edit', agenda => this.editar(agenda))
+                                 .add('delete_outline', agenda => this.apagar(agenda))
+                                 .add('search', agenda => this.visualizar(agenda))
                                  .build();
         this.tabela = TabelaBuilder.getBuilder()
                                    .addColunaTexto('id', 'Código', 3)
@@ -48,26 +50,18 @@ export class PesquisarAgendaComponent implements OnInit {
     }
 
     editar(agenda) {
-        debugger;
-        alert('editar' + agenda.nome);
+        this.router.navigate([`/page/agenda/editar/${agenda.id}`]);      
     }
 
-    apagar() {
-        alert('apagar');
+    apagar(agenda) {
+        this.http.remover(agenda.id, () => {
+            this.agendas = new Array<Agenda>();
+            this.carregarTabela(this.filtro);
+        });        
     }
 
-    visualizar() {
-        alert('visualizaer')
-    }
-
-    criarItens() {
-        for (let i = 0; i < 28; i++) {
-            const agenda = new Agenda();
-            agenda.id = i;
-            agenda.nome = 'teste' + i;
-            agenda.competencia = '04/2019';
-            this.agendas.push(agenda);
-        }
+    visualizar(agenda) {
+        alert('Criar componente de visualizar agenda')
     }
 
     ngOnInit(): void {
@@ -91,13 +85,17 @@ export class PesquisarAgendaComponent implements OnInit {
 
     pesquisar() {
         this.filtro = { ...this.filtro, ...this.formPesquisaAgenda.value };
-        this.http.recuperarPaginada(this.filtro, resposta => {
+        this.carregarTabela(this.filtro);
+    } 
+    
+    private carregarTabela(filtro) {
+        this.http.recuperarPaginada(filtro, resposta => {
             this.agendas = resposta.conteudo;
             this.total = resposta.total;
         }, erro => {
             console.log('ERRO CONSULTAR AGENDA', erro.error.mensagem);
             this.mensagem.mostrar(erro.error.mensagem, "OK");
         });
-    }  
+    }
  
 }
