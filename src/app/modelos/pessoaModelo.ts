@@ -17,7 +17,7 @@ export class PessoaModelo {
     email:String;
     estadoCivil: EstadoCivilModelo;
     naturalidade:String;
-    nascionalidade:String;
+    nacionalidade:String;
     nomeMae:String;
     nomePai:String;
     sexo: SexoEnum;

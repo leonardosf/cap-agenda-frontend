@@ -26,7 +26,7 @@ export class MedicoFormGroup {
                 descricao: new FormControl('')
             }),
             naturalidade: new FormControl('', Validators.required),
-            nascionalidade: new FormControl('', Validators.required),
+            nacionalidade: new FormControl('', Validators.required),
             nomeMae: new FormControl('', Validators.required),
             nomePai: new FormControl('', Validators.required),
             sexo: new FormControl('', Validators.required),

@@ -36,7 +36,7 @@ export class TabelaAssociadoComponent implements OnInit{
             (callback) => {
                 let associado:AssociadoModelo;
                 associado = callback;
-                this.navegar.navigate(["/editar/associado"], {queryParams: {associado:JSON.stringify(associado)}});
+                this.navegar.navigate(["page/associado/editar"], {queryParams: {associado:JSON.stringify(associado)}});
             })
     }
 
@@ -45,7 +45,7 @@ export class TabelaAssociadoComponent implements OnInit{
             (callback) => {
                 let associado: AssociadoModelo;
                 associado = callback;
-                this.navegar.navigate(["/visualizar/associado"], { queryParams: { associado: JSON.stringify(associado) } });
+                this.navegar.navigate(["page/associado/visualizar"], { queryParams: { associado: JSON.stringify(associado) } });
             })
     }
 

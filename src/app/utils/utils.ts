@@ -49,4 +49,16 @@ export class Utils {
     static isNull(valor): boolean {
         return valor !== undefined && valor !== null;
     }
+
+    static removerCarateresEspeciais(modelo): any {
+        modelo.cpf = Utils.somenteNumeros(modelo.cpf.toString());
+        modelo.numeroRG = Utils.somenteNumeros(modelo.numeroRG.toString());
+        modelo.endereco.cep = Utils.somenteNumeros(modelo.endereco.cep.toString());
+
+        if (modelo.telefones.length > 0) {
+            for (let tel of modelo.telefones) {
+                tel.numero = Utils.somenteNumeros(tel.numero.toString());
+            }
+        }
+    }
 }

@@ -42,10 +42,14 @@ import {
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormEnderecoComponent } from '../componentes/formularios/endereco/form-endereco.component';
+import { FormTelefoneComponent } from '../componentes/formularios/telefone/form-telefone.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [],
+  declarations: [FormEnderecoComponent, FormTelefoneComponent],
   imports: [
+    CommonModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -88,6 +92,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     NgxDatatableModule
   ],
   exports: [
+    CommonModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -127,6 +132,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ReactiveFormsModule,
     LayoutModule,
     FlexLayoutModule,
-    NgxDatatableModule]
+    NgxDatatableModule,
+    FormEnderecoComponent, FormTelefoneComponent]
 })
 export class ModuleCompartilhado { }
