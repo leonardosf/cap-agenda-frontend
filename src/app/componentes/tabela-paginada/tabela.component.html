@@ -19,9 +19,9 @@
                 <ng-template let-value="value" ngx-datatable-cell-template *ngIf="coluna.tipo === 'texto'">
                     {{value}}
                 </ng-template>
-                <ng-template let-row="elemento" ngx-datatable-cell-template *ngIf="coluna.tipo === 'acao'">
+                <ng-template let-row="row" ngx-datatable-cell-template *ngIf="coluna.tipo === 'acao'">
                     <div *ngFor="let acao of coluna.acoes" fxLayout="row" fxLayoutAlign.xs="center center" fxLayoutAlign="center center" fxFlex="auto">
-                        <a class="hand" (click)="acao.onClick(elemento)">
+                        <a class="hand" (click)="acao.onClick(row)">
                             <mat-icon>{{acao.icone}}</mat-icon>
                         </a>
                     </div>

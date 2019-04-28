@@ -27,7 +27,7 @@ export class TabelaComponent implements OnInit, OnChanges {
 
     public mensagem = { emptyMessage:'Nenhum resultado encontrado.' };
 
-    constructor(private http: HttpService, private cd: ChangeDetectorRef) {
+    constructor(private http: HttpService) {
     }
 
     ngOnInit() {

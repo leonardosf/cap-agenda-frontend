@@ -30,8 +30,21 @@ body {
     background-color: #673ab7;
     color: white;
     font-weight: bold;
+    text-align: center;
+}
+
+.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
+    text-align: center;
 }
 
 .hand:hover {
     cursor: pointer;
+}
+
+.margin-top-1 {
+    margin-top: 1%;
+}
+
+.margin-1 {
+    margin: 1%;
 }
