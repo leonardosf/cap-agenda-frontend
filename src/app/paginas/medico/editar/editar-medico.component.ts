@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AssociadoModelo } from 'src/app/modelos/associado/associadoModelo';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Utils } from 'src/app/utils/utils';
-import { AssociadoService } from 'src/app/servicos/associado/associado.service';
-import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
 import { MedicoFormGroup } from '../medico.form.group';
 import { MedicoModelo } from 'src/app/modelos/medico/medicoModelo';
+import { MedicoService } from 'src/app/servicos/medicos/medico.service';
 
 @Component({
   selector: 'editar-medico',
@@ -20,9 +18,9 @@ export class EditarMedicoComponent implements OnInit {
   medicoModelo:MedicoModelo;
 
   constructor(public router:ActivatedRoute, public fb: FormBuilder, public location:Location,
-      public associadoService:AssociadoService){
+      public medicoService:MedicoService){
 
-    this.router.queryParams.subscribe(parametro => {this.medicoModelo = JSON.parse(parametro['associado'])});
+    this.router.queryParams.subscribe(parametro => {this.medicoModelo = JSON.parse(parametro['medico'])});
 
     const medicoFormGroup = new MedicoFormGroup(this.fb);
     this.formMedico = medicoFormGroup.montarForGroup();
@@ -39,22 +37,12 @@ export class EditarMedicoComponent implements OnInit {
 
   atualizar() {
     this.medicoModelo = {...this.formMedico.value};
-    Utils.removerCaracteresEspeciais(this.medicoModelo)
-    this.associadoService.atualizar(this.medicoModelo);
-  }
-
-  comporDependentes(associadoModelo: AssociadoModelo): any {
-    for(let dep of associadoModelo.dependentes) {
-      if(dep.nome) {
-        dep.endereco = associadoModelo.endereco;
-        dep.matricula = associadoModelo.matricula;
-        dep.estadoCivil = associadoModelo.estadoCivil;
-        dep.telefones = associadoModelo.telefones;
-        dep.tipoParentesco.id = TipoParentescoEnum.getByDescCompleta(dep.tipoParentesco.descricao.toUpperCase()).codigo;
-      } else {
-        delete associadoModelo.dependentes;
-      }
-    }
+    Utils.removerCarateresEsp(this.medicoModelo.cpf);
+    Utils.removerCarateresEsp(this.medicoModelo.numeroRG);
+    Utils.removerCarateresEsp(this.medicoModelo.endereco.cep);
+    Utils.removerCarateresEsp(this.medicoModelo.telefones[0].numero);
+    // Utils.removerCaracteresEspeciais(this.medicoModelo)
+    this.medicoService.atualizar(this.medicoModelo);
   }
 
 }

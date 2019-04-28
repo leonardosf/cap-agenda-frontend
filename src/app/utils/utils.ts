@@ -38,10 +38,13 @@ export class Utils {
         if (typeof valor == 'number') {
             return valor;
         }
-        return valor.replace(/[.,-]/g, "");
+        return valor.replace(/[.,-/(/)]/g, "");
     }
 
-    static somenteNumeros(valor): String {
+    static somenteNumeros(valor) {
+        if(typeof valor == 'number') {
+            return valor;
+        }
         return valor.replace(/[^\d]+/g, '');
     }
 
@@ -55,16 +58,22 @@ export class Utils {
                 if(modelo[key] instanceof Array) {
                     for(let array of modelo[key]) {
                         for(let a in array) {
-                            modelo[key][array][a] = Utils.somenteNumeros(modelo[key][array][a].toString());
+                            if(typeof modelo[key][0][a] == 'object') {
+                                for(let t in modelo[key][0][a]) {
+                                    modelo[key][0][a][t] = Utils.removerCarateresEsp(modelo[key][0][a][t]);
+                                }
+                            } else {
+                                modelo[key][0][a] = Utils.removerCarateresEsp(modelo[key][0][a]);
+                            }
                         }
                     }
                 } else {
                     for(let obj in  modelo[key]) {
-                        modelo[key][obj] = Utils.somenteNumeros(modelo[key][obj].toString());
+                        modelo[key][obj] = Utils.removerCarateresEsp(modelo[key][obj]);
                     }
                 }
             } else {
-                modelo[key] = Utils.somenteNumeros(modelo[key].toString());
+                modelo[key] = Utils.removerCarateresEsp(modelo[key]);
             }
         }
     }

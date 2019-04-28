@@ -7,6 +7,7 @@ import { EditarMedicoComponent } from "./editar/editar-medico.component";
 import { VisualizarMedicoComponent } from "./visualizar/visualizar-medico.component";
 import { PesquisarMedicoComponent } from "./pesquisar/pesquisar-medico.component";
 import { FormMedicoComponent } from "src/app/componentes/formularios/medico/form-medico.component";
+import { TabelaMedicoComponent } from "src/app/componentes/tabelas/medico/tabela-medico.component";
 
 const router: Routes = [
     {
@@ -29,7 +30,7 @@ const router: Routes = [
 ]
 @NgModule({
     declarations: [CadastrarMedicoComponent, EditarMedicoComponent, VisualizarMedicoComponent,
-        PesquisarMedicoComponent, FormMedicoComponent],
+        PesquisarMedicoComponent, FormMedicoComponent, TabelaMedicoComponent],
     exports: [],
     imports: [CommonModule, RouterModule.forChild(router), ModuleCompartilhado]
 })

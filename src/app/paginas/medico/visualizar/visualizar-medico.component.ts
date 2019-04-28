@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AssociadoModelo } from 'src/app/modelos/associado/associadoModelo';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { MedicoFormGroup } from '../medico.form.group';
+import { MedicoModelo } from 'src/app/modelos/medico/medicoModelo';
 
 @Component({
   selector: 'visualizar-medico',
@@ -12,16 +12,16 @@ import { MedicoFormGroup } from '../medico.form.group';
 })
 export class VisualizarMedicoComponent implements OnInit {
 
-  formAssociado: FormGroup;
-  associadoModelo:AssociadoModelo;
+  formMedico: FormGroup;
+  medicoModelo:MedicoModelo;
 
   constructor(public router:ActivatedRoute, public fb: FormBuilder, public location:Location){
-    this.router.queryParams.subscribe(parametro => {this.associadoModelo = JSON.parse(parametro['associado'])});
+    this.router.queryParams.subscribe(parametro => {this.medicoModelo = JSON.parse(parametro['medico'])});
 
     const medicoFormGroup = new MedicoFormGroup(this.fb);
-    this.formAssociado = medicoFormGroup.montarForGroup();
-    this.formAssociado.patchValue(this.associadoModelo);
-    this.formAssociado.disable();
+    this.formMedico = medicoFormGroup.montarForGroup();
+    this.formMedico.patchValue(this.medicoModelo);
+    this.formMedico.disable();
   }
 
   ngOnInit() {
