@@ -1,15 +1,14 @@
 import { Pagina } from './pagina';
 import { HttpService } from 'src/app/servicos/http.service';
 import { Component, Input, OnInit, ViewChild, SimpleChanges, OnChanges, ChangeDetectorRef } from "@angular/core";
-import { Router } from '@angular/router';
-import { MensagemToast } from '../mensagens/mensagem-toast';
+import { MensagemToast } from '../../mensagens/mensagem-toast';
 
 @Component({
     selector: 'tabela-paginada',
     templateUrl: './tabela.component.html',
     styleUrls: ['./tabela.component.scss']
 })
-export class TabelaComponent implements OnInit, OnChanges {
+export class TabelaPaginadaComponent implements OnInit, OnChanges {
 
     @Input()
     public colunas = [];

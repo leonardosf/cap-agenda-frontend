@@ -1,7 +1,11 @@
+import { DialogComponent } from './../componentes/dialog/dialog.component';
 import { NgModule } from '@angular/core';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
+import { TabelaPaginadaComponent } from './../componentes/tabelas/tabela-paginada/tabela-paginada.component';
+
 
 import {
   MatAutocompleteModule,
@@ -50,7 +54,7 @@ import { NumeroDiretiva } from '../diretivas/validadores/numero.diretiva';
 
 @NgModule({
   declarations: [FormEnderecoComponent, FormTelefoneComponent, 
-    MascaraDirective, NumeroDiretiva
+    MascaraDirective, NumeroDiretiva, TabelaPaginadaComponent, DialogComponent
   ],
   imports: [
     CommonModule,
@@ -139,7 +143,7 @@ import { NumeroDiretiva } from '../diretivas/validadores/numero.diretiva';
     NgxDatatableModule,
     // Componentes da aplicação e diretivas
     FormEnderecoComponent, FormTelefoneComponent,
-    MascaraDirective, NumeroDiretiva
+    MascaraDirective, NumeroDiretiva, TabelaPaginadaComponent, DialogComponent
   ]
 })
 export class ModuleCompartilhado { }
