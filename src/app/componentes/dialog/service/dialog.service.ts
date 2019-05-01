@@ -28,16 +28,4 @@ export class DialogService {
             }
         });
     }
-
-
-    /*
-
-                titulo: string = 'Alerta', 
-                conteudo: string = '', 
-                btnConfirmar: string = 'Sim', 
-                btnCancelar: string = 'Não', 
-                acaoSim: Function, 
-                acaoNao: Function
-    */
-
 }
