@@ -68,5 +68,13 @@ export class AssociadoFormGroup {
         return this.form;
     }
 
+    montarFormGroupPesquisa() {
+        return this.fb.group({
+            matricula: new FormControl(''),
+            cpf: new FormControl(''),
+            nome: new FormControl(''),
+        });
+    }
+
 }
 

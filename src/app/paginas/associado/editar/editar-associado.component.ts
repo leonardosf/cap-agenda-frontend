@@ -17,20 +17,23 @@ export class EditarAssociadoComponent implements OnInit {
 
   formAssociado: FormGroup;
   associadoModelo:AssociadoModelo;
+  id;
 
-  constructor(public router: ActivatedRoute, public fb: FormBuilder, public location: Location,
-    public associadoService: AssociadoService) {
-
-    this.router.queryParams.subscribe(parametro => { this.associadoModelo = JSON.parse(parametro['associado']) });
+  constructor(private router: ActivatedRoute, public fb: FormBuilder, private location: Location,
+    private http:AssociadoService) {
 
     const associadoFormGroup = new AssociadoFormGroup(this.fb);
     this.formAssociado = associadoFormGroup.montarForGroup();
-    this.formAssociado.patchValue(this.associadoModelo);
+
+    this.router.paramMap.subscribe(params => {
+      this.id = Number(params.get("id"));
+      this.http.recuperar(this.id, resposta => {
+          this.formAssociado.patchValue(resposta);
+      });
+    });
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   voltar() {
     this.location.back();
@@ -40,7 +43,7 @@ export class EditarAssociadoComponent implements OnInit {
     this.associadoModelo = {...this.formAssociado.value};
     this.removerCarateresEspeciais(this.associadoModelo)
     this.comporDependentes(this.associadoModelo);
-    this.associadoService.atualizar(this.associadoModelo);
+    this.http.atualizar(this.associadoModelo);
   }
 
   comporDependentes(associadoModelo: AssociadoModelo): any {

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { MedicoFormGroup } from '../medico.form.group';
 import { MedicoModelo } from 'src/app/modelos/medico/medicoModelo';
+import { MedicoService } from 'src/app/servicos/medicos/medico.service';
 
 @Component({
   selector: 'visualizar-medico',
@@ -14,23 +15,27 @@ export class VisualizarMedicoComponent implements OnInit {
 
   formMedico: FormGroup;
   medicoModelo:MedicoModelo;
+  id;
 
-  constructor(public router:ActivatedRoute, public fb: FormBuilder, public location:Location){
-    this.router.queryParams.subscribe(parametro => {this.medicoModelo = JSON.parse(parametro['medico'])});
+  constructor(private router:ActivatedRoute, public fb: FormBuilder, private location:Location,
+    private http:MedicoService){
 
     const medicoFormGroup = new MedicoFormGroup(this.fb);
     this.formMedico = medicoFormGroup.montarForGroup();
-    this.formMedico.patchValue(this.medicoModelo);
-    this.formMedico.disable();
+
+    this.router.paramMap.subscribe(params => {
+      this.id = Number(params.get("id"));
+      this.http.recuperar(this.id, resposta => {
+          this.formMedico.patchValue(resposta);
+          this.formMedico.disable();
+      });
+    });
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   voltar() {
     this.location.back();
   }
-
 
 }

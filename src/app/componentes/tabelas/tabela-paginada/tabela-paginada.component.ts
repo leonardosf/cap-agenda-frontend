@@ -36,7 +36,7 @@ export class TabelaPaginadaComponent implements OnInit, OnChanges {
         for (let propName in changes) {
             if (propName === 'dados') {    
                 const dados = changes['dados'].currentValue;    
-                const total = changes['total'].currentValue;    
+                const total = changes['total'] ? changes['total'].currentValue: this.total;    
                 this.atualizarTabela({conteudo: dados, total: total, pagina: 0 });
             }
             if (propName === 'filtro') {
@@ -46,10 +46,12 @@ export class TabelaPaginadaComponent implements OnInit, OnChanges {
     }
 
     private atualizarTabela(resposta) {
-        this.dados = [ ...resposta.conteudo ];
-        this.pagina.numero = resposta.pagina;
-        this.pagina.total = resposta.total;
-        this.dados = this.dados.splice(0, 10);
+        if(resposta.conteudo) {
+            this.dados = [ ...resposta.conteudo ];
+            this.pagina.numero = resposta.pagina;
+            this.pagina.total = resposta.total;
+            this.dados = this.dados.splice(0, 10);
+        }
     }
 
     setPage(paginaInfo) {

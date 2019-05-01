@@ -16,20 +16,23 @@ export class EditarMedicoComponent implements OnInit {
 
   formMedico: FormGroup;
   medicoModelo:MedicoModelo;
+  id;
 
-  constructor(public router:ActivatedRoute, public fb: FormBuilder, public location:Location,
-      public medicoService:MedicoService){
-
-    this.router.queryParams.subscribe(parametro => {this.medicoModelo = JSON.parse(parametro['medico'])});
+  constructor(private router:ActivatedRoute, public fb: FormBuilder, private location:Location,
+      private http:MedicoService){
 
     const medicoFormGroup = new MedicoFormGroup(this.fb);
     this.formMedico = medicoFormGroup.montarForGroup();
-    this.formMedico.patchValue(this.medicoModelo);
+
+    this.router.paramMap.subscribe(params => {
+      this.id = Number(params.get("id"));
+      this.http.recuperar(this.id, resposta => {
+          this.formMedico.patchValue(resposta);
+      });
+    });
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   voltar() {
     this.location.back();
@@ -42,7 +45,7 @@ export class EditarMedicoComponent implements OnInit {
     Utils.removerCarateresEsp(this.medicoModelo.endereco.cep);
     Utils.removerCarateresEsp(this.medicoModelo.telefones[0].numero);
     // Utils.removerCaracteresEspeciais(this.medicoModelo)
-    this.medicoService.atualizar(this.medicoModelo);
+    this.http.atualizar(this.medicoModelo);
   }
 
 }

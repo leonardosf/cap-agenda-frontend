@@ -23,8 +23,11 @@
     </mat-card-content>
 </mat-card>
 
-<mat-card>
-    <mat-card-content>
-        <tabela-associado *ngIf="lstAssociado" [lstAssociado]="lstAssociado"></tabela-associado>
-    </mat-card-content>
-</mat-card>
+<div class="margin-1">
+    <tabela-paginada [colunas]="tabela.colunas" 
+                         [dados]="lstAssociado" 
+                         [destino]="'associado'" 
+                         [total]="total"
+                         [filtro]="filtro">
+    </tabela-paginada>
+</div>
