@@ -26,7 +26,6 @@ export class DialogService {
             } else if (!result && dados.acaoCancelar !== undefined) {
                 dados.acaoCancelar();
             }
-            console.log('The dialog was closed', result);
         });
     }
 
