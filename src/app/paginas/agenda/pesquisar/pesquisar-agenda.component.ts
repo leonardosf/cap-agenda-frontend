@@ -1,6 +1,3 @@
-import { DialogComponent } from './../../../componentes/dialog/dialog.component';
-import { MatDialog } from '@angular/material';
-import { DialogFactory } from './../../../componentes/dialog/dialog.service';
 import { AcaoBuilder, TabelaBuilder } from './../../../componentes/tabelas/tabela-paginada/tabela';
 import { AgendaFormGroup } from './../agenda.form.group';
 import { MedicoService } from './../../../servicos/medicos/medico.service';
@@ -10,9 +7,10 @@ import { AgendaService } from './../../../servicos/agenda/agenda.service';
 import { Agenda } from './../../../modelos/agenda/agenda';
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { Utils } from 'src/app/utils/utils';
 import { Router } from '@angular/router';
 import { Tabela } from 'src/app/componentes/tabelas/tabela-paginada/tabela';
+import { DialogService } from 'src/app/componentes/dialog/service/dialog.service';
+import { DialogDados } from 'src/app/componentes/dialog/model/dialog.dados';
 
 @Component({
     selector: 'app-pesquisar-agenda',
@@ -36,7 +34,7 @@ export class PesquisarAgendaComponent implements OnInit {
         private consultorioService: ConsultorioService,
         private medicoService: MedicoService,
         private router: Router,
-        public dialog: MatDialog) {
+        private dialogService: DialogService) {
         const agendaFormGroup = new AgendaFormGroup(this.fb);
         this.formPesquisaAgenda = agendaFormGroup.montarFormGroupPesquisa();
    
@@ -58,10 +56,21 @@ export class PesquisarAgendaComponent implements OnInit {
     }
 
     apagar(agenda) {
-        this.http.remover(agenda.id, () => {
-            this.agendas = new Array<Agenda>();
-            this.carregarTabela(this.filtro);
-        });        
+
+        const dados: DialogDados = { 
+            titulo: 'Alerta', 
+            conteudo: 'Deseja excluir a agenda?', 
+            btnConfirmar: 'Sim', 
+            btnCancelar: 'Não', 
+            acaoConfirmar: () => {
+                this.http.remover(agenda.id, () => {
+                    this.agendas = new Array<Agenda>();
+                    this.carregarTabela(this.filtro);
+                });
+            }, 
+            acaoCancelar: undefined 
+        };
+        this.dialogService.confirmacao(dados);                
     }
 
     visualizar(agenda) {
@@ -88,8 +97,6 @@ export class PesquisarAgendaComponent implements OnInit {
     }
 
     pesquisar() {
-        //const dialogFactor = new DialogFactory(this.dialog, DialogComponent, {titulo: 'Alerta', conteudo: 'Deseja Excluir a agenda'});
-        //dialogFactor.openDialog();
         this.filtro = { ...this.filtro, ...this.formPesquisaAgenda.value };
         this.carregarTabela(this.filtro);
     } 
