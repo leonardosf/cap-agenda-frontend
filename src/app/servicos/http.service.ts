@@ -97,19 +97,4 @@ export class HttpService {
                 console.log("EERRRROOO = " + erro);
             });
     }
-
-    pesquisarAssociado(modelo, callback) {
-        this.http.get(this.resource + this.path, {params:Utils.montarParametros(modelo)}).pipe().subscribe(
-            (retorno:any) => {
-                if(retorno.conteudo && retorno.conteudo.length > 0) {
-                    return callback(retorno.conteudo);
-                }
-                this.mensagem.mostrar("Nenhum registro encontrado!");
-                return callback(new Array<AssociadoModelo>())
-            }, (erro) => {
-                this.mensagem.mostrar("Erro na requisição", erro.statusText);
-                console.log("EERRRROOO = " + erro);
-            });
-
-    }
 }

@@ -54,5 +54,12 @@ export class MedicoFormGroup {
         return this.form;
     }
 
+    montarFormGroupPesquisa() {
+        return this.fb.group({
+            numeroConselho: new FormControl(''),
+            cpf: new FormControl(''),
+            nome: new FormControl(''),
+        });
+    }
 }
 

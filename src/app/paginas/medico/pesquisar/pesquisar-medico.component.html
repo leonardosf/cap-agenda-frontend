@@ -23,8 +23,11 @@
     </mat-card-content>
 </mat-card>
 
-<mat-card>
-    <mat-card-content>
-        <tabela-medico *ngIf="lstMedico" [lstMedico]="lstMedico"></tabela-medico>
-    </mat-card-content>
-</mat-card>
+<div class="margin-1">
+    <tabela-paginada [colunas]="tabela.colunas" 
+                         [dados]="lstMedico" 
+                         [destino]="'medico'" 
+                         [total]="total"
+                         [filtro]="filtro">
+    </tabela-paginada>
+</div>

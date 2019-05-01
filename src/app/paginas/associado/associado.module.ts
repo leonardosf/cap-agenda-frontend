@@ -8,7 +8,6 @@ import { FormDependenteComponent } from "src/app/componentes/formularios/depende
 import { CommonModule } from "@angular/common";
 import { EditarAssociadoComponent } from "./editar/editar-associado.component";
 import { PesquisarAssociadoComponent } from "./pesquisar/pesquisar-associado.component";
-import { TabelaAssociadoComponent } from "src/app/componentes/tabelas/associado/tabela-associado.component";
 
 const router: Routes = [
     {
@@ -18,10 +17,10 @@ const router: Routes = [
                 path: 'cadastrar', component: CadastrarAssociadoComponent
             },
             {
-                path: 'editar', component: EditarAssociadoComponent
+                path: 'editar/:id', component: EditarAssociadoComponent
             },
             {
-                path: 'visualizar', component: VisualizarAssociadoComponent
+                path: 'visualizar/:id', component: VisualizarAssociadoComponent
             },
             {
                 path: 'pesquisar', component: PesquisarAssociadoComponent
@@ -32,7 +31,7 @@ const router: Routes = [
 @NgModule({
     declarations: [CadastrarAssociadoComponent, FormAssociadoComponent,
         FormDependenteComponent, EditarAssociadoComponent, VisualizarAssociadoComponent,
-        PesquisarAssociadoComponent, TabelaAssociadoComponent],
+        PesquisarAssociadoComponent],
     exports: [],
     imports: [CommonModule, RouterModule.forChild(router), ModuleCompartilhado]
 })
