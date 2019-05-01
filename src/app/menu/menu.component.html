@@ -1,97 +1,59 @@
 <div class="example-container">
-    <mat-toolbar color="primary" class="example-toolbar">
-        <button mat-icon-button (click)="snav.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <h1 class="example-app-name">Cap - Agenda</h1>
-        <span class="example-spacer"></span>
-        <button mat-button [matMenuTriggerFor]="menu" matTooltip="Perfil">
-            <mat-icon class="example-icon">account_circle</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-                <mat-icon>edit</mat-icon>
-                <span>Perfil</span>
+        <mat-toolbar color="primary" class="example-toolbar">
+            <button mat-icon-button (click)="snav.toggle()">
+                <mat-icon>menu</mat-icon>
             </button>
-        </mat-menu>
-        <button mat-button>
-            <mat-icon class="example-icon" matTooltip="Sair">exit_to_app</mat-icon>
-        </button>
-    </mat-toolbar>
-
-    <mat-sidenav-container class="example-sidenav-container">
-        <mat-sidenav #snav opened mode="side" fixedTopGap="56">
-            <mat-nav-list>
-                <!-- <a mat-list-item routerLink="{{nav.path}}" *ngFor="let nav of fillerNav">{{nav.nomeMenu}}</a> -->
+            <h1 class="example-app-name">Cap - Agenda</h1>
+            <span class="example-spacer"></span>
+            <button mat-button [matMenuTriggerFor]="menu" matTooltip="Perfil">
+                <mat-icon class="example-icon">account_circle</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                    <mat-icon>edit</mat-icon>
+                    <span>Perfil</span>
+                </button>
+            </mat-menu>
+            <button mat-button>
+                <mat-icon class="example-icon" matTooltip="Sair">exit_to_app</mat-icon>
+            </button>
+        </mat-toolbar>
+    
+        <mat-sidenav-container class="example-sidenav-container" *ngIf="menus.length > 0">
+            <mat-sidenav #snav opened mode="side" fixedTopGap="56">
                 <mat-nav-list>
-                    <mat-list-item>
-                        <mat-icon>home</mat-icon>
-                        <span>
-                            <a href="#">Home</a>
-                        </span>
-                    </mat-list-item>
+                    <!-- <a mat-list-item routerLink="{{nav.path}}" *ngFor="let nav of fillerNav">{{nav.nomeMenu}}</a> -->
+                    <mat-nav-list>
+                        <mat-list-item >
+                            <mat-icon>{{ home.icone }}</mat-icon>
+                            <span>
+                                <a href="#">{{ home.nome }}</a>
+                            </span>
+                        </mat-list-item>
+                    </mat-nav-list>
+                    <mat-accordion *ngFor="let menu of menus">
+                        <mat-expansion-panel >
+                            <mat-expansion-panel-header >
+                                <mat-panel-title>
+                                    <mat-icon>{{ menu.icone }}</mat-icon>
+                                    <span>
+                                        <a routerLink="{{menu.url}}">{{ menu.nome }}</a>
+                                    </span>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-nav-list *ngFor="let subMenu of menu.subMenus">
+                                <mat-list-item >
+                                    <a routerLink="{{subMenu.url}}">{{ subMenu.nome }}</a>
+                                </mat-list-item>                            
+                            </mat-nav-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
                 </mat-nav-list>
-                <mat-accordion>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Agenda
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <mat-nav-list>
-                            <mat-list-item>
-                                <!-- <mat-icon>person_add</mat-icon> -->
-                                <a routerLink="agenda/cadastrar">Cadastrar</a>
-                                <!-- <a routerLink="associado/pesquisar">Associado</a> -->
-                            </mat-list-item>
-                            <mat-list-item>
-                                <!-- <mat-icon>person_add</mat-icon> -->
-                                <a routerLink="agenda/pesquisar">Pesquisar</a>
-                                <!-- <a routerLink="associado/pesquisar">Associado</a> -->
-                            </mat-list-item>
-                        </mat-nav-list>
-                    </mat-expansion-panel>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Associado
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <mat-nav-list>
-                            <mat-list-item>
-                                <!-- <mat-icon>person_add</mat-icon> -->
-                                <a routerLink="associado/cadastrar">Cadastrar</a>
-                            </mat-list-item>
-                            <mat-list-item>
-                                <!-- <mat-icon>person_add</mat-icon> -->
-                                <a routerLink="associado/pesquisar">Pesquisar</a>
-                            </mat-list-item>
-                        </mat-nav-list>
-                    </mat-expansion-panel>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Médico
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <mat-nav-list>
-                            <mat-list-item>
-                                <!-- <mat-icon>person_add</mat-icon> -->
-                                <a routerLink="medico/cadastrar">Cadastrar</a>
-                            </mat-list-item>
-                            <mat-list-item>
-                                <!-- <mat-icon>person_add</mat-icon> -->
-                                <a routerLink="medico/pesquisar">Pesquisar</a>
-                            </mat-list-item>
-                        </mat-nav-list>
-                    </mat-expansion-panel>
-                </mat-accordion>
-            </mat-nav-list>
-        </mat-sidenav>
-
-        <mat-sidenav-content>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
-</div>
-<loading></loading>
+            </mat-sidenav>
+    
+            <mat-sidenav-content>
+                <router-outlet></router-outlet>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    </div>
+    <loading></loading>
