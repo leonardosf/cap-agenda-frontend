@@ -1,0 +1,25 @@
+<mat-card>
+    <mat-card-title>
+        Pesquisa de Consultório
+    </mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="formPesquisaConsultorio" (ngSubmit)="pesquisar()">
+            <div linha fxLayoutGap="2%">
+                <mat-form-field fxFill appearance="outline">
+                    <mat-label>Nome</mat-label>
+                    <input type="text" matInput formControlName="nome" maxlength="50">
+                </mat-form-field>
+            </div>
+            <button color="primary" mat-raised-button type="submit">Pesquisar</button>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<div class="margin-1">
+    <tabela-paginada [colunas]="tabela.colunas" 
+                         [dados]="lstConsultorio" 
+                         [destino]="'consultorio'" 
+                         [total]="total"
+                         [filtro]="filtro">
+    </tabela-paginada>
+</div>

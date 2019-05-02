@@ -23,6 +23,9 @@ const router:Routes = [
             },
             {
                 path: 'medico', loadChildren: './medico/medico.module#MedicoModule'
+            },
+            {
+                path: 'consultorio', loadChildren: './consultorio/consultorio.module#ConsultorioModule'
             }
         ]
     },

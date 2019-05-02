@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-card-title>
+        Editar Consultório
+    </mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="formConsultorio" (ngSubmit)="atualizar()">
+            <form-consultorio [formConsultorio]="formConsultorio"></form-consultorio>
+            <div fxLayoutGap="2%">
+                <button color="primary" mat-raised-button type="submit" [disabled]="formConsultorio.invalid">Atualizar</button>
+                <button color="primary" mat-raised-button type="button" (click)="voltar()">Voltar</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,19 @@
+<div [formGroup]="formConsultorio">
+    <div linha fxLayoutGap="2%">
+        <mat-form-field fxFlex="50%" fxFill appearance="outline">
+            <mat-label>Nome*</mat-label>
+            <input type="text" matInput formControlName="nome" maxlength="50">
+            <mat-error *ngIf="formConsultorio.controls.nome.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex="50%" fxFill appearance="outline">
+            <mat-label>Descrição*</mat-label>
+            <input type="text" matInput formControlName="descricao" maxlength="50">
+            <mat-error *ngIf="formConsultorio.controls.descricao.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+    </div>
+    <!-- FORM ENDERECO -->
+    <form-endereco [formGenerico]="formConsultorio"></form-endereco>
+    <!-- FORM TELEFONE -->
+    <form-telefone [formGenerico]="formConsultorio"></form-telefone>
+
+</div>

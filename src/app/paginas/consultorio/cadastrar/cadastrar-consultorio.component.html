@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-card-title>
+    Cadastro Consultório
+  </mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="formConsultorio" (ngSubmit)="salvar()">
+      <form-consultorio [formConsultorio]="formConsultorio"></form-consultorio>
+      <button color="primary" mat-raised-button type="submit" [disabled]="formConsultorio.invalid">Salvar</button>
+    </form>
+  </mat-card-content>
+</mat-card>
