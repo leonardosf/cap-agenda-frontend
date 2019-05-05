@@ -24,7 +24,7 @@ export class CadastrarConsultorioComponent implements OnInit {
 
   salvar() {
     this.consultorioModelo = {...this.formConsultorio.value};
-    Utils.removerCaracteresEspeciais(this.consultorioModelo);
+    Utils.removerMascaras(this.consultorioModelo);
     this.consultorioModelo.telefones[0].numero = this.consultorioModelo.telefones[0].numero.trim();
     this.http.salvar(this.consultorioModelo);
   }

@@ -77,4 +77,15 @@ export class Utils {
             }
         }
     }
+
+    static removerMascaras(modelo) {
+        if(modelo.cpf) {
+            modelo.cpf = modelo.cpf.replace(/[^\d]+/g, '');
+        }
+        if(modelo.numeroRG) {
+            modelo.numeroRG = modelo.numeroRG.replace(/[^\d]+/g, '');
+        }
+        modelo.endereco.cep = modelo.endereco.cep.replace(/[^\d]+/g, '');
+        modelo.telefones.filter(tel => tel.numero = tel.numero.replace(/[^\d]+/g, ''));
+    }
 }

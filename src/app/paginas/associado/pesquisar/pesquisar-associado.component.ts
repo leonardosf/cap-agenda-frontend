@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AssociadoService } from 'src/app/servicos/associado/associado.service';
 import { AssociadoModelo } from 'src/app/modelos/associado/associadoModelo';
 import { Utils } from 'src/app/utils/utils';
-import { AgendaFormGroup } from '../../agenda/agenda.form.group';
 import { AssociadoFormGroup } from '../associado.form.group';
 import { AcaoBuilder, TabelaBuilder, Tabela } from 'src/app/componentes/tabelas/tabela-paginada/tabela';
 import { Router } from '@angular/router';
@@ -83,12 +82,8 @@ export class PesquisarAssociadoComponent implements OnInit {
 
   pesquisar() {
     this.filtro = {...this.filtro, ...this.formPesquisaAssociado.value};
-    this.removerCarateresEspeciais(this.filtro);
+    Utils.removerCaracteresEspeciais(this.filtro);
     this.carregarTabela(this.filtro);
-  }  
-  
-  removerCarateresEspeciais(filtro): any {
-    filtro.matricula = Utils.somenteNumeros(filtro.matricula);
-    filtro.cpf = Utils.somenteNumeros(filtro.cpf);
   }
+
 }

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AssociadoFormGroup } from '../associado.form.group';
 import { AssociadoService } from 'src/app/servicos/associado/associado.service';
+import { Formatador } from 'src/app/diretivas/formatadores/formatador';
 
 @Component({
   selector: 'visualizar-associado',
@@ -26,6 +27,7 @@ export class VisualizarAssociadoComponent implements OnInit {
     this.router.paramMap.subscribe(params => {
       this.id = Number(params.get("id"));
       this.http.recuperar(this.id, resposta => {
+        this.formatarCampos(resposta);
           this.formAssociado.patchValue(resposta);
           this.formAssociado.disable();
       });
@@ -38,5 +40,11 @@ export class VisualizarAssociadoComponent implements OnInit {
     this.location.back();
   }
 
+  formatarCampos(resposta: any): any {
+    resposta.cpf = Formatador.formatarCPF(resposta.cpf);
+    resposta.numeroRG = Formatador.formatarRG(resposta.numeroRG);
+    resposta.endereco.cep = Formatador.formatarCEP(resposta.endereco.cep.toString());
+    resposta.telefones.filter(tel => tel.numero = Formatador.formatarTelefone(tel.numero.toString()));
+  }
 
 }

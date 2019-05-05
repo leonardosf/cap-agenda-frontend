@@ -1,6 +1,5 @@
 import { Directive, Attribute, ElementRef, HostListener } from "@angular/core";
-import { CpfFormatador } from "../formatadores/cpf-formatador";
-import { CnpjFormatador } from "../formatadores/cnpj-formatador";
+import { Formatador } from "../formatadores/formatador";
 
 @Directive({
     selector: '[mascara]'
@@ -61,18 +60,18 @@ export class MascaraDirective {
     }
 
     private cpf(valorLimpo: any) {
-        return CpfFormatador.formatarIncompleto(valorLimpo);
+        return Formatador.formatarCPFIncompleto(valorLimpo);
     }
 
     private cnpj(valorLimpo: any) {
-        return CnpjFormatador.formatarIncompleto(valorLimpo);
+        return Formatador.formatarCNPJIncompleto(valorLimpo);
     }
 
     private cpfCnpj(valorLimpo: any) {
         if (valorLimpo.length <= 11) {
-            return CpfFormatador.formatarIncompleto(valorLimpo);
+            return Formatador.formatarCPFIncompleto(valorLimpo);
         } else {
-            return CnpjFormatador.formatarIncompleto(valorLimpo);
+            return Formatador.formatarCNPJIncompleto(valorLimpo);
         }
     }
 

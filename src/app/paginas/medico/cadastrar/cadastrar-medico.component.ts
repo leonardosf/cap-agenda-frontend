@@ -25,20 +25,8 @@ export class CadastrarMedicoComponent implements OnInit {
 
   salvar() {
     this.medicoModelo = {...this.formMedico.value};
-    this.removerCarateresEspeciais(this.medicoModelo);
+    Utils.removerMascaras(this.medicoModelo);
     this.medicoService.salvar(this.medicoModelo);
-  }
-
-  removerCarateresEspeciais(medicoModelo: MedicoModelo): any {
-    medicoModelo.cpf = Utils.somenteNumeros(medicoModelo.cpf);
-    medicoModelo.numeroRG = Utils.somenteNumeros(medicoModelo.numeroRG);
-    medicoModelo.endereco.cep = Utils.somenteNumeros(medicoModelo.endereco.cep);
-
-    if(medicoModelo.telefones.length > 0) {
-      for(let tel of medicoModelo.telefones) {
-        tel.numero = Utils.somenteNumeros(tel.numero);
-      }
-    }
   }
 
 }

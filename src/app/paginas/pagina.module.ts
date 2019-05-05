@@ -26,6 +26,9 @@ const router:Routes = [
             },
             {
                 path: 'consultorio', loadChildren: './consultorio/consultorio.module#ConsultorioModule'
+            },
+            {
+                path: 'funcionario', loadChildren: './funcionario/funcionario.module#FuncionarioModule'
             }
         ]
     },

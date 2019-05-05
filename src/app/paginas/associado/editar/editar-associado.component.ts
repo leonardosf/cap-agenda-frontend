@@ -7,6 +7,7 @@ import { Utils } from 'src/app/utils/utils';
 import { AssociadoService } from 'src/app/servicos/associado/associado.service';
 import { TipoParentescoEnum } from 'src/app/enums/tipoParentescoEnum';
 import { AssociadoFormGroup } from '../associado.form.group';
+import { Formatador } from 'src/app/diretivas/formatadores/formatador';
 
 @Component({
   selector: 'editar-associado',
@@ -28,7 +29,8 @@ export class EditarAssociadoComponent implements OnInit {
     this.router.paramMap.subscribe(params => {
       this.id = Number(params.get("id"));
       this.http.recuperar(this.id, resposta => {
-          this.formAssociado.patchValue(resposta);
+        this.formatarCampos(resposta);
+        this.formAssociado.patchValue(resposta);
       });
     });
   }
@@ -41,7 +43,7 @@ export class EditarAssociadoComponent implements OnInit {
 
   atualizar() {
     this.associadoModelo = {...this.formAssociado.value};
-    this.removerCarateresEspeciais(this.associadoModelo)
+    Utils.removerMascaras(this.associadoModelo)
     this.comporDependentes(this.associadoModelo);
     this.http.atualizar(this.associadoModelo);
   }
@@ -60,17 +62,11 @@ export class EditarAssociadoComponent implements OnInit {
     }
   }
 
-  removerCarateresEspeciais(associadoModelo: AssociadoModelo): any {
-    associadoModelo.cpf = Utils.somenteNumeros(associadoModelo.cpf.toString());
-    associadoModelo.numeroRG = Utils.somenteNumeros(associadoModelo.numeroRG.toString());
-    associadoModelo.endereco.cep = Utils.somenteNumeros(associadoModelo.endereco.cep.toString());
-
-    if(associadoModelo.telefones.length > 0) {
-      for(let tel of associadoModelo.telefones) {
-        tel.numero = Utils.somenteNumeros(tel.numero.toString());
-      }
-    }
+  formatarCampos(resposta: any): any {
+    resposta.cpf = Formatador.formatarCPF(resposta.cpf);
+    resposta.numeroRG = Formatador.formatarRG(resposta.numeroRG);
+    resposta.endereco.cep = Formatador.formatarCEP(resposta.endereco.cep.toString());
+    resposta.telefones.filter(tel => tel.numero = Formatador.formatarTelefone(tel.numero.toString()));
   }
-
 
 }

@@ -25,7 +25,7 @@ export class CadastrarAssociadoComponent implements OnInit {
 
   salvar() {
     this.associadoModelo = {...this.formAssociado.value};
-    Utils.removerCaracteresEspeciais(this.associadoModelo);
+    Utils.removerMascaras(this.associadoModelo);
     this.comporDependentes(this.associadoModelo);
     this.associadoService.salvar(this.associadoModelo);
   }

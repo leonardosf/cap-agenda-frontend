@@ -3,33 +3,33 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Utils } from 'src/app/utils/utils';
-import { MedicoFormGroup } from '../medico.form.group';
-import { MedicoModelo } from 'src/app/modelos/medico/medicoModelo';
-import { MedicoService } from 'src/app/servicos/medicos/medico.service';
+import { FuncionarioModelo } from 'src/app/modelos/funcionario/funcionarioModelo';
+import { FuncionarioFormGroup } from '../funcionario.form.group';
+import { FuncionarioService } from 'src/app/servicos/funcionario/funcionario.service';
 import { Formatador } from 'src/app/diretivas/formatadores/formatador';
 
 @Component({
-  selector: 'editar-medico',
-  templateUrl: './editar-medico.component.html',
-  styleUrls: ['./editar-medico.component.scss']
+  selector: 'editar-funcionario',
+  templateUrl: './editar-funcionario.component.html',
+  styleUrls: ['./editar-funcionario.component.scss']
 })
-export class EditarMedicoComponent implements OnInit {
+export class EditarFuncionarioComponent implements OnInit {
 
-  formMedico: FormGroup;
-  medicoModelo:MedicoModelo;
+  formFuncionario: FormGroup;
+  funcionarioModelo:FuncionarioModelo;
   id;
 
   constructor(private router:ActivatedRoute, public fb: FormBuilder, private location:Location,
-      private http:MedicoService){
+      private http:FuncionarioService){
 
-    const medicoFormGroup = new MedicoFormGroup(this.fb);
-    this.formMedico = medicoFormGroup.montarForGroup();
+    const funcionarioFormGroup = new FuncionarioFormGroup(this.fb);
+    this.formFuncionario = funcionarioFormGroup.montarForGroup();
 
     this.router.paramMap.subscribe(params => {
       this.id = Number(params.get("id"));
       this.http.recuperar(this.id, resposta => {
         this.formatarCampos(resposta);
-          this.formMedico.patchValue(resposta);
+          this.formFuncionario.patchValue(resposta);
       });
     });
   }
@@ -41,9 +41,9 @@ export class EditarMedicoComponent implements OnInit {
   }
 
   atualizar() {
-    this.medicoModelo = {...this.formMedico.value};
-    Utils.removerMascaras(this.medicoModelo)
-    this.http.atualizar(this.medicoModelo);
+    this.funcionarioModelo = {...this.formFuncionario.value};
+    Utils.removerMascaras(this.funcionarioModelo);
+    this.http.atualizar(this.funcionarioModelo);
   }
 
   formatarCampos(resposta: any): any {

@@ -6,6 +6,7 @@ import { Utils } from 'src/app/utils/utils';
 import { ConsultorioFormGroup } from '../consultorio.form.group';
 import { ConsultorioModelo } from 'src/app/modelos/consultorio/consultorioModelo';
 import { ConsultorioService } from 'src/app/servicos/consultorios/consultorio.service';
+import { Formatador } from 'src/app/diretivas/formatadores/formatador';
 
 @Component({
   selector: 'editar-consultorio',
@@ -27,6 +28,7 @@ export class EditarConsultorioComponent implements OnInit {
     this.router.paramMap.subscribe(params => {
       this.id = Number(params.get("id"));
       this.http.recuperar(this.id, resposta => {
+        this.formatarCampos(resposta);
           this.formConsultorio.patchValue(resposta);
       });
     });
@@ -43,6 +45,11 @@ export class EditarConsultorioComponent implements OnInit {
     Utils.removerCarateresEsp(this.consultorioModelo.endereco.cep);
     Utils.removerCarateresEsp(this.consultorioModelo.telefones[0].numero);
     this.http.atualizar(this.consultorioModelo);
+  }
+
+  formatarCampos(resposta: any): any {
+    resposta.endereco.cep = Formatador.formatarCEP(resposta.endereco.cep.toString());
+    resposta.telefones.filter(tel => tel.numero = Formatador.formatarTelefone(tel.numero.toString()));
   }
 
 }
