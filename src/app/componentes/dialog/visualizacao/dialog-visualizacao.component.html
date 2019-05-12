@@ -1,0 +1,14 @@
+<h1 mat-dialog-title> {{ dados.titulo }} </h1>
+<div mat-dialog-content>
+    <label>{{ dados.conteudo }}</label>
+</div>
+<div>
+    <mat-form-field fxFlex="100%" fxFill appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input type="text" matInput formControlName="nome" maxlength="15">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions class="direita">
+    <button mat-button color="primary" [mat-dialog-close]="false">{{ dados.btnCancelar }}</button>
+    <button mat-button color="primary" [mat-dialog-close]="true">{{ dados.btnConfirmar }}</button>
+</div>

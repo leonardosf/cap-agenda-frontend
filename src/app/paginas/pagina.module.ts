@@ -29,6 +29,9 @@ const router:Routes = [
             },
             {
                 path: 'funcionario', loadChildren: './funcionario/funcionario.module#FuncionarioModule'
+            },
+            {
+                path: 'calendario', loadChildren: './calendario/calendario.module#CalendarioModule'
             }
         ]
     },

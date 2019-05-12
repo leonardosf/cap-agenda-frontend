@@ -1,0 +1,18 @@
+<mat-card>
+    <!-- <mat-card-title>
+        Cadastro Associado
+    </mat-card-title> -->
+    <mat-card-content>
+        <full-calendar *ngIf="options" #fullcalendar 
+            [editable]="true" 
+            [events]="eventsModel" 
+            [header]="options.header"
+            [locale]="options.locale"
+            [buttonText]="options.buttonText" 
+            (dateClick)="dateClick($event)"
+            (eventDragStop)="eventDragStop($event)" 
+            [plugins]="options.plugins" 
+            (eventClick)="eventClick($event)">
+        </full-calendar>
+    </mat-card-content>
+</mat-card>
