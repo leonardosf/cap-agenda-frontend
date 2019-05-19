@@ -246,6 +246,54 @@
   dependencies:
     tslib "^1.9.0"
 
+"@fullcalendar/angular@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/angular/-/angular-4.1.0.tgz#aa921cd5004b2d8a194a09e8087877710569c2e3"
+  integrity sha512-tsSlmeOGG9v7pcsYRfXP8tktisdDVwQgeRX/sJAXzYeZwvYF2XZg0Js2RUmWDmubkK2ski6HWb35RllqjoOW/A==
+  dependencies:
+    "@fullcalendar/core" "~4.1.0"
+    tslib "^1.9.0"
+
+"@fullcalendar/core@4.1.0", "@fullcalendar/core@~4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/core/-/core-4.1.0.tgz#9f09c4c35e308a81a97e4d62c05f64548d0e5666"
+  integrity sha512-pyBRbNnppQH5iPnhENrNIkvOxjPdR46o7HMuSx3M+OlGVZLygbb97sKg5XuJx6Bn3hFP0EJXKmA9/GCfeP9PPQ==
+
+"@fullcalendar/daygrid@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/daygrid/-/daygrid-4.1.0.tgz#058b02585d17a63f448e2ab42f65db7bacca2296"
+  integrity sha512-y2w+js+cr0SFC3f88QIS91V8LeZ5TEG/W6hX+CcokP+KTZdepW0uCjPzf9QwVE0LM904tZ2kjCe209hZGfSNGg==
+
+"@fullcalendar/interaction@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/interaction/-/interaction-4.1.0.tgz#5d0c4c2c407934ff8bd45071ff76fb6736937da3"
+  integrity sha512-s9679mbLnBqvQJpIqj4CJi36yGCOXKYshasW7PL5a/BgNXYEScHtdSNZubJx26zHlgGOh8S0wIvBlYQUihMcLQ==
+
+"@ngrx/core@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/core/-/core-1.2.0.tgz#882b46abafa2e0e6d887cb71a1b2c2fa3e6d0dc6"
+  integrity sha1-iCtGq6+i4ObYh8txobLC+j5tDcY=
+
+"@ngrx/effects@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-7.4.0.tgz#7d1977538cf85e42ab48fd648acdfbc8b52f93d3"
+  integrity sha512-YjgB17WnLCBDPjAkHduKWsLFSGLZryPaTjY3EIvMF+WTRPDlgC5SAv2n7p3YIei6g6IYcEvOwLWBqZHFUXTgBw==
+
+"@ngrx/router-store@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-7.4.0.tgz#69c085bda3022117169f87ed5753b951de7d376d"
+  integrity sha512-ZpwTO1/ha3pxO7NV3jIfnwipBN1A719IjAOgrcmI8Ut06VH3HY/7JVFTkwLN/FyuHvl4EOlAVYmMAblmrymUWA==
+
+"@ngrx/store-devtools@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-7.4.0.tgz#5a73469c70322351c4224f4529c5123f587a5997"
+  integrity sha512-ZmPpquprBYUozbLuLMLZzUhI+LnMNGMNg8x1ij9yDxXWQADcJm1Zu7kouYE1r5SoCYxKfwJ3Ia1VQfS3A5S8dw==
+
+"@ngrx/store@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-7.4.0.tgz#525a343aa45d7f6ca60f3301a23a27669c14bbce"
+  integrity sha512-kwTUHgfgBeAL4RQBjZO46z9v4Xzg8PXAgY4WwXdt3zUk1tF4ZvijMleFvFRUoiJJfxF/UM6jgIZ/yGrX2dXQuA==
+
 "@ngtools/webpack@7.3.8":
   version "7.3.8"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-7.3.8.tgz#c8761d0f6959682e03032f8d3de718d1f811410e"
@@ -280,7 +328,7 @@
     semver "5.6.0"
     semver-intersect "1.4.0"
 
-"@swimlane/ngx-datatable@^14.0.0":
+"@swimlane/ngx-datatable@14.0.0":
   version "14.0.0"
   resolved "https://registry.yarnpkg.com/@swimlane/ngx-datatable/-/ngx-datatable-14.0.0.tgz#6227625e2ce2e9143735d4deeb3ab34b88745c26"
   integrity sha512-zgRY58MzTpg9Jb575cg0O87mLtXYi6fx7NLRPRHdQ/FqH9mKjZ3i7+OjqtR8/w3KRmFP2Hnkmx52VzldZIKspg==

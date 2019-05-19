@@ -21,14 +21,20 @@ const router: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [BrowserModule, ModuleCompartilhado, HttpClientModule, PaginaModule, BrowserAnimationsModule,
-    RouterModule.forRoot(router)],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpInterceptador, multi: true},
-    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}],
-  bootstrap: [AppComponent],
-  exports: []
+    declarations: [
+        AppComponent
+    ],
+    imports: [ 
+        BrowserModule, 
+        ModuleCompartilhado, 
+        HttpClientModule, 
+        PaginaModule, 
+        BrowserAnimationsModule,
+        RouterModule.forRoot(router),
+    ],
+    providers: [ {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptador, multi: true},
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' } ],
+    bootstrap: [AppComponent],
+    exports: []
 })
 export class AppModule { }

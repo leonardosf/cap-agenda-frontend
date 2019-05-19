@@ -1,3 +1,4 @@
+import { AuthGuardService } from './../../seguranca/auth-guard.service';
 import { EditarAgendaComponent } from './editar/editar-agenda.component';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -24,7 +25,8 @@ const router: Routes = [
             {
                 path: 'calendario/:id', component: CalendarioAgendaComponent
             }
-        ]
+        ],
+        canActivate: [ AuthGuardService ] 
     }
 ]
 

@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+    production: false,
+    secret: '$2a$04$xZQTx5i7csGt6MhzvRIQlOf7DvvY5l8OYQDMkyZoWuM1R9Yyu3Bji',
+    client: 'clientapp',
+    basic: 'Basic Y2xpZW50YXBwOnNlY3JldA==',
+    grantType: 'password',
+    scope: 'read write',
+    url: 'http://localhost:8080/cap-agenda/api/',
+    urlLogin: 'http://localhost:8080/cap-agenda/oauth/token'
 };
 
 /*

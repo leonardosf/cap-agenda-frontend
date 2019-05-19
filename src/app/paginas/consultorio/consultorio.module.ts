@@ -1,3 +1,4 @@
+import { AuthGuardService } from './../../seguranca/auth-guard.service';
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { ModuleCompartilhado } from "src/app/modulos-compartilhados/compartilhado.module";
@@ -24,7 +25,8 @@ const router: Routes = [
             {
                 path: 'pesquisar', component: PesquisarConsultorioComponent
             }
-        ]
+        ],
+        canActivate: [ AuthGuardService ] 
     }
 ]
 @NgModule({

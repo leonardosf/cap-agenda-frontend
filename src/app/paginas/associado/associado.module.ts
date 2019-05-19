@@ -1,3 +1,4 @@
+import { AuthGuardService } from './../../seguranca/auth-guard.service';
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { CadastrarAssociadoComponent } from "./cadastrar/cadastrar-associado.component";
@@ -25,7 +26,8 @@ const router: Routes = [
             {
                 path: 'pesquisar', component: PesquisarAssociadoComponent
             }
-        ]
+        ],
+        canActivate: [ AuthGuardService ] 
     }
 ]
 @NgModule({

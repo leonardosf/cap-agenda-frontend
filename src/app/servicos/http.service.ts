@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Utils } from "../utils/utils";
@@ -9,7 +10,7 @@ import { AssociadoModelo } from "../modelos/associado/associadoModelo";
 })
 export class HttpService {
 
-    resource = "http://localhost:8080/cap-agenda/api/";
+    resource = environment.url;
     path;
 
     constructor(protected http: HttpClient, protected mensagem:MensagemToast) {

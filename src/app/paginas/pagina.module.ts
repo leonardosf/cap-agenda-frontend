@@ -32,6 +32,9 @@ const router:Routes = [
             },
             {
                 path: 'calendario', loadChildren: './calendario/calendario.module#CalendarioModule'
+            },
+            {
+                path: 'autenticacao', loadChildren: './login/login.module#LoginModule'
             }
         ]
     },

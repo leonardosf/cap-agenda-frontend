@@ -1,26 +1,26 @@
-<div class="example-container">
+<div class="example-container" >
         <mat-toolbar color="primary" class="example-toolbar">
-            <button mat-icon-button (click)="snav.toggle()">
+            <button *ngIf="(autenticado$ | async)" mat-icon-button (click)="snav.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
             <h1 class="example-app-name">Cap - Agenda</h1>
             <span class="example-spacer"></span>
-            <button mat-button [matMenuTriggerFor]="menu" matTooltip="Perfil">
+            <button *ngIf="(autenticado$ | async)" mat-button [matMenuTriggerFor]="menu" matTooltip="Perfil">
                 <mat-icon class="example-icon">account_circle</mat-icon>
             </button>
-            <mat-menu #menu="matMenu">
+            <mat-menu #menu="matMenu" >
                 <button mat-menu-item>
                     <mat-icon>edit</mat-icon>
                     <span>Perfil</span>
                 </button>
             </mat-menu>
-            <button mat-button>
-                <mat-icon class="example-icon" matTooltip="Sair">exit_to_app</mat-icon>
+            <button mat-button *ngIf="(autenticado$ | async)">
+                <mat-icon class="example-icon" matTooltip="Sair" (click)="sair();">exit_to_app</mat-icon>
             </button>
         </mat-toolbar>
     
-        <mat-sidenav-container class="example-sidenav-container" *ngIf="menus.length > 0">
-            <mat-sidenav #snav opened mode="side" fixedTopGap="56">
+        <mat-sidenav-container class="example-sidenav-container">
+            <mat-sidenav #snav opened mode="side" fixedTopGap="56" *ngIf="menus.length > 0">
                 <mat-nav-list>
                     <!-- <a mat-list-item routerLink="{{nav.path}}" *ngFor="let nav of fillerNav">{{nav.nomeMenu}}</a> -->
                     <mat-nav-list>
