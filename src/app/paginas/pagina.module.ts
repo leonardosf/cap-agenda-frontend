@@ -15,20 +15,24 @@ const router:Routes = [
             // {
             //     path: 'index', component: IndeComponent,
             // },
+
             {
-                path: 'associado', loadChildren: './associado/associado.module#AssociadoModule',
+                path: 'consulta', loadChildren: './consulta/consulta.module#ConsultaModule',
             },
             {
-                path: 'agenda', loadChildren: './agenda/agenda.module#AgendaModule'
+                path: 'associado', loadChildren: './associado/associado.module#AssociadoModule',
             },
             {
                 path: 'medico', loadChildren: './medico/medico.module#MedicoModule'
             },
             {
-                path: 'consultorio', loadChildren: './consultorio/consultorio.module#ConsultorioModule'
+                path: 'agenda', loadChildren: './agenda/agenda.module#AgendaModule'
             },
             {
                 path: 'funcionario', loadChildren: './funcionario/funcionario.module#FuncionarioModule'
+            },
+            {
+                path: 'consultorio', loadChildren: './consultorio/consultorio.module#ConsultorioModule'
             },
             {
                 path: 'calendario', loadChildren: './calendario/calendario.module#CalendarioModule'

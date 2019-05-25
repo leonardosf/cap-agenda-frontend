@@ -12,11 +12,11 @@ import { of } from 'rxjs';
 export class MenuComponent implements OnInit {
 
     public menus: Array<Menu> = [];
-    public home = { nome: 'Home', icone: 'home' };
+    public menusFixos = new Array<any>();
 
     constructor(private http: HttpService, private autenticacaoService: AutenticacaoService) {
-        this.menus = [];
-    }
+           
+        }
 
     ngOnInit() {
         this.carregarMenu();
@@ -26,8 +26,9 @@ export class MenuComponent implements OnInit {
         this.http.path = 'menus';
         this.http.recuperarTodos(resposta => { 
             this.menus = resposta;
-            this.home = this.menus[0];
-            this.menus.splice(0, 1);
+            this.menusFixos.push(this.menus[0]);
+            this.menusFixos.push(this.menus[1]);
+            this.menus.splice(0, 2);
         }, () => {
             this.menus = [];
         });

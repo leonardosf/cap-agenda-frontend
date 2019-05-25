@@ -6,6 +6,7 @@ import { FullCalendarComponent } from "@fullcalendar/angular";
 import { DialogService } from "src/app/componentes/dialog/service/dialog.service";
 import { DialogDados } from "src/app/componentes/dialog/model/dialog.dados";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
+import { ConsultaModelo } from "src/app/modelos/agenda/consulta";
 
 @Component({
     selector: 'calendario',
@@ -16,18 +17,7 @@ export class CalendarioComponent {
 
 
     options: OptionsInput;
-    eventsModel: any = [{ title: 'Leonardo', date: '2019-05-01 08:00', backgroundColor: 'red' },
-                        { title: 'João', date: '2019-05-01 08:30', backgroundColor: 'red'},
-                        { title: 'Disponível', date: '2019-05-01 09:00', backgroundColor: 'green'},
-                        { title: 'Jose', date: '2019-05-01 09:30', backgroundColor: 'red' },
-                        { title: 'Francisco', date: '2019-05-01 10:00', backgroundColor: 'red' },
-                        { title: 'Diego', date: '2019-05-01 10:30', backgroundColor: 'red' },
-                        { title: 'Chico', date: '2019-05-01 11:00', backgroundColor: 'red' },
-                        { title: 'Fernando', date: '2019-05-02 11:00', backgroundColor: 'red' },
-                        { title: 'Gustavo', date: '2019-05-02 11:30', backgroundColor: 'red' },
-                        { title: 'Gustavo', date: '2019-05-02 11:30', backgroundColor: 'red' },
-                        { title: 'Disponível', date: '2019-05-02 11:30', backgroundColor: 'green' }
-                        ];
+    eventsModel = new Array<ConsultaModelo>();
 
     dados: DialogDados = {
         btnConfirmar: 'Fechar', 
@@ -35,9 +25,6 @@ export class CalendarioComponent {
     };
 
     form:FormGroup;
-
-    @ViewChild('fullcalendar') fullcalendar: FullCalendarComponent;
-
 
     constructor(private dialog:DialogService){}
 
@@ -59,7 +46,19 @@ export class CalendarioComponent {
             locale:'ptBr',
             plugins: [dayGridPlugin, interactionPlugin]
         };
+        this.comporAgenda()
+    }
 
+    private comporAgenda() {
+        let dadosAgenda = JSON.parse(sessionStorage.getItem('dadosAgenda'));
+        let consultaModelo:ConsultaModelo;
+        for(let consulta of dadosAgenda.consultas) {
+            consultaModelo = new ConsultaModelo();
+            consultaModelo.title = consulta.pessoa == undefined ? '' : consulta.pessoa.nome;
+            consultaModelo.date = consulta.data+" "+consulta.horaInicio;
+            consultaModelo.backgroundColor = consulta.title != undefined && consulta.title != '' ? 'red' : 'green';
+            this.eventsModel.push(consultaModelo);
+        }   
     }
 
     eventClick(model) {
