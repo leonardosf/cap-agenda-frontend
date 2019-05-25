@@ -1,3 +1,4 @@
+import { LoginComponent } from './paginas/login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -13,10 +14,14 @@ import { PaginaModule } from './paginas/pagina.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_DATE_LOCALE } from '@angular/material';
+import { LoginModule } from './paginas/login/login.module';
 
 const router: Routes = [
   {
     path: '', redirectTo: 'page', pathMatch: 'full'
+  },
+  {
+    path: 'login', component: LoginComponent
   }
 ];
 
@@ -29,6 +34,7 @@ const router: Routes = [
         ModuleCompartilhado, 
         HttpClientModule, 
         PaginaModule, 
+        LoginModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(router),
     ],

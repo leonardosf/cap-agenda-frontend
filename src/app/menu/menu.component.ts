@@ -13,7 +13,6 @@ export class MenuComponent implements OnInit {
 
     public menus: Array<Menu> = [];
     public home = { nome: 'Home', icone: 'home' };
-    public autenticado$ = of(false);
 
     constructor(private http: HttpService, private autenticacaoService: AutenticacaoService) {
         this.menus = [];
@@ -21,7 +20,6 @@ export class MenuComponent implements OnInit {
 
     ngOnInit() {
         this.carregarMenu();
-        this.autenticado$ = of(this.autenticacaoService.isAutenticado());
     }
 
     carregarMenu() {
@@ -37,7 +35,6 @@ export class MenuComponent implements OnInit {
 
     sair() {
         this.autenticacaoService.logout();
-        this.autenticado$ = of(false);
         this.menus = [];
     }
 

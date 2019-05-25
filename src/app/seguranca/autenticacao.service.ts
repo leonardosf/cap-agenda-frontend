@@ -36,7 +36,7 @@ export class AutenticacaoService implements OnInit {
     }
 
     public redirecionarLogin() {
-        this.router.navigate(['/page/autenticacao/login']);
+        this.router.navigate(['/login']);
     }
 
     public limparStorage() {

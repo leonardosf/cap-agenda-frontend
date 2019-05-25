@@ -1,11 +1,11 @@
 <div class="example-container" >
         <mat-toolbar color="primary" class="example-toolbar">
-            <button *ngIf="(autenticado$ | async)" mat-icon-button (click)="snav.toggle()">
+            <button mat-icon-button (click)="snav.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
             <h1 class="example-app-name">Cap - Agenda</h1>
             <span class="example-spacer"></span>
-            <button *ngIf="(autenticado$ | async)" mat-button [matMenuTriggerFor]="menu" matTooltip="Perfil">
+            <button mat-button [matMenuTriggerFor]="menu" matTooltip="Perfil">
                 <mat-icon class="example-icon">account_circle</mat-icon>
             </button>
             <mat-menu #menu="matMenu" >
@@ -14,7 +14,7 @@
                     <span>Perfil</span>
                 </button>
             </mat-menu>
-            <button mat-button *ngIf="(autenticado$ | async)">
+            <button mat-button>
                 <mat-icon class="example-icon" matTooltip="Sair" (click)="sair();">exit_to_app</mat-icon>
             </button>
         </mat-toolbar>

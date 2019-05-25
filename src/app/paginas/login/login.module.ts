@@ -4,18 +4,9 @@ import { ModuleCompartilhado } from "src/app/modulos-compartilhados/compartilhad
 import { CommonModule } from "@angular/common";
 import { LoginComponent } from "./login.component";
 
-const router: Routes = [
-    {
-        path: '',
-        children: [
-            {
-                path: 'login', component: LoginComponent
-            }
-        ]
-    }
-]
+
 @NgModule({
     declarations: [ LoginComponent ],
-    imports: [ CommonModule, RouterModule.forChild(router), ModuleCompartilhado]
+    imports: [ CommonModule, ModuleCompartilhado]
 })
 export class LoginModule { }
