@@ -1,3 +1,4 @@
+import { validadorHora } from './../../../paginas/agenda/agenda.form.group';
 import { ConsultorioService } from './../../../servicos/consultorios/consultorio.service';
 import { MedicoService } from './../../../servicos/medicos/medico.service';
 import { FormBase } from './../form.base';
@@ -66,8 +67,8 @@ export class FormAgendaComponent extends FormBase implements OnInit {
 
     private adicionarRemoverFormValidadorIntervalo() {
         if (this.possuiIntervalo) {
-            this.formAgenda.controls.horaInicioIntervalo.setValidators(Validators.required);
-            this.formAgenda.controls.horaFimIntervalo.setValidators(Validators.required);
+            this.formAgenda.controls.horaInicioIntervalo.setValidators([ Validators.required ]);
+            this.formAgenda.controls.horaFimIntervalo.setValidators([Validators.required ]);
         } else {
             this.formAgenda.controls.horaInicioIntervalo.setValidators(null);
             this.formAgenda.controls.horaFimIntervalo.setValidators(null);

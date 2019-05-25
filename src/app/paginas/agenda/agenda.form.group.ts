@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup, AbstractControl } from '@angular/forms';
 import { FormBuilder, FormControl, Validators, FormArray, ValidatorFn } from '@angular/forms';
 export class AgendaFormGroup {
 
@@ -14,8 +14,8 @@ export class AgendaFormGroup {
             nome: new FormControl('', Validators.required),
             idMedico: new FormControl('', Validators.required),
             idConsultorio: new FormControl('', Validators.required),
-            horaInicio: new FormControl('', Validators.required),
-            horaFim: new FormControl('', Validators.required),
+            horaInicio: new FormControl('', [Validators.required ]),
+            horaFim: new FormControl('', [Validators.required ]),
             tempoAtendimento: new FormControl('', Validators.required),
             competencia: new FormControl('', Validators.required),            
             horaInicioIntervalo: new FormControl('', null),
@@ -54,5 +54,31 @@ export class AgendaFormGroup {
         });
     }
     
+}
+
+export const validadorHora = (control: AbstractControl): Resposta => {
+    const regex = new RegExp('(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)');
+    console.log('antes', control.value.length);
+    if (control.value.length > 4) {
+        const campos = control.value.split(':');
+        const hora = campos[0];
+        const minuto = campos[1];
+        console.log('hora', +hora);
+        console.log('minuto', minuto);
+        let horaOk = false;
+        let minOk = false;
+        if (+hora >= 0 && +hora < 24) horaOk = true;
+        if (+minuto >= 0 && +minuto < 60) minOk = true;
+        if (horaOk && minOk) {
+            console.log('ok');
+            return { 'hora': true };
+        }
+    } 
+        
+    return null;
+}
+
+interface Resposta {
+    hora: boolean;
 }
 

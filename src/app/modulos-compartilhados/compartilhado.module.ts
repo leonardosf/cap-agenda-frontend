@@ -1,3 +1,4 @@
+import { NgxMaskModule } from 'ngx-mask';
 import { NgModule } from '@angular/core';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -99,7 +100,8 @@ import { DialogVisualizacaoComponent } from '../componentes/dialog/visualizacao/
     ReactiveFormsModule,
     LayoutModule,
     FlexLayoutModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    NgxMaskModule.forRoot()
   ],
   exports: [
     CommonModule,
@@ -146,7 +148,8 @@ import { DialogVisualizacaoComponent } from '../componentes/dialog/visualizacao/
     // Componentes da aplicação e diretivas
     FormEnderecoComponent, FormTelefoneComponent,
     MascaraDirective, NumeroDiretiva, TabelaPaginadaComponent, DialogConfirmacaoComponent,
-    DialogVisualizacaoComponent
+    DialogVisualizacaoComponent,
+    NgxMaskModule
   ]
 })
 export class ModuleCompartilhado { }

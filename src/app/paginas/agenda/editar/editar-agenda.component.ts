@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Agenda } from '../../../modelos/agenda/agenda';
 import { AgendaService } from '../../../servicos/agenda/agenda.service';
@@ -16,21 +17,22 @@ import { Utils } from 'src/app/utils/utils';
 export class EditarAgendaComponent extends FormBase implements OnInit {
 
     public formAgenda: FormGroup;
-    private id: number = 0;
+    private id = 0;
 
     constructor(private fb: FormBuilder, private agendaService: AgendaService, private router: ActivatedRoute) {
-        super()
-        const agendaFormGroup = new AgendaFormGroup(this.fb)
-        this.formAgenda = agendaFormGroup.montarFormGroup();   
-        
+        super();
+        const agendaFormGroup = new AgendaFormGroup(this.fb);
+        this.formAgenda = agendaFormGroup.montarFormGroup();
+
         this.router.paramMap.subscribe(params => {
-            this.id = Number(params.get("id"));
+            this.id = Number(params.get('id'));
             this.agendaService.recuperar(this.id, resposta => {
                 resposta.diasAtendimentos = this.prencherDiasAtendimentos(resposta.diasAtendimentos)
-                resposta.possuiIntervalo = this.preencherPossuiIntervalo(resposta);    
+                resposta.possuiIntervalo = this.preencherPossuiIntervalo(resposta);
                 this.formAgenda.patchValue(resposta);
+                this.formAgenda.updateValueAndValidity(); 
             });
-        })  
+        });
      }
 
     ngOnInit() {

@@ -1,3 +1,4 @@
+import { NgxMaskModule } from 'ngx-mask';
 import { AuthGuardService } from './../../seguranca/auth-guard.service';
 import { EditarAgendaComponent } from './editar/editar-agenda.component';
 import { NgModule } from "@angular/core";

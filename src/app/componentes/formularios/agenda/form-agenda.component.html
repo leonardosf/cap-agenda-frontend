@@ -29,12 +29,12 @@
     <div linha fxLayoutGap="2%">
         <mat-form-field fxFlex="20%" fxFill appearance="outline">
             <mat-label>Hora Ínicio Atendimento*</mat-label>
-            <input type="text" matInput formControlName="horaInicio" mascara="HORA" maxlength="5">
+            <input type="text" matInput formControlName="horaInicio" [dropSpecialCharacters]="false" mask="00:00" [specialCharacters]="[ ':' ]" [validation]="true">
             <mat-error *ngIf="formAgenda.controls.horaInicio.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="20%" fxFill appearance="outline">
             <mat-label>Hora Fim Atendimento*</mat-label>
-            <input type="text" matInput formControlName="horaFim" mascara="HORA" maxlength="5">
+            <input type="text" matInput formControlName="horaFim" [dropSpecialCharacters]="false" mask="00:00" [specialCharacters]="[ ':' ]" [validation]="true">
             <mat-error *ngIf="formAgenda.controls.horaFim.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="25%" fxFill appearance="outline">
@@ -49,7 +49,7 @@
         </mat-form-field>   
         <mat-form-field fxFlex="15%" fxFill appearance="outline">
             <mat-label>Competência*</mat-label>
-            <input type="text" matInput formControlName="competencia" mascara="COMPETENCIA" maxlength="7">
+            <input type="text" matInput formControlName="competencia" [dropSpecialCharacters]="false" mask="00/0000"  [specialCharacters]="[ '/' ]" [validation]="true"  maxlength="7">
             <mat-error *ngIf="formAgenda.controls.competencia.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field>     
         <mat-list fxFlex="10%" fxFill appearance="outline">
@@ -60,12 +60,12 @@
     <div linha fxLayoutGap="2%">        
         <mat-form-field fxFlex="20%" fxFill appearance="outline" *ngIf="possuiIntervalo">
             <mat-label>Hora Ínicio Intervado*</mat-label>
-            <input type="text" matInput formControlName="horaInicioIntervalo" mascara="HORA" maxlength="5">
+            <input type="text" matInput formControlName="horaInicioIntervalo" [dropSpecialCharacters]="false" mask="00:00" [specialCharacters]="[ ':' ]" [validation]="true">
             <mat-error *ngIf="formAgenda.controls.horaInicioIntervalo.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field> 
         <mat-form-field fxFlex="20%" fxFill appearance="outline" *ngIf="possuiIntervalo">
             <mat-label>Hora Fim Intervalo*</mat-label>
-            <input type="text" matInput formControlName="horaFimIntervalo" mascara="HORA" maxlength="5">
+            <input type="text" matInput formControlName="horaFimIntervalo" [dropSpecialCharacters]="false" mask="00:00" [specialCharacters]="[ ':' ]" [validation]="true">
             <mat-error *ngIf="formAgenda.controls.horaFimIntervalo.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field> 
     </div>

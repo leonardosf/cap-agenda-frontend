@@ -2,6 +2,8 @@ import { LoginComponent } from './paginas/login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { NgxMaskModule } from 'ngx-mask';
+
 import { AppComponent } from './app.component';
 import { ModuleCompartilhado } from './modulos-compartilhados/compartilhado.module';
 
@@ -36,7 +38,7 @@ const router: Routes = [
         PaginaModule, 
         LoginModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(router),
+        RouterModule.forRoot(router),          
     ],
     providers: [ {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptador, multi: true},
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' } ],

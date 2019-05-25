@@ -125,4 +125,10 @@ export class MascaraDirective {
         return valorLimpo.replace(/(\d{2})(\d{4})$/, "$1/$2");
     }
 
+    /*private lpad(valor, tamanho): string {
+        const indice = tamanho * -1;
+        if (valor === undefined) return valor;
+        return valor <= 9999 ? `000${valor}`.slice(indice) : valor;
+    }*/
+
 }
