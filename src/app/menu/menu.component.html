@@ -28,8 +28,8 @@
                     </mat-list-item>
                 </mat-nav-list>
                 <mat-nav-list>
-                    <mat-accordion *ngFor="let menu of menus">
-                        <mat-expansion-panel >
+                    <mat-accordion>
+                        <mat-expansion-panel *ngFor="let menu of menus">
                             <mat-expansion-panel-header >
                                 <mat-panel-title>
                                     <mat-icon>{{ menu.icone }}</mat-icon>
@@ -45,7 +45,7 @@
                     </mat-accordion>
                 </mat-nav-list>
             </mat-sidenav>
-            <mat-sidenav-content>
+            <mat-sidenav-content class="padding-10">
                 <router-outlet></router-outlet>
             </mat-sidenav-content>
         </mat-sidenav-container>
