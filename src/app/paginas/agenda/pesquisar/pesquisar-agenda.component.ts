@@ -5,8 +5,8 @@ import { ConsultorioService } from './../../../servicos/consultorios/consultorio
 import { MensagemToast } from './../../../componentes/mensagens/mensagem-toast';
 import { AgendaService } from './../../../servicos/agenda/agenda.service';
 import { Agenda } from './../../../modelos/agenda/agenda';
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Tabela } from 'src/app/componentes/tabelas/tabela-paginada/tabela';
 import { DialogService } from 'src/app/componentes/dialog/service/dialog.service';
@@ -74,12 +74,19 @@ export class PesquisarAgendaComponent implements OnInit {
     }
 
     visualizar(agenda) {
-        alert('Criar componente de visualizar agenda')
+        if(sessionStorage.getItem('dadosAgenda')) {
+            sessionStorage.removeItem('dadosAgenda');
+            sessionStorage.setItem('dadosAgenda', JSON.stringify(agenda));
+        } else {
+            sessionStorage.setItem('dadosAgenda', JSON.stringify(agenda));
+        }
+        this.router.navigate(['/page/calendario']);
     }
 
     ngOnInit(): void {
         this.carregarMedicos();
         this.carregarConsultorios();
+        this.carregarAgendas();
     }
 
     private carregarConsultorios() {
@@ -108,6 +115,14 @@ export class PesquisarAgendaComponent implements OnInit {
         }, erro => {
             console.log('ERRO CONSULTAR AGENDA', erro.error.mensagem);
             this.mensagem.mostrar(erro.error.mensagem, "OK");
+        });
+    }
+
+    private carregarAgendas(): any {
+        this.http.recuperarPaginada({ limite: 1000 }, response => {
+            this.agendas = response.conteudo;
+            this.total = response.total;
+          }, () => {
         });
     }
  

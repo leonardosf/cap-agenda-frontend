@@ -19,30 +19,25 @@
             </button>
         </mat-toolbar>
     
-        <mat-sidenav-container class="example-sidenav-container">
-            <mat-sidenav #snav opened mode="side" fixedTopGap="56" *ngIf="menus.length > 0">
+        <mat-sidenav-container autosize class="example-sidenav-container">
+            <mat-sidenav #snav opened mode="side" fixedTopGap="56">
                 <mat-nav-list>
-                    <!-- <a mat-list-item routerLink="{{nav.path}}" *ngFor="let nav of fillerNav">{{nav.nomeMenu}}</a> -->
-                    <mat-nav-list>
-                        <mat-list-item >
-                            <mat-icon>{{ home.icone }}</mat-icon>
-                            <span>
-                                <a href="#">{{ home.nome }}</a>
-                            </span>
-                        </mat-list-item>
-                    </mat-nav-list>
+                    <mat-list-item *ngFor="let principal of menusFixos">
+                        <mat-icon>{{principal.icone}}</mat-icon>
+                        <a routerLink="{{principal.url}}">{{principal.nome}}</a>
+                    </mat-list-item>
+                </mat-nav-list>
+                <mat-nav-list>
                     <mat-accordion *ngFor="let menu of menus">
                         <mat-expansion-panel >
                             <mat-expansion-panel-header >
                                 <mat-panel-title>
                                     <mat-icon>{{ menu.icone }}</mat-icon>
-                                    <span>
-                                        <a routerLink="{{menu.url}}">{{ menu.nome }}</a>
-                                    </span>
+                                        <a>{{ menu.nome }}</a>
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
-                            <mat-nav-list *ngFor="let subMenu of menu.subMenus">
-                                <mat-list-item >
+                            <mat-nav-list>
+                                <mat-list-item *ngFor="let subMenu of menu.subMenus">
                                     <a routerLink="{{subMenu.url}}">{{ subMenu.nome }}</a>
                                 </mat-list-item>                            
                             </mat-nav-list>
@@ -50,9 +45,9 @@
                     </mat-accordion>
                 </mat-nav-list>
             </mat-sidenav>
-        <mat-sidenav-content>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
-</div>
+            <mat-sidenav-content>
+                <router-outlet></router-outlet>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    </div>
 <loading></loading>
