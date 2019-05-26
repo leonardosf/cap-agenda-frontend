@@ -1,4 +1,4 @@
-import { validadorHora, ValidadorHora } from './../../../paginas/agenda/agenda.form.group';
+import { ValidadorHora } from './../../../paginas/agenda/agenda.form.group';
 import { ConsultorioService } from './../../../servicos/consultorios/consultorio.service';
 import { MedicoService } from './../../../servicos/medicos/medico.service';
 import { FormBase } from './../form.base';
