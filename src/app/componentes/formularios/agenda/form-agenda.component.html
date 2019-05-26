@@ -31,6 +31,7 @@
             <mat-label>Hora Ínicio Atendimento*</mat-label>
             <input type="text" matInput formControlName="horaInicio" [dropSpecialCharacters]="false" mask="00:00" [specialCharacters]="[ ':' ]" [validation]="true">
             <mat-error *ngIf="formAgenda.controls.horaInicio.invalid">{{ getErrorMessage() }}</mat-error>
+            <!--mat-error *ngIf="formAgenda.controls.horaInicio.errors.horaInvalida">Hora invalida</mat-error-->
         </mat-form-field>
         <mat-form-field fxFlex="20%" fxFill appearance="outline">
             <mat-label>Hora Fim Atendimento*</mat-label>
