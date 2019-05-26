@@ -8,12 +8,17 @@
   right: 0;
 
   .mat-expansion-panel-header {
-    padding: 0 10px;
+    padding: 0 20px 0 0;
+    max-height: 35px !important;
   }
   .mat-list-base {
     padding: 0;
   
     .mat-list-item {
+
+      font-size: 14px;
+      height: 35px;
+
       .material-icons {
         font-size: 20px !important;
       }
@@ -27,6 +32,7 @@
 
 .mat-expansion-panel-spacing {
   margin: 0;
+  border-radius: 0;
 }
 
 .example-is-mobile .example-toolbar {
