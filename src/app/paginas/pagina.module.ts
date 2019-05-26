@@ -9,13 +9,12 @@ const router:Routes = [
     {
         path: 'page', component: MenuComponent,
         children: [
-            // {
-            //     path: '', redirectTo: 'index', pathMatch: 'full',
-            // },
-            // {
-            //     path: 'index', component: IndeComponent,
-            // },
-
+            {
+                path: '', redirectTo: 'index', pathMatch: 'full',
+            },
+            {
+                path: 'index', loadChildren: './index/index.module#IndexModule',
+            },
             {
                 path: 'consulta', loadChildren: './consulta/consulta.module#ConsultaModule',
             },
