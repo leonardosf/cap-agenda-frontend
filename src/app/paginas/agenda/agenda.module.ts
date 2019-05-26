@@ -8,7 +8,6 @@ import { ModuleCompartilhado } from "src/app/modulos-compartilhados/compartilhad
 import { CadastrarAgendaComponent } from "./cadastrar/cadastrar-agenda.component";
 import { FormAgendaComponent } from "src/app/componentes/formularios/agenda/form-agenda.component";
 import { PesquisarAgendaComponent } from './pesquisar/pesquisar-agenda.component';
-import { CalendarioAgendaComponent } from './calendario/calendario-agenda.component';
 
 const router: Routes = [
     {
@@ -22,9 +21,6 @@ const router: Routes = [
             }, 
             {
                 path: 'pesquisar', component: PesquisarAgendaComponent
-            },
-            {
-                path: 'calendario/:id', component: CalendarioAgendaComponent
             }
         ],
         canActivate: [ AuthGuardService ] 
@@ -33,6 +29,6 @@ const router: Routes = [
 
 @NgModule({
     imports:[CommonModule, RouterModule.forChild(router), ModuleCompartilhado],
-    declarations: [CadastrarAgendaComponent, EditarAgendaComponent, PesquisarAgendaComponent, FormAgendaComponent, CalendarioAgendaComponent]
+    declarations: [CadastrarAgendaComponent, EditarAgendaComponent, PesquisarAgendaComponent, FormAgendaComponent]
 })
 export class AgendaModule {}

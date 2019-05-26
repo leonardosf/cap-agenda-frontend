@@ -26,7 +26,6 @@ export class CadastrarAgendaComponent extends FormBase implements OnInit {
 
     salvar() {
         if (this.formAgenda.valid) {
-            debugger;
             const agenda: Agenda = { ...this.formAgenda.value };
             agenda.diasAtendimentos = this.formAgenda.value.diasAtendimentos.map(this.filtrarDiasAtendimentoSelecionados).filter(dia => dia !== undefined);
             this.agendaService.save(agenda);

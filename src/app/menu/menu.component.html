@@ -24,7 +24,7 @@
                 <mat-nav-list>
                     <mat-list-item *ngFor="let principal of menusFixos">
                         <mat-icon>{{principal.icone}}</mat-icon>
-                        <a href="#">{{principal.nome}}</a>
+                        <a routerLink="{{principal.url}}">{{principal.nome}}</a>
                     </mat-list-item>
                 </mat-nav-list>
                 <mat-nav-list>

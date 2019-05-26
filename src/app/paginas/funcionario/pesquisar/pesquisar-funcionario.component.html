@@ -1,13 +1,13 @@
 <mat-card>
     <mat-card-title>
-        Pesquisa de Funcionário
+        Pesquisar Funcionário
     </mat-card-title>
     <mat-card-content>
         <form [formGroup]="formPesquisaFuncionario" (ngSubmit)="pesquisar()">
             <div linha fxLayoutGap="2%">
                 <mat-form-field fxFlex="50%" fxFill appearance="outline">
                     <mat-label>Nome</mat-label>
-                    <input type="text" matInput formControlName="nome" maxlength="15" numero>
+                    <input type="text" matInput formControlName="nome" maxlength="50">
                 </mat-form-field>
                 <mat-form-field fxFlex="50%" fxFill appearance="outline">
                     <mat-label>CPF</mat-label>
