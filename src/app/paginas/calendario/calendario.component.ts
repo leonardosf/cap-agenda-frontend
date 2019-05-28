@@ -19,11 +19,6 @@ export class CalendarioComponent {
     options: OptionsInput;
     eventsModel = new Array<ConsultaModelo>();
 
-    dados: DialogDados = {
-        btnConfirmar: 'Fechar', 
-        btnCancelar: 'Cancelar'
-    };
-
     form:FormGroup;
 
     constructor(private dialog:DialogService){}
@@ -62,9 +57,22 @@ export class CalendarioComponent {
     }
 
     eventClick(model) {
-        console.log(model);
-        this.dados.titulo = `Dia/Hora ${new Date(model.event.start).toLocaleString()}`;
-        this.dialog.visualizar(this.dados, '700px');
+        const dadosDialog: DialogDados = {
+            btnConfirmar: 'Confirmar', 
+            btnCancelar: 'Cancelar',
+            acaoConfirmar: () => {
+                alert(dadosDialog.dados.paciente);
+                // this.http.remover(agenda.id, () => {
+                //     this.agendas = new Array<Agenda>();
+                //     this.carregarTabela(this.filtro);
+                // });
+            }, 
+        };
+    
+        let dados = {dia:new Date(model.event.start).toLocaleString().split(" ")[0],
+                    hora:new Date(model.event.start).toLocaleString().split(" ")[1]};
+        dadosDialog.dados = dados;
+        this.dialog.visualizar(dadosDialog, '500px');
     }
 
     eventDragStop(model) {

@@ -1,7 +1,12 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DialogDados } from '../model/dialog.dados';
-import { EventEmitter } from 'events';
+import { FormBuilder } from '@angular/forms';
+import { PessoaModelo } from 'src/app/modelos/pessoaModelo';
+
+import {Observable} from 'rxjs'
+import {switchMap, debounceTime, tap, finalize} from 'rxjs/operators';
+import { AssociadoService } from 'src/app/servicos/associado/associado.service';
 
 
 @Component({
@@ -9,12 +14,40 @@ import { EventEmitter } from 'events';
     templateUrl: './dialog-visualizacao.component.html',
     styleUrls: ['./dialog-visualizacao.component.scss']
 })
-export class DialogVisualizacaoComponent {
+export class DialogVisualizacaoComponent implements OnInit{
 
-    nome = new EventEmitter();
-    
+    pacientesFiltrados: PessoaModelo[] = [];
+    pacientesForm;
+    isLoading = false
+
     constructor(
         public dialogRef: MatDialogRef<DialogVisualizacaoComponent>,
-        @Inject(MAT_DIALOG_DATA) public dados: DialogDados) {}
+        @Inject(MAT_DIALOG_DATA) public dialogDados: DialogDados, public fb:FormBuilder,
+            private associado:AssociadoService) {}
    
+    ngOnInit(): void {
+        this.pacientesForm = this.fb.group({
+            nome: null
+        })
+
+        this.pacientesForm
+            .get('nome')
+            .valueChanges
+            .pipe(
+                tap(() => this.isLoading = true),
+                switchMap(nome => this.associado.recuperarPaciente(nome)
+                    .pipe(
+                        finalize(() => this.isLoading = false),
+                    )
+                )
+            )
+            .subscribe((pacientes) => {
+                this.pacientesFiltrados = pacientes.conteudo;
+                this.dialogDados.dados.paciente = this.pacientesFiltrados;
+            });
+    }
+
+    displayFn(paciente: PessoaModelo) {
+    if (paciente) { return paciente.nome; }
+    }
 }

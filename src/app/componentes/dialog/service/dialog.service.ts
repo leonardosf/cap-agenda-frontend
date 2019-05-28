@@ -30,18 +30,18 @@ export class DialogService {
         });
     }
 
-    visualizar(dados: DialogDados, tamanho:string) {
+    visualizar(dadosDialog: DialogDados, tamanho:string) {
         const dialogRef = this.dialog.open(DialogVisualizacaoComponent, {
             width: tamanho,
-            data: { titulo: dados.titulo, conteudo: dados.conteudo, btnConfirmar: dados.btnConfirmar, btnCancelar: dados.btnCancelar, acaoConfirmar: dados.acaoConfirmar, acaoCancelar: dados.acaoCancelar },
+            data: { dados: dadosDialog.dados, btnConfirmar: dadosDialog.btnConfirmar, btnCancelar: dadosDialog.btnCancelar, acaoConfirmar: dadosDialog.acaoConfirmar, acaoCancelar: dadosDialog.acaoCancelar },
             autoFocus: false           
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            if (result && dados.acaoConfirmar !== undefined) {
-                dados.acaoConfirmar();
-            } else if (!result && dados.acaoCancelar !== undefined) {
-                dados.acaoCancelar();
+            if (result && dadosDialog.acaoConfirmar !== undefined) {
+                dadosDialog.acaoConfirmar();
+            } else if (!result && dadosDialog.acaoCancelar !== undefined) {
+                dadosDialog.acaoCancelar();
             }
         });
     }

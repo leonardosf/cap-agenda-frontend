@@ -98,4 +98,9 @@ export class HttpService {
                 console.log("EERRRROOO = " + erro);
             });
     }
+
+    recuperarPaciente(nome) {
+        let request = {nome: nome};
+        return this.http.get(this.resource + this.path +"/", { params:Utils.montarParametros(request) });
+    }
 }

@@ -5,4 +5,5 @@ export interface DialogDados {
     btnCancelar?: string;
     acaoConfirmar?: Function;
     acaoCancelar?: Function;
+    dados?:any;
 }
