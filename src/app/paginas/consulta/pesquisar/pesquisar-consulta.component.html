@@ -1,0 +1,29 @@
+<mat-card>
+        <mat-card-title>
+            Pesquisar Consultas
+        </mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="formPesquisaConsulta" (ngSubmit)="pesquisar()">
+                <div linha fxLayoutGap="2%">
+                    <mat-form-field fxFlex="50%" fxFill appearance="outline">
+                        <mat-label>Nome</mat-label>
+                        <input type="text" matInput formControlName="nome" maxlength="50">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="50%" fxFill appearance="outline">
+                        <mat-label>CPF</mat-label>
+                        <input type="text" matInput formControlName="cpf" maxlength="14" mascara="CPF">
+                    </mat-form-field>
+                </div>
+                <button color="primary" mat-raised-button type="submit">Pesquisar</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+    
+    <div class="margin-top-1">
+        <tabela-paginada [colunas]="tabela.colunas" 
+                             [dados]="consultas" 
+                             [destino]="'consultas'" 
+                             [total]="total"
+                             [filtro]="filtro">
+        </tabela-paginada>
+    </div>
