@@ -19,6 +19,7 @@ export class LoginComponent extends FormBase {
     formLogin: FormGroup;
     @Output()
     customEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+    exibirMensagemErro = false;
 
     constructor(private fb: FormBuilder, private autenticacaoService: AutenticacaoService, private router: Router) {
         super();
@@ -30,13 +31,19 @@ export class LoginComponent extends FormBase {
 
     private criarFormGroup(): FormGroup {
         return this.fb.group({
-            login: new FormControl('dev', Validators.required),
+            login: new FormControl('11111111111', Validators.required),
             senha: new FormControl('123', Validators.required)
         });
     }
 
     logar() {
-        this.autenticacaoService.autenticar(this.formLogin.controls.login.value, this.formLogin.controls.senha.value);
+        this.exibirMensagemErro = false;
+        this.autenticacaoService.autenticar(this.formLogin.controls.login.value, 
+                                            this.formLogin.controls.senha.value, erro => {
+                                                if (erro.status === 400) {
+                                                    this.exibirMensagemErro = true;
+                                                }
+                                            });
     }    
 
 }

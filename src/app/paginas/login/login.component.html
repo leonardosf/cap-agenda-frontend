@@ -8,7 +8,7 @@
                 <div linha fxLayoutGap="2%">
                     <mat-form-field fxFlex="100%" fxFill appearance="outline">
                         <mat-label>Usuário*</mat-label>
-                        <input type="text" matInput formControlName="login" maxlength="100">
+                        <input type="text" matInput formControlName="login" maxlength="100" mask="000.000.000-00">
                         <mat-error *ngIf="formLogin.controls.login.invalid">{{getErrorMessage()}}</mat-error>
                     </mat-form-field>
                 </div>
@@ -19,10 +19,14 @@
                         <mat-error *ngIf="formLogin.controls.senha.invalid">{{getErrorMessage()}}</mat-error>
                     </mat-form-field>
                 </div>
-            
-                <button color="primary" mat-raised-button type="submit" [disabled]="formLogin.invalid">Login</button>
-            
+                <div linha fxLayoutGap="2%" *ngIf="exibirMensagemErro" class="margin-bottom-4">
+                    <mat-error >Usuário ou senha incorretos.</mat-error>
+                </div>
+                <div linha fxLayoutGap="2%">
+                    <button color="primary" mat-raised-button type="submit" [disabled]="formLogin.invalid">Entrar</button>
+                </div>            
             </form>
         </mat-card-content>
     </mat-card>
+    
 </div>

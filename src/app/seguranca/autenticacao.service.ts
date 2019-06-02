@@ -48,7 +48,7 @@ export class AutenticacaoService implements OnInit {
         this.redirecionarLogin();
     }
 
-    public autenticar(usuario: string, senha: string){
+    public autenticar(usuario: string, senha: string, callbackErro: Function){
 
         const payload = new URLSearchParams();
         payload.set('username', usuario);
@@ -68,6 +68,7 @@ export class AutenticacaoService implements OnInit {
             }, 
             erro => {
                 console.log(erro);
+                if (callbackErro !== undefined) callbackErro(erro);
         });
     }
 
