@@ -1,12 +1,16 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { OptionsInput } from "@fullcalendar/core";
-import { FullCalendarComponent } from "@fullcalendar/angular";
 import { DialogService } from "src/app/componentes/dialog/service/dialog.service";
 import { DialogDados } from "src/app/componentes/dialog/model/dialog.dados";
-import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
-import { ConsultaModelo } from "src/app/modelos/agenda/consulta";
+import { FormGroup } from "@angular/forms";
+import { ConsultaModelo } from "src/app/modelos/agenda/consultaModelo";
+import { ConsultaService } from "src/app/servicos/consulta/consulta.service";
+import { ConsultaDTO } from "src/app/modelos/agenda/ConsultaDTO";
+import { ActivatedRoute } from "@angular/router";
+import { AgendaService } from "src/app/servicos/agenda/agenda.service";
+import { Agenda } from "src/app/modelos/agenda/agenda";
 
 @Component({
     selector: 'calendario',
@@ -20,8 +24,11 @@ export class CalendarioComponent {
     eventsModel = new Array<ConsultaModelo>();
 
     form:FormGroup;
+    agenda;
+    consultaDTO = new ConsultaDTO();
 
-    constructor(private dialog:DialogService){}
+    constructor(private dialog:DialogService, private consultaService:ConsultaService,
+        private route:ActivatedRoute, private agendaService:AgendaService){}
 
 
     ngOnInit() {
@@ -45,29 +52,60 @@ export class CalendarioComponent {
     }
 
     private comporAgenda() {
-        let dadosAgenda = JSON.parse(sessionStorage.getItem('dadosAgenda'));
-        let consultaModelo:ConsultaModelo;
-        for(let consulta of dadosAgenda.consultas) {
-            consultaModelo = new ConsultaModelo();
-            consultaModelo.title = consulta.pessoa == undefined ? '' : consulta.pessoa.nome;
-            consultaModelo.date = consulta.data+" "+consulta.horaInicio;
-            consultaModelo.backgroundColor = consulta.title != undefined && consulta.title != '' ? 'red' : 'green';
-            this.eventsModel.push(consultaModelo);
-        }   
+        let id;
+        this.route.queryParams.subscribe(params => id = params.id);
+        this.recuperar(id);
     }
 
+    recuperar(id) {
+        this.agendaService.recuperar(id,
+            (callback) => {
+                this.agenda = callback;
+                let consultaModelo: ConsultaModelo;
+                for (let consulta of this.agenda.consultas) {
+                    consultaModelo = new ConsultaModelo();
+                    consultaModelo.id = consulta.id;
+                    consultaModelo.title = consulta.pessoa == undefined ? '' : consulta.pessoa.nome;
+                    consultaModelo.date = consulta.data + " " + consulta.horaInicio;
+                    consultaModelo.backgroundColor = consultaModelo.title != undefined && consultaModelo.title != '' ? 'red' : 'green';
+                    this.eventsModel.push(consultaModelo);
+                }
+            })
+    }
+    
+
     eventClick(model) {
-        const dadosDialog: DialogDados = {
-            btnConfirmar: 'Confirmar', 
-            btnCancelar: 'Cancelar',
-            acaoConfirmar: () => {
-                alert(dadosDialog.dados.paciente);
-                // this.http.remover(agenda.id, () => {
-                //     this.agendas = new Array<Agenda>();
-                //     this.carregarTabela(this.filtro);
-                // });
-            }, 
-        };
+        this.consultaDTO = this.agenda.consultas.filter(consulta => consulta.id == model.event.id);
+
+        let dadosDialog:DialogDados;
+        
+        if(model.title == undefined) {
+            dadosDialog = {
+                btnConfirmar: 'Confirmar', 
+                btnCancelar: 'Cancelar',
+                acaoConfirmar: () => {
+                    this.consultaDTO[0].pessoa = dadosDialog.dados.paciente[0];
+                    this.consultaDTO[0].situacao = 'AGENDADA';
+                    this.consultaService.atualizar(this.consultaDTO[0], 
+                        (callback) => {
+                            this.recuperar(callback.agenda.id);
+                        });
+                }, 
+            };
+        } else {
+            dadosDialog = {
+                btnDesmarcar: 'Desmarcar',
+                btnCancelar: 'Cancelar', 
+                acaoDesmarcar: () => {
+                    this.consultaDTO[0].pessoa = null;
+                    this.consultaDTO[0].situacao = 'CRIADA';
+                    this.consultaService.atualizar(this.consultaDTO[0], 
+                        (callback) => {
+                            this.recuperar(callback.agenda.id);
+                        });
+                }, 
+            };
+        }
     
         let dados = {dia:new Date(model.event.start).toLocaleString().split(" ")[0],
                     hora:new Date(model.event.start).toLocaleString().split(" ")[1]};

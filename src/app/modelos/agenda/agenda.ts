@@ -10,6 +10,7 @@ export class Agenda  {
     horaFimIntervalo: string;
     tempoAtendimento: number;
     competencia: string;
+    consultas;
     diasAtendimentos: Array<DiaAtendimento> = new Array<DiaAtendimento>();	
     possuiIntervalo: boolean = false;
 }

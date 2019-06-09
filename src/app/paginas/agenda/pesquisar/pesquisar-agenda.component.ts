@@ -74,13 +74,7 @@ export class PesquisarAgendaComponent implements OnInit {
     }
 
     visualizar(agenda) {
-        if(sessionStorage.getItem('dadosAgenda')) {
-            sessionStorage.removeItem('dadosAgenda');
-            sessionStorage.setItem('dadosAgenda', JSON.stringify(agenda));
-        } else {
-            sessionStorage.setItem('dadosAgenda', JSON.stringify(agenda));
-        }
-        this.router.navigate(['/page/calendario']);
+        this.router.navigate(['/page/calendario/'],{queryParams:{id:agenda.id}});
     }
 
     ngOnInit(): void {

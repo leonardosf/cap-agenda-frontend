@@ -16,7 +16,7 @@ import { AssociadoService } from 'src/app/servicos/associado/associado.service';
 })
 export class DialogVisualizacaoComponent implements OnInit{
 
-    pacientesFiltrados: PessoaModelo[] = [];
+    pacientesFiltrados: Observable<PessoaModelo[]>;
     pacientesForm;
     isLoading = false
 
@@ -34,8 +34,9 @@ export class DialogVisualizacaoComponent implements OnInit{
             .get('nome')
             .valueChanges
             .pipe(
+                debounceTime(300),
                 tap(() => this.isLoading = true),
-                switchMap(nome => this.associado.recuperarPaciente(nome)
+                switchMap(nome => typeof nome === 'object' ? '' : this.associado.recuperarPaciente(nome)
                     .pipe(
                         finalize(() => this.isLoading = false),
                     )
@@ -48,6 +49,6 @@ export class DialogVisualizacaoComponent implements OnInit{
     }
 
     displayFn(paciente: PessoaModelo) {
-    if (paciente) { return paciente.nome; }
+        return paciente ? paciente.nome : undefined;
     }
 }

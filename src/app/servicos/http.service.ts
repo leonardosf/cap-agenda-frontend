@@ -59,10 +59,11 @@ export class HttpService {
         });
     }
 
-    atualizar(modelo) {
+    atualizar(modelo, callback?) {
         this.http.put(this.resource + this.path, modelo).pipe().subscribe(
             () => {
                 this.mensagem.mostrar("Atualizado com sucesso!", "OK");
+                callback(true);
             }, (erro) => {
                 this.mensagem.mostrar("Erro na requisição", erro.statusText);
                 console.log("EERRRROOO = " + erro);
