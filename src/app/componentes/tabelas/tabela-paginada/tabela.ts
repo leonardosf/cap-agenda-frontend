@@ -39,7 +39,9 @@ export class Acao {
 
 export const tipos = {
     TEXTO : 'texto',
-    ACAO : 'acao' 
+    ACAO : 'acao',
+    DATA: 'data',
+    HORA: 'hora'
 }
 
 export class TabelaBuilder {
@@ -52,6 +54,16 @@ export class TabelaBuilder {
 
     addColunaTexto(prop = '', name = '', flexGrow = 1): TabelaBuilder {
         this.colunas.push(new Coluna(prop, name, flexGrow, tipos.TEXTO))
+        return this;
+    }
+
+    addColunaData(prop = '', name = '', flexGrow = 1): TabelaBuilder {
+        this.colunas.push(new Coluna(prop, name, flexGrow, tipos.DATA))
+        return this;
+    }
+
+    addColunaHora(prop = '', name = '', flexGrow = 1): TabelaBuilder {
+        this.colunas.push(new Coluna(prop, name, flexGrow, tipos.HORA))
         return this;
     }
 

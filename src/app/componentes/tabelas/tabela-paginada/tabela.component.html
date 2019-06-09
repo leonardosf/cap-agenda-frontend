@@ -19,6 +19,12 @@
                 <ng-template let-value="value" ngx-datatable-cell-template *ngIf="coluna.tipo === 'texto'">
                     {{value}}
                 </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template *ngIf="coluna.tipo === 'data'">
+                    {{value | date: 'dd/MM/yyyy'}}
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template *ngIf="coluna.tipo === 'hora'">
+                    {{value.substring(0, 5)}}
+                </ng-template>
                 <ng-template let-row="row" ngx-datatable-cell-template *ngIf="coluna.tipo === 'acao'">
                     <div *ngFor="let acao of coluna.acoes" fxLayout="row" fxLayoutAlign.xs="center center" fxLayoutAlign="center center" fxFlex="auto">
                         <a class="hand" (click)="acao.onClick(row)">

@@ -38,7 +38,7 @@ export class PesquisarAssociadoComponent implements OnInit {
     this.tabela = TabelaBuilder.getBuilder()
                                .addColunaTexto('matricula', 'Matrícula', 2)
                                .addColunaTexto('nome', 'Nome', 6)
-                               .addColunaTexto('dataNascimento', 'Data Nascimento', 2)
+                               .addColunaData('dataNascimento', 'Data Nascimento', 2)
                                .addColunaAcao('Ações', 2, acoes)
                                .build();
   }
