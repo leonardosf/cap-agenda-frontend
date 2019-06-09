@@ -36,8 +36,9 @@ export class PesquisarConsultaComponent implements OnInit {
                              .build();
     this.tabela = TabelaBuilder.getBuilder()
                                .addColunaTexto('pessoa.nome', 'Nome', 2)
-                               .addColunaTexto('data', 'Data', 6)
-                               .addColunaTexto('horaInicio', 'Hora', 2)
+                               .addColunaData('data', 'Data', 6)
+                               .addColunaHora('horaInicio', 'Hora', 2)
+                               .addColunaTexto('situacao', 'Situação', 2)
                                .addColunaAcao('Ações', 2, acoes)
                                .build();
   }
