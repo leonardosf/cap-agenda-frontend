@@ -3,7 +3,8 @@
         Cadastro Associado
     </mat-card-title> -->
     <mat-card-content>
-        <full-calendar *ngIf="options" #fullcalendar 
+        <full-calendar *ngIf="options" #fullcalendar
+            deepChangeDetection="true"
             [editable]="true" 
             [events]="eventsModel" 
             [header]="options.header"

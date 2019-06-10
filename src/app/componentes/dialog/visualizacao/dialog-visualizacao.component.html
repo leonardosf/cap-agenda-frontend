@@ -30,5 +30,5 @@
 </div>
 <div mat-dialog-actions class="direita">
     <button mat-button color="primary" [mat-dialog-close]="false">{{ dialogDados.btnCancelar }}</button>
-    <button mat-button color="primary" [mat-dialog-close]="true">{{ dialogDados.btnConfirmar }}</button>
+    <button mat-button color="primary" [mat-dialog-close]="true">{{ dialogDados.btnConfirmar || dialogDados.btnDesmarcar }}</button>
 </div>

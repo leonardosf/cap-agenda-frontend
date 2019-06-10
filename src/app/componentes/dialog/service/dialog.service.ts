@@ -33,7 +33,7 @@ export class DialogService {
     visualizar(dadosDialog: DialogDados, tamanho:string) {
         const dialogRef = this.dialog.open(DialogVisualizacaoComponent, {
             width: tamanho,
-            data: { dados: dadosDialog.dados, btnConfirmar: dadosDialog.btnConfirmar, btnCancelar: dadosDialog.btnCancelar, acaoConfirmar: dadosDialog.acaoConfirmar, acaoCancelar: dadosDialog.acaoCancelar },
+            data: { dados: dadosDialog.dados, btnConfirmar: dadosDialog.btnConfirmar, btnCancelar: dadosDialog.btnCancelar, btnDesmarcar:dadosDialog.btnDesmarcar, acaoConfirmar: dadosDialog.acaoConfirmar, acaoCancelar: dadosDialog.acaoCancelar, acaoDesmarcar: dadosDialog.acaoDesmarcar },
             autoFocus: false           
         });
 
@@ -42,6 +42,8 @@ export class DialogService {
                 dadosDialog.acaoConfirmar();
             } else if (!result && dadosDialog.acaoCancelar !== undefined) {
                 dadosDialog.acaoCancelar();
+            } else if (result && dadosDialog.acaoDesmarcar !== undefined) {
+                dadosDialog.acaoDesmarcar();
             }
         });
     }

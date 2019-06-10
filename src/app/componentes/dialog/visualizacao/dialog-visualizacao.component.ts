@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DialogDados } from '../model/dialog.dados';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { PessoaModelo } from 'src/app/modelos/pessoaModelo';
 
 import {Observable} from 'rxjs'
@@ -28,7 +28,7 @@ export class DialogVisualizacaoComponent implements OnInit{
     ngOnInit(): void {
         this.pacientesForm = this.fb.group({
             nome: null
-        })
+        });
 
         this.pacientesForm
             .get('nome')
@@ -36,7 +36,7 @@ export class DialogVisualizacaoComponent implements OnInit{
             .pipe(
                 debounceTime(300),
                 tap(() => this.isLoading = true),
-                switchMap(nome => typeof nome === 'object' ? '' : this.associado.recuperarPaciente(nome)
+                switchMap(nome => typeof nome === 'object' ? [] : this.associado.recuperarPaciente(nome)
                     .pipe(
                         finalize(() => this.isLoading = false),
                     )
@@ -46,9 +46,17 @@ export class DialogVisualizacaoComponent implements OnInit{
                 this.pacientesFiltrados = pacientes.conteudo;
                 this.dialogDados.dados.paciente = this.pacientesFiltrados;
             });
+
+        if(this.dialogDados.dados != undefined && this.dialogDados.dados.nome != undefined) {
+            this.pacientesForm.get('nome').patchValue(this.dialogDados.dados.nome);
+        }
     }
 
     displayFn(paciente: PessoaModelo) {
-        return paciente ? paciente.nome : undefined;
+        if(paciente && paciente.nome) {
+            return paciente.nome;
+        } else {
+            return paciente;
+        }
     }
 }
