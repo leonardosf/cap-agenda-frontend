@@ -12,4 +12,13 @@ export class ConsultaService extends HttpService {
         super.setPath(this.path);
     }
 
+    totalConsultasAgendadasDia(callBackSucesso, callbackErro) {
+        this.http.get(`${this.resource}${this.path}/total-dia`).subscribe(response => {
+            callBackSucesso(response);
+        }, error => {
+            console.log('ERRO HTTP', error);
+            callbackErro();
+        });
+    }
+
 }

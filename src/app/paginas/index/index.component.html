@@ -1,15 +1,15 @@
 <div class="div-main">
-    <div fxLayout.xs="column" fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="space-around center">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>Odontologia</mat-card-title>
-                <mat-card-subtitle>Quantidade:</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content fxLayoutAlign="center center">
-                <h1>50</h1>
-            </mat-card-content>
-        </mat-card>
-        <mat-card>
+    <div fxLayout.xs="column" fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="start center">
+        <mat-grid-list cols="4" rowHeight="100px" >            
+            <mat-grid-tile *ngFor="let totalConsulta of totaisConsultas"
+                colspan="2"
+                rowspan="2"
+                [style.background]="'#DDBDF1'">
+                <!--total-consulta [total]="totalConsulta.total" [especialidade]="totalConsulta.especialidade"></total-consulta -->
+                {{totalConsulta.especialidade}}
+            </mat-grid-tile>
+        </mat-grid-list>      
+        <!--mat-card>
             <mat-card-header>
                 <mat-card-title>Clínica Médica</mat-card-title>
                 <mat-card-subtitle>Quantidade:</mat-card-subtitle>
@@ -35,7 +35,7 @@
             <mat-card-content fxLayoutAlign="center center">
                 <h1>50</h1>
             </mat-card-content>
-        </mat-card>
+        </mat-card-->
     </div>
     <div class="div-atendimentos">
         <h3>Próximos Atendimentos</h3>
