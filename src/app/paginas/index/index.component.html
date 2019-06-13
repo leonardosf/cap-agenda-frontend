@@ -1,46 +1,19 @@
 <div class="div-main">
-    <div fxLayout.xs="column" fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="start center">
-        <mat-grid-list cols="4" rowHeight="100px" >            
-            <mat-grid-tile *ngFor="let totalConsulta of totaisConsultas"
-                colspan="2"
-                rowspan="2"
-                [style.background]="'#DDBDF1'">
-                <!--total-consulta [total]="totalConsulta.total" [especialidade]="totalConsulta.especialidade"></total-consulta -->
-                {{totalConsulta.especialidade}}
-            </mat-grid-tile>
-        </mat-grid-list>      
-        <!--mat-card>
-            <mat-card-header>
-                <mat-card-title>Clínica Médica</mat-card-title>
-                <mat-card-subtitle>Quantidade:</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content fxLayoutAlign="center center">
-                <h1>50</h1>
-            </mat-card-content>
-        </mat-card>
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>Ginecologia</mat-card-title>
-                <mat-card-subtitle>Quantidade:</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content fxLayoutAlign="center center">
-                <h1>50</h1>
-            </mat-card-content>
-        </mat-card>
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>Pediatria</mat-card-title>
-                <mat-card-subtitle>Quantidade:</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content fxLayoutAlign="center center">
-                <h1>50</h1>
-            </mat-card-content>
-        </mat-card-->
-    </div>
-    <div class="div-atendimentos">
+    <mat-grid-list cols="4" rowHeight="100px" *ngIf="totaisConsultas.length > 0">            
+        <mat-grid-tile *ngFor="let totalConsulta of totaisConsultas"
+            [colspan]="1"
+            [rowspan]="2">
+            <total-consulta [total]="totalConsulta.total" [especialidade]="totalConsulta.especialidade"></total-consulta>
+        </mat-grid-tile>
+    </mat-grid-list>    
+    <div class="div-atendimentos" *ngIf="consultas.length > 0">
         <h3>Próximos Atendimentos</h3>
     </div>
-    <div class="margin-top-1">
-        <tabela-paginada></tabela-paginada>
+    <div class="margin-top-1" *ngIf="consultas.length > 0">
+        <tabela-paginada [colunas]="tabela.colunas" 
+            [dados]="consultas" 
+            [destino]="'consultas'" 
+            [total]="total"
+            [filtro]="filtro"></tabela-paginada>
     </div>
 </div>
